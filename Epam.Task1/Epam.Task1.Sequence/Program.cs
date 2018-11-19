@@ -8,45 +8,46 @@ namespace Epam.Task1.Sequence
 {
     class Program
     {
-        static string Sequence(int n)
+        static void Sequence(int n)
         {
             try
             {
-                if (n <= 0)
-                    throw new ArgumentOutOfRangeException();
+                if (n < 1)
+                {
+                    throw new ArgumentOutOfRangeException("Number is below 0");
+                }
             }
+
             catch (ArgumentOutOfRangeException e)
             {
                 Console.WriteLine(e.Message);
-                return null;
+                return;
             }
-
-            var sb = new StringBuilder();
 
             for (var i = 1; i < n; i++)
             {
-                sb.Append(i + ", ");
+                Console.Write(i + ", ");
             }
 
-            sb.Append(n);
-
-            return sb.ToString();
-        }
-
-        static void ShowIsSequence(int n)
-        {
-            Console.WriteLine($"Перечисление до {n}:");
-            Console.WriteLine(Sequence(n));
+            Console.WriteLine(n);
         }
 
         static void Main(string[] args)
         {
-            int a = 13;
-            int b = -1;
+            while (true)
+            {
+                Console.WriteLine("Enter a positive integer");
 
-            ShowIsSequence(a);
+                bool isDigit = int.TryParse(Console.ReadLine(), out var data);
 
-            ShowIsSequence(b);
+                if (!isDigit || data < 1)
+                {
+                    Console.WriteLine("Please, enter correct data");
+                    continue;
+                }
+
+                Sequence(data);
+            }
         }
     }
 }

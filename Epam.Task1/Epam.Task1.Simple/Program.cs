@@ -12,8 +12,8 @@ namespace Epam.Task1.Simple
         {
             try
             {
-                if (n <= 0)
-                    throw new ArgumentOutOfRangeException();
+                if (n < 1)
+                    throw new ArgumentOutOfRangeException("Number is below 0");
             }
             catch (ArgumentOutOfRangeException e)
             {
@@ -24,29 +24,33 @@ namespace Epam.Task1.Simple
             for (var i = 2; i <= Math.Sqrt(n); i++)
             {
                 if (n % i == 0)
+                {
                     return false;
+                }
             }
-
             return true;
-        }
-
-        static void ShowIsSimple(int n)
-        {
-            Console.Write($"Число {n} простое: ");
-            Console.WriteLine(Simple(n));
         }
 
         static void Main(string[] args)
         {
-            int a = 7;
-            int b = 18;
-            int c = 0;
+            Console.WriteLine("This program will determine if the input number is simple or not");
 
-            ShowIsSimple(a);
+            while (true)
+            {
+                Console.WriteLine("\r\nEnter a positive integer");
 
-            ShowIsSimple(b);
+                bool isDigit = int.TryParse(Console.ReadLine(), out var data);
 
-            ShowIsSimple(c);
+                if (!isDigit || data < 1)
+                {
+                    Console.WriteLine("Please, enter correct data");
+                    continue;
+                }
+
+                bool result = Simple(data);
+
+                Console.WriteLine($"{data} is simple number: {result}");
+            }
         }
     }
 }

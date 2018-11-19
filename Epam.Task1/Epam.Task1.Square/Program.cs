@@ -12,16 +12,19 @@ namespace Epam.Task1.Square
         {
             try
             {
-                if (n <= 0 || n % 2 == 0)
-                    throw new ArgumentOutOfRangeException();
+                if (n <= 0)
+                {
+                    throw new ArgumentOutOfRangeException("Value doesn't meet the condition: less than 0.");
+                }
+                if (n % 2 == 0)
+                {
+                    throw new ArgumentOutOfRangeException("Value doesn't meet the condition: even.");
+                }
             }
-            catch (ArgumentOutOfRangeException)
-            {
-                if (n < 0)
-                    Console.WriteLine($"Значение {n} не соответствует условию: меньше 0.");
-                else
-                    Console.WriteLine($"Значение {n} не соответствует условию: четное.");
 
+            catch (ArgumentOutOfRangeException e)
+            {
+                Console.WriteLine(e.Message);
                 return;
             }
 
@@ -41,11 +44,22 @@ namespace Epam.Task1.Square
 
         static void Main(string[] args)
         {
-            Square(9);
+            Console.WriteLine("This program will show you the beauty of symmetry!");
 
-            Square(6);
+            while (true)
+            {
+                Console.WriteLine("\r\nEnter a positive odd integer");
 
-            Square(-2);
+                bool isDigit = int.TryParse(Console.ReadLine(), out var data);
+
+                if (!isDigit || data < 1 || data % 2 == 0)
+                {
+                    Console.WriteLine("Please, enter correct data");
+                    continue;
+                }
+
+                Square(data);
+            }
         }
     }
 }
