@@ -13,7 +13,7 @@ namespace Epam.Task1.Simple
             try
             {
                 if (n < 1)
-                    throw new ArgumentOutOfRangeException("Number is below 0");
+                    throw new ArgumentOutOfRangeException("The number less than 0.");
             }
             catch (ArgumentOutOfRangeException e)
             {
@@ -33,17 +33,17 @@ namespace Epam.Task1.Simple
 
         static void Main(string[] args)
         {
-            Console.WriteLine("This program will determine if the input number is simple or not");
+            Console.WriteLine("This program will determine if the input number is simple or not.");
 
             while (true)
             {
-                Console.WriteLine("\r\nEnter a positive integer");
+                Console.WriteLine("\r\nEnter a positive integer.");
 
                 bool isDigit = int.TryParse(Console.ReadLine(), out var data);
 
                 if (!isDigit || data < 1)
                 {
-                    Console.WriteLine("Please, enter correct data");
+                    Console.WriteLine("Please, enter correct data.");
                     continue;
                 }
 

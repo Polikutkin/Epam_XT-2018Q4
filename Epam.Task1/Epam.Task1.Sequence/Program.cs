@@ -14,7 +14,7 @@ namespace Epam.Task1.Sequence
             {
                 if (n < 1)
                 {
-                    throw new ArgumentOutOfRangeException("Number is below 0");
+                    throw new ArgumentOutOfRangeException("The number less than 0.");
                 }
             }
 
@@ -36,13 +36,13 @@ namespace Epam.Task1.Sequence
         {
             while (true)
             {
-                Console.WriteLine("Enter a positive integer");
+                Console.WriteLine("Enter a positive integer.");
 
                 bool isDigit = int.TryParse(Console.ReadLine(), out var data);
 
                 if (!isDigit || data < 1)
                 {
-                    Console.WriteLine("Please, enter correct data");
+                    Console.WriteLine("Please, enter correct data.");
                     continue;
                 }
 

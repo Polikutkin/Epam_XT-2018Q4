@@ -14,11 +14,11 @@ namespace Epam.Task1.Square
             {
                 if (n <= 0)
                 {
-                    throw new ArgumentOutOfRangeException("Value doesn't meet the condition: less than 0.");
+                    throw new ArgumentOutOfRangeException("The number less than 0.");
                 }
                 if (n % 2 == 0)
                 {
-                    throw new ArgumentOutOfRangeException("Value doesn't meet the condition: even.");
+                    throw new ArgumentOutOfRangeException("The number is even.");
                 }
             }
 
@@ -48,13 +48,13 @@ namespace Epam.Task1.Square
 
             while (true)
             {
-                Console.WriteLine("\r\nEnter a positive odd integer");
+                Console.WriteLine("\r\nEnter a positive odd integer.");
 
                 bool isDigit = int.TryParse(Console.ReadLine(), out var data);
 
                 if (!isDigit || data < 1 || data % 2 == 0)
                 {
-                    Console.WriteLine("Please, enter correct data");
+                    Console.WriteLine("Please, enter correct data.");
                     continue;
                 }
 
