@@ -46,8 +46,6 @@ namespace Epam.Task1.Square
             Square(6);
 
             Square(-2);
-
-            Console.ReadKey();
         }
     }
 }

@@ -47,8 +47,6 @@ namespace Epam.Task1.Simple
             ShowIsSimple(b);
 
             ShowIsSimple(c);
-
-            Console.ReadKey();
         }
     }
 }

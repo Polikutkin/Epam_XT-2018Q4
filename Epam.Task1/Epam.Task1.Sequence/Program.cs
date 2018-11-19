@@ -47,8 +47,6 @@ namespace Epam.Task1.Sequence
             ShowIsSequence(a);
 
             ShowIsSequence(b);
-
-            Console.ReadKey();
         }
     }
 }
