@@ -37,7 +37,7 @@ namespace Epam.Task1.Simple
 
             while (true)
             {
-                Console.WriteLine("\r\nEnter a positive integer.");
+                Console.WriteLine($"{Environment.NewLine}Enter a positive integer.");
 
                 bool isDigit = int.TryParse(Console.ReadLine(), out var data);
 

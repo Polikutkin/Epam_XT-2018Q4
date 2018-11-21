@@ -48,7 +48,7 @@ namespace Epam.Task1.Square
 
             while (true)
             {
-                Console.WriteLine("\r\nEnter a positive odd integer.");
+                Console.WriteLine($"{Environment.NewLine}Enter a positive odd integer.");
 
                 bool isDigit = int.TryParse(Console.ReadLine(), out var data);
 
