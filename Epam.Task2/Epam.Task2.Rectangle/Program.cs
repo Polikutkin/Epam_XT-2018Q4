@@ -14,7 +14,7 @@ namespace Epam.Task2.Rectangle
         {
             bool side = int.TryParse(Console.ReadLine(), out var x);
 
-            if (side == true && x < 1)
+            if (side && x < 1)
             {
                 try
                 {
@@ -58,7 +58,7 @@ namespace Epam.Task2.Rectangle
                     continue;
                 }
 
-                Console.WriteLine($"\nArea of Rectangle: {Area(a, b)}");
+                Console.WriteLine($"{Environment.NewLine}Area of Rectangle: {Area(a, b)}");
             }
         }
     }

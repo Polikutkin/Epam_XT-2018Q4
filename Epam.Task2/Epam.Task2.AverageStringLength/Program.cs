@@ -44,7 +44,7 @@ namespace Epam.Task2.AverageStringLength
 
                 string input = Console.ReadLine();
 
-                Console.WriteLine($"Average word length is: {AverageStringLength(input)}"); 
+                Console.WriteLine($"{Environment.NewLine}Average word length is: {AverageStringLength(input)}{Environment.NewLine}"); 
             }
         }
     }

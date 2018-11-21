@@ -113,6 +113,7 @@ namespace Epam.Task2.FontAdjustment
                 if (!result || num < 1 || num > 3)
                 {
                     Console.WriteLine("Please, enter the correct number.");
+                    number = 0;
                     continue;
                 }
 

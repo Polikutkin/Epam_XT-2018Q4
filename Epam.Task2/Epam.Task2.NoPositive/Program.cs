@@ -8,7 +8,7 @@ namespace Epam.Task2.NoPositive
 {
     class Program
     {
-        static void InitialieTridimensionalArray(int[,,] array)
+        static void InitializelArray(int[,,] array)
         {
             Random r = new Random();
 
@@ -60,7 +60,7 @@ namespace Epam.Task2.NoPositive
         {
             int[,,] array = new int[2,2,2];
 
-            InitialieTridimensionalArray(array);
+            InitializelArray(array);
 
             Console.WriteLine($"Array:{Environment.NewLine}");
             ShowArrayInfo(array);

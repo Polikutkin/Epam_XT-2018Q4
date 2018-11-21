@@ -32,38 +32,51 @@ namespace Epam.Task2.ArrayProcessing
             return min;
         }
 
-        static int[] BubbleSort(int[] array)
+        static int[] MergeSort(int[] array)
         {
-            if (array.Length < 1)
-                try
-                {
-                    throw new ArgumentNullException("Array is empty.");
-                }
-                catch (ArgumentNullException e)
-                {
-                    Console.WriteLine(e.Message);
-                    return array;
-                }
-
-            if (array.Length == 1)
+            
+            if (array.Length <= 1)
                 return array;
 
-            int temp;
+            int middle = array.Length / 2;
 
-            for (var i = 0; i < array.Length; i++)
+            int[] leftArray = new int[middle];
+            int[] rightArray = new int[array.Length - middle];
+
+            Array.Copy(array, leftArray, middle);
+            Array.Copy(array, middle, rightArray, 0, array.Length - middle);
+
+            return Merge(MergeSort(leftArray), MergeSort(rightArray));
+
+            int[] Merge(int[] leftAr, int[] rightAr)
             {
-                for (var j = 0; j < array.Length - 1; j++)
+                int left = 0;
+                int right = 0;
+
+                for (int i = 0; i < array.Length; i++)
                 {
-                    if (array[j] > array[j + 1])
+                    if (left < leftAr.Length && right < rightAr.Length)
                     {
-                        temp = array[j];
-                        array[j] = array[j + 1];
-                        array[j + 1] = temp;
+                        if (leftAr[left] > rightAr[right])
+                        {
+                            array[i] = rightAr[right++];
+                        }
+                        else
+                        {
+                            array[i] = leftAr[left++];
+                        }
+                    }
+                    else if (left < leftAr.Length)
+                    {
+                        array[i] = leftAr[left++];
+                    }
+                    else
+                    {
+                        array[i] = rightAr[right++];
                     }
                 }
+                return array;
             }
-
-            return array;
         }
 
         static void ArrayElements(int[] array)
@@ -86,15 +99,12 @@ namespace Epam.Task2.ArrayProcessing
                 array[i] = r.Next(-50, 50);
             }
 
-            int max = Max(array);
-            int min = Min(array);
-
             Console.WriteLine("Array: ");
             ArrayElements(array);
 
-            Console.WriteLine($"Max value: {max}{Environment.NewLine}Min value: {min}");
+            Console.WriteLine($"Max value: {Max(array)}{Environment.NewLine}Min value: {Min(array)}");
 
-            BubbleSort(array);
+            MergeSort(array);
 
             Console.WriteLine("Sorted array: ");
             ArrayElements(array);

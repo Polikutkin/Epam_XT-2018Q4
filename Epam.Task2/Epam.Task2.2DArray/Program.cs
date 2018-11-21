@@ -8,7 +8,7 @@ namespace Epam.Task2._2DArray
 {
     class Program
     {
-        static void InitialieTwodimensionalArray(int[,] array)
+        static void InitializeArray(int[,] array)
         {
             Random r = new Random();
 
@@ -51,12 +51,12 @@ namespace Epam.Task2._2DArray
         {
             int[,] array = new int[3, 3];
 
-            InitialieTwodimensionalArray(array);
+            InitializeArray(array);
 
             Console.WriteLine($"Array:{Environment.NewLine}");
             ShowArrayInfo(array);
 
-            Console.WriteLine($"Sum of even elements: {TwoDArray(array)}");
+            Console.WriteLine($"{Environment.NewLine}Sum of even elements: {TwoDArray(array)}");
         }
     }
 }
