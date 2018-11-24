@@ -12,28 +12,26 @@ namespace Epam.Task2.AverageStringLength
         {
             var charArray = s.ToCharArray();
 
+            double letterCounter = 0;
+            int wordCounter = 0;
+            bool previousIsLetter = false;
+
             for (int i = 0; i < charArray.Length; i++)
             {
                 if (char.IsLetter(charArray[i]))
                 {
+                    letterCounter++;
+                    previousIsLetter = true;
                     continue;
                 }
-                else
+                else if (previousIsLetter)
                 {
-                    charArray[i] = ' ';
+                    wordCounter++;
+                    previousIsLetter = false;
                 }
             }
 
-            string[] str = new string(charArray).Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            int count = 0;
-
-            foreach(var word in str)
-            {
-                count += word.Length;
-            }
-
-            return (double)count / str.Length;
+            return letterCounter / wordCounter;
         }
 
         static void Main(string[] args)
