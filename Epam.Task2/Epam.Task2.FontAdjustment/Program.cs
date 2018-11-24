@@ -12,7 +12,7 @@ namespace Epam.Task2.FontAdjustment
         None = 0,
         Bold = 1,
         Italic = 2,
-        Underline = 4
+        Underline = 4,
     }
 
     class Program

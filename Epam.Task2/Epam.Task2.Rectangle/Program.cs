@@ -14,7 +14,13 @@ namespace Epam.Task2.Rectangle
         {
             bool side = int.TryParse(Console.ReadLine(), out var x);
 
-            if (side && x < 1)
+            if (!side)
+            {
+                Console.WriteLine("Please, enter the correct number.");
+                return false;
+            }
+
+            if (x < 1)
             {
                 try
                 {
