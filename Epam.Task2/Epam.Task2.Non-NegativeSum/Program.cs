@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Epam.Task2.Non_NegativeSum
 {
-    class Program
+    internal class Program
     {
-        static int NonNegativeSum(int[] array)
+        internal static int NonNegativeSum(int[] array)
         {
             int sum = 0;
 
@@ -20,7 +20,7 @@ namespace Epam.Task2.Non_NegativeSum
             return sum;
         }
 
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             int[] array = new int[5];
 

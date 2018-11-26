@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Epam.Task2.X_MasTree
 {
-    class Program
+    internal class Program
     {
-        static void XMasTree(int n)
+        internal static void XMasTree(int n)
         {
             for (int s = 0; s <= n; s++)
             {
@@ -17,17 +17,19 @@ namespace Epam.Task2.X_MasTree
                     for (int j = 0; j < (n - s) + (s - i); j++)
                     {
                         Console.Write(' ');
+
+                        for (int k = 0; k < i + (i - 1); k++)
+                        {
+                            Console.Write('*');
+                        }
+
+                        Console.WriteLine();
                     }
-                    for (int k = 0; k < i + (i - 1); k++)
-                    {
-                        Console.Write('*');
-                    }
-                    Console.WriteLine();
                 }
             }
         }
 
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             while (true)
             {

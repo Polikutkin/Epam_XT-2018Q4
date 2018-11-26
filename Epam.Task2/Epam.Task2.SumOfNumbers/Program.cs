@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Epam.Task2.SumOfNumbers
 {
-    class Program
+    internal class Program
     {
-        static int SumOfNumbers(int n)
+        internal static int SumOfNumbers(int n)
         {
             int sum = 0;
 
@@ -19,7 +19,8 @@ namespace Epam.Task2.SumOfNumbers
 
             return sum;
         }
-        static void Main(string[] args)
+
+        internal static void Main(string[] args)
         {
             Console.Write("The sum of all numbers is less than 1000, a multiple of 3 or 5: ");
 

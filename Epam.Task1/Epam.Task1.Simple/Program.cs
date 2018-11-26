@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace Epam.Task1.Simple
 {
-    class Program
+    internal class Program
     {
-        static bool Simple(int n)
+        internal static bool Simple(int n)
         {
             try
             {
                 if (n < 1)
+                {
                     throw new ArgumentOutOfRangeException("The number less than 0.");
+                }
             }
             catch (ArgumentOutOfRangeException e)
             {
@@ -28,10 +30,11 @@ namespace Epam.Task1.Simple
                     return false;
                 }
             }
+
             return true;
         }
 
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             Console.WriteLine("This program will determine if the input number is simple or not.");
 

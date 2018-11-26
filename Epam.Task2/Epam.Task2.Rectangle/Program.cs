@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Epam.Task2.Rectangle
 {
-    class Program
+    internal class Program
     {
-        static int Area(int a, int b) => a * b;
+        internal static int Area(int a, int b) => a * b;
 
-        static bool IsPositiveNumber(ref int a)
+        internal static bool IsPositiveNumber(ref int a)
         {
             bool side = int.TryParse(Console.ReadLine(), out var x);
 
@@ -37,7 +37,7 @@ namespace Epam.Task2.Rectangle
             return true;
         }
 
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             Console.WriteLine("Enter the length of the sides of the rectangle to find the area.");
 
@@ -59,7 +59,7 @@ namespace Epam.Task2.Rectangle
 
                 bool side2 = IsPositiveNumber(ref b);
 
-                if(!side2)
+                if (!side2)
                 {
                     continue;
                 }

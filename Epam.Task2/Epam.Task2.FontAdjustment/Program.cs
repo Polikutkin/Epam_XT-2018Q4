@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Epam.Task2.FontAdjustment
 {
     [Flags]
-    enum Font : byte
+    internal enum Font : byte
     {
         None = 0,
         Bold = 1,
@@ -15,9 +15,9 @@ namespace Epam.Task2.FontAdjustment
         Underline = 4,
     }
 
-    class Program
+    internal class Program
     {
-        static Font FontAdjustment(ref int f, int n)
+        internal static Font FontAdjustment(ref int f, int n)
         {
             switch (f)
             {
@@ -25,7 +25,7 @@ namespace Epam.Task2.FontAdjustment
                     f |= n;
                     break;
                 case 1:
-                    if(n == 1)
+                    if (n == 1)
                     {
                         f ^= n;
                     }
@@ -33,6 +33,7 @@ namespace Epam.Task2.FontAdjustment
                     {
                         f |= n;
                     }
+
                     break;
                 case 2:
                     if (n == 2)
@@ -43,6 +44,7 @@ namespace Epam.Task2.FontAdjustment
                     {
                         f |= n;
                     }
+
                     break;
                 case 4:
                     if (n == 4)
@@ -53,9 +55,10 @@ namespace Epam.Task2.FontAdjustment
                     {
                         f |= n;
                     }
+
                     break;
                 case 3:
-                    if(n == 4)
+                    if (n == 4)
                     {
                         f |= n;
                     }
@@ -63,6 +66,7 @@ namespace Epam.Task2.FontAdjustment
                     {
                         f ^= n;
                     }
+
                     break;
                 case 5:
                     if (n == 3)
@@ -73,6 +77,7 @@ namespace Epam.Task2.FontAdjustment
                     {
                         f ^= n;
                     }
+
                     break;
                 case 6:
                     if (n == 1)
@@ -83,6 +88,7 @@ namespace Epam.Task2.FontAdjustment
                     {
                         f ^= n;
                     }
+
                     break;
                 case 7:
                     f ^= n;
@@ -94,14 +100,13 @@ namespace Epam.Task2.FontAdjustment
             return (Font)f;
         }
 
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             int number = 0;
             int font = 0;
 
             while (true)
             {
-
                 Console.Write("Label parameters: ");
 
                 Console.WriteLine(FontAdjustment(ref font, number));

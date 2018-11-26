@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Epam.Task2.NoPositive
 {
-    class Program
+    internal class Program
     {
-        static void InitializelArray(int[,,] array)
+        internal static void InitializelArray(int[,,] array)
         {
             Random r = new Random();
 
@@ -24,7 +24,7 @@ namespace Epam.Task2.NoPositive
             }
         }
 
-        static void NoPositive(int[,,] array)
+        internal static void NoPositive(int[,,] array)
         {
             for (int i = 0; i < array.GetLongLength(0); i++)
             {
@@ -41,7 +41,7 @@ namespace Epam.Task2.NoPositive
             }
         }
 
-        static void ShowArrayInfo(int[,,] array)
+        internal static void ShowArrayInfo(int[,,] array)
         {
             for (int i = 0; i < array.GetLongLength(0); i++)
             {
@@ -51,14 +51,17 @@ namespace Epam.Task2.NoPositive
                     {
                         Console.Write($"{array[k, j, i]}, ");
                     }
+
                     Console.WriteLine();
                 }
+
                 Console.WriteLine();
             }
         }
-        static void Main(string[] args)
+
+        internal static void Main(string[] args)
         {
-            int[,,] array = new int[2,2,2];
+            int[,,] array = new int[2, 2, 2];
 
             InitializelArray(array);
 

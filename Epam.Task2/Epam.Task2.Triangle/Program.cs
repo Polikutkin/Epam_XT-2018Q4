@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Epam.Task2.Triangle
 {
-    class Program
+    internal class Program
     {
-        static void Triangle(int n)
+        internal static void Triangle(int n)
         {
             for (int i = 0; i < n; i++)
             {
@@ -21,15 +21,15 @@ namespace Epam.Task2.Triangle
             }
         }
 
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             while (true)
             {
                 Console.WriteLine($"{Environment.NewLine}Enter the number of the lines of the Triangle.");
 
                 bool result = int.TryParse(Console.ReadLine(), out var lines);
-
-                if(!result || lines < 1)
+                
+                if (!result || lines < 1)
                 {
                     Console.WriteLine("Please, enter the correct number.");
                     continue;

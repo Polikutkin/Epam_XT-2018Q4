@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Epam.Task2.AnotherTriangle
 {
-    class Program
+    internal class Program
     {
-        static void AnotherTriangle(int n)
+        internal static void AnotherTriangle(int n)
         {
             for (int i = 1; i <= n; i++)
             {
@@ -16,15 +16,17 @@ namespace Epam.Task2.AnotherTriangle
                 {
                     Console.Write(' ');
                 }
+
                 for (int k = 0; k < i + (i - 1); k++)
                 {
                     Console.Write('*');
                 }
+
                 Console.WriteLine();
             }
         }
 
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             while (true)
             {

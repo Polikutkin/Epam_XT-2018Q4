@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Epam.Task2.ArrayProcessing
 {
-    class Program
+    internal class Program
     {
-        static int Max(int[] array)
+        internal static int Max(int[] array)
         {
             int max = array[0];
 
@@ -20,7 +20,7 @@ namespace Epam.Task2.ArrayProcessing
             return max;
         }
 
-        static int Min(int[] array)
+        internal static int Min(int[] array)
         {
             int min = array[0];
 
@@ -32,11 +32,12 @@ namespace Epam.Task2.ArrayProcessing
             return min;
         }
 
-        static int[] MergeSort(int[] array)
+        internal static int[] MergeSort(int[] array)
         {
-            
             if (array.Length <= 1)
+            {
                 return array;
+            }
 
             int middle = array.Length / 2;
 
@@ -75,20 +76,22 @@ namespace Epam.Task2.ArrayProcessing
                         array[i] = rightAr[right++];
                     }
                 }
+
                 return array;
             }
         }
 
-        static void ArrayElements(int[] array)
+        internal static void ArrayElements(int[] array)
         {
             for (int i = 0; i < array.Length - 1; i++)
             {
                 Console.Write(array[i] + ", ");
             }
+
             Console.WriteLine(array[array.Length - 1]);
         }
 
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             Random r = new Random();
 

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Epam.Task2.AverageStringLength
 {
-    class Program
+    internal class Program
     {
-        static double AverageStringLength(string s)
+        internal static double AverageStringLength(string s)
         {
             var charArray = s.ToCharArray();
 
@@ -34,7 +34,7 @@ namespace Epam.Task2.AverageStringLength
             return letterCounter / wordCounter;
         }
 
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             while (true)
             {

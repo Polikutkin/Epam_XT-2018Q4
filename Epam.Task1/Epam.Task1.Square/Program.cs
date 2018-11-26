@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Epam.Task1.Square
 {
-    class Program
+    internal class Program
     {
-        static void Square(int n)
+        internal static void Square(int n)
         {
             try
             {
@@ -16,12 +16,12 @@ namespace Epam.Task1.Square
                 {
                     throw new ArgumentOutOfRangeException("The number less than 0.");
                 }
+
                 if (n % 2 == 0)
                 {
                     throw new ArgumentOutOfRangeException("The number is even.");
                 }
             }
-
             catch (ArgumentOutOfRangeException e)
             {
                 Console.WriteLine(e.Message);
@@ -33,16 +33,20 @@ namespace Epam.Task1.Square
                 for (var j = 0; j < n; j++)
                 {
                     if (i == n / 2 && j == n / 2)
+                    {
                         Console.Write(' ');
+                    }
                     else
+                    {
                         Console.Write('*');
+                    }
                 }
 
                 Console.WriteLine();
             }
         }
 
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             Console.WriteLine("This program will show you the beauty of symmetry!");
 

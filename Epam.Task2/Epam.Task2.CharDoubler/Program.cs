@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Epam.Task2.CharDoubler
 {
-    class Program
+    internal class Program
     {
-        static string CharDoubler(string input1, string input2)
+        internal static string CharDoubler(string input1, string input2)
         {
             var sb = new StringBuilder();
 
@@ -29,7 +29,7 @@ namespace Epam.Task2.CharDoubler
             return sb.ToString();
         }
 
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             while (true)
             {

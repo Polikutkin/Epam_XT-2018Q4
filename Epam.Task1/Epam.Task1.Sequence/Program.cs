@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Epam.Task1.Sequence
 {
-    class Program
+    internal class Program
     {
-        static void Sequence(int n)
+         internal static void Sequence(int n)
         {
             try
             {
@@ -17,7 +17,6 @@ namespace Epam.Task1.Sequence
                     throw new ArgumentOutOfRangeException("The number less than 0.");
                 }
             }
-
             catch (ArgumentOutOfRangeException e)
             {
                 Console.WriteLine(e.Message);
@@ -32,7 +31,7 @@ namespace Epam.Task1.Sequence
             Console.WriteLine(n);
         }
 
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             while (true)
             {

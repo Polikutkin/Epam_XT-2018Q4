@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Epam.Task2._2DArray
 {
-    class Program
+    internal class Program
     {
-        static void InitializeArray(int[,] array)
+        internal static void InitializeArray(int[,] array)
         {
             Random r = new Random();
 
@@ -21,7 +21,7 @@ namespace Epam.Task2._2DArray
             }
         }
 
-        static int TwoDArray(int[,] array)
+        internal static int TwoDArray(int[,] array)
         {
             int sum = 0;
 
@@ -36,7 +36,7 @@ namespace Epam.Task2._2DArray
             return sum;
         }
 
-        static void ShowArrayInfo(int[,] array)
+        internal static void ShowArrayInfo(int[,] array)
         {
             for (int i = 0; i < array.GetLongLength(0); i++)
             {
@@ -44,10 +44,12 @@ namespace Epam.Task2._2DArray
                 {
                     Console.Write($"{array[j, i]}, ");
                 }
+
                 Console.WriteLine();
             }
         }
-        static void Main(string[] args)
+
+        internal static void Main(string[] args)
         {
             int[,] array = new int[3, 3];
 
