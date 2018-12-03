@@ -10,35 +10,18 @@ namespace Epam.Task3.User
     {
         public static void Main(string[] args)
         {
-            DateTime now = DateTime.Now;
-
             Console.WriteLine("This program allows you to create a User.");
 
             while (true)
             {
                 Console.WriteLine($"{Environment.NewLine}Enter user data:");
 
-                Console.Write("Name: ");
-                string name = Console.ReadLine();
+                string name = CheckMethods.CheckString("Name");
+                string patronymic = CheckMethods.CheckString("Patronymic");
+                string lastName = CheckMethods.CheckString("LastName");
+                DateTime birthDate = CheckMethods.CheckDate("Birth date (Day/Month/Year. Example: 27 1 2000)");
 
-                Console.Write("Patronymic: ");
-                string patronymic = Console.ReadLine();
-
-                Console.Write("LastName: ");
-                string lastName = Console.ReadLine();
-
-                Console.Write("Birth date (Day/Month/Year. Example: 27 1 2000): ");
-                string birthDate = Console.ReadLine();
-
-                bool dateParse = DateTime.TryParse(birthDate, out var date);
-
-                if (!dateParse || now.CompareTo(date) < 0)
-                {
-                    Console.WriteLine("Please enter the valid birth date.");
-                    continue;
-                }
-
-                User user = new User(name, patronymic, lastName, date);
+                User user = new User(name, patronymic, lastName, birthDate);
 
                 Console.WriteLine($"{Environment.NewLine}User Data:");
                 user.ShowInfo();
