@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace Epam.Task3.VectorGraphicsEditor
 {
-    public class Ellipse : Shape
+    public class Circle : Shape
     {
-        public Ellipse()
+        public Circle()
         {
         }
 
-        public Ellipse(double r1, double r2, double x, double y)
+        public Circle(double r, double x, double y)
         {
-            if (r1 <= 0 || r2 <= 0)
+            if (r <= 0)
             {
                 try
                 {
-                    throw new ArgumentException("Ellipse with a radius equal to or less than 0 cannot exist.");
+                    throw new ArgumentException("Ellipse with a radius equal to or less than 0 cannot exist.", nameof(r));
                 }
                 catch (ArgumentException e)
                 {
@@ -27,8 +27,7 @@ namespace Epam.Task3.VectorGraphicsEditor
                 }
             }
 
-            this.XRadius = r1;
-            this.YRadius = r2;
+            this.Radius = r;
             this.X = x;
             this.Y = y;
         }
@@ -37,13 +36,9 @@ namespace Epam.Task3.VectorGraphicsEditor
 
         public override double Y { get; set; }
 
-        public double XRadius { get; }
+        public double Radius { get; }
 
-        public double YRadius { get; }
-
-        public double Length => Math.PI * (this.XRadius + this.YRadius);
-
-        public double Square => Math.PI * this.XRadius * this.YRadius;
+        public double Length => 2 * Math.PI * Radius;
 
         public override void ShowInfo()
         {
@@ -51,10 +46,8 @@ namespace Epam.Task3.VectorGraphicsEditor
             Console.WriteLine($"Shape: {this.GetType().Name}");
             Console.WriteLine($"Coordinate X: {this.X}");
             Console.WriteLine($"Coordinate Y: {this.Y}");
-            Console.WriteLine($"XRadius: {this.XRadius}");
-            Console.WriteLine($"YRadius: {this.YRadius}");
+            Console.WriteLine($"Radius: {this.Radius}");
             Console.WriteLine($"Circumference: {this.Length}");
-            Console.WriteLine($"Area: {this.Square}");
         }
     }
 }

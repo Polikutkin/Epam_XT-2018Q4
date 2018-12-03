@@ -6,39 +6,15 @@ using System.Threading.Tasks;
 
 namespace Epam.Task3.VectorGraphicsEditor
 {
-    public class Round : Shape
+    public class Round : Circle
     {
         public Round()
         {
         }
 
-        public Round(double r, double x, double y)
+        public Round(double r, double x, double y) : base(r, x, y)
         {
-            if (r <= 0)
-            {
-                try
-                {
-                    throw new ArgumentException("Round with a radius equal to or less than 0 cannot exist.", nameof(r));
-                }
-                catch (ArgumentException e)
-                {
-                    Console.WriteLine(e.Message);
-                    throw;
-                }
-            }
-
-            this.Radius = r;
-            this.X = x;
-            this.Y = y;
         }
-
-        public override double X { get; set; }
-
-        public override double Y { get; set; }
-
-        public double Radius { get; }
-
-        public double Length => 2 * Math.PI * this.Radius;
 
         public double Square => Math.PI * Math.Pow(this.Radius, 2);
 

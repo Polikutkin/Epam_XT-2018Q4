@@ -21,7 +21,7 @@ namespace Epam.Task3.VectorGraphicsEditor
                 Console.WriteLine();
                 Console.WriteLine("Create a line: 1");
                 Console.WriteLine("Create a rectangle: 2");
-                Console.WriteLine("Create an ellipse: 3");
+                Console.WriteLine("Create an circle: 3");
                 Console.WriteLine("Create a round: 4");
                 Console.WriteLine("Create a ring: 5");
                 Console.WriteLine();
@@ -47,8 +47,8 @@ namespace Epam.Task3.VectorGraphicsEditor
                         Console.WriteLine("Rectangle created.");
                         break;
                     case 3:
-                        shapes.Add(new Ellipse(r.Next(1, 50), r.Next(1, 50), r.Next(-50, 50), r.Next(-50, 50)));
-                        Console.WriteLine("Ellipse created.");
+                        shapes.Add(new Circle(r.Next(1, 50), r.Next(1, 50), r.Next(-50, 50)));
+                        Console.WriteLine("Circle created.");
                         break;
                     case 4:
                         shapes.Add(new Round(r.Next(1, 50), r.Next(-50, 50), r.Next(-50, 50)));
