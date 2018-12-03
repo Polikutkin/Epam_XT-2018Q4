@@ -59,9 +59,14 @@ namespace Epam.Task3.MyString
             return new string(myString.CharList);
         }
 
-        public static explicit operator char[](MyString myString)
+        public static implicit operator char[](MyString myString)
         {
             return myString.CharList;
+        }
+
+        public static implicit operator StringBuilder(MyString myString)
+        {
+            return new StringBuilder(myString.ToString());
         }
 
         public int Compare(string s)

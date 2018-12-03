@@ -38,7 +38,7 @@ namespace Epam.Task3.VectorGraphicsEditor
 
         public double Radius { get; }
 
-        public double Length => 2 * Math.PI * Radius;
+        public double Length => 2 * Math.PI * this.Radius;
 
         public override void ShowInfo()
         {

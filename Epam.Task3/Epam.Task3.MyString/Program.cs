@@ -10,12 +10,13 @@ namespace Epam.Task3.MyString
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Some work with class \"MyString\"");
-            Console.WriteLine(Environment.NewLine);
-
             string s1 = "First string";
             string s2 = "Second string";
             string s3 = "First string";
+            string s4 = "rst stri";
+            string arrow = " => ";
+            char l = 'l';
+            char dot = '.';
             char[] charArray = s3.ToCharArray();
 
             MyString myStr1 = new MyString(s1);
@@ -25,45 +26,52 @@ namespace Epam.Task3.MyString
             int comp1 = myStr1.Compare(myStr2);
             int comp2  = myStr1.Compare(s3);
 
-            char l = 'l';
-            string s = "rst stri";
             bool b1 = myStr1.Contains(l);
-            bool b2 = myStr1.Contains(s);
+            bool b2 = myStr1.Contains(s4);
             bool b3 = myStr1.Contains(myStr3);
 
-            char dot = '.';
-            string arrow = " => ";
             MyString myStr4 = myStr1.Concat('.');
             MyString myStr5 = myStr1.Concat(" => ");
             MyString myStr6 = myStr1.Concat(myStr2);
 
             MyString myStr7 = myStr1 + myStr3;
 
-            Console.WriteLine($"{nameof(myStr1)} = {myStr1}");
-            Console.WriteLine($"{nameof(myStr2)} = {myStr2}");
-            Console.WriteLine($"{nameof(myStr3)} = {myStr3}");
+            {
+                Console.WriteLine("Some work with class \"MyString\"");
+                Console.WriteLine(Environment.NewLine);
 
-            Console.WriteLine(Environment.NewLine);
-            Console.WriteLine($"{nameof(myStr1)} is bigger (1), smaller (2) or equal (0) to {nameof(myStr2)}: {comp1}");
-            Console.WriteLine($"{nameof(myStr1)} is bigger (1), smaller (2) or equal (0) to {nameof(s3)}: {comp2}");
+                Console.WriteLine($"{nameof(myStr1)} = {myStr1}");
+                Console.WriteLine($"{nameof(myStr2)} = {myStr2}");
+                Console.WriteLine($"{nameof(myStr3)} = {myStr3}");
 
-            Console.WriteLine(Environment.NewLine);
-            Console.WriteLine($"{nameof(myStr1)} contains '{l}': {b1}");
-            Console.WriteLine($"{nameof(myStr1)} contains \"{s}\": {b2}");
-            Console.WriteLine($"{nameof(myStr1)} contains {nameof(myStr3)}: {b3}");
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine($"{nameof(myStr1)} is bigger (1), smaller (2) or equal (0) to {nameof(myStr2)}: {comp1}");
+                Console.WriteLine($"{nameof(myStr1)} is bigger (1), smaller (2) or equal (0) to {nameof(s3)}: {comp2}");
 
-            Console.WriteLine(Environment.NewLine);
-            Console.WriteLine("Sum of MyStrings with Concat():");
-            Console.WriteLine($"{nameof(myStr1)} and '{dot}': {myStr4}");
-            Console.WriteLine($"{nameof(myStr1)} and \"{arrow}\": {myStr5}");
-            Console.WriteLine($"{nameof(myStr1)} and {nameof(myStr2)}: {myStr6}");
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine($"{nameof(myStr1)} contains '{l}': {b1}");
+                Console.WriteLine($"{nameof(myStr1)} contains \"{s4}\": {b2}");
+                Console.WriteLine($"{nameof(myStr1)} contains {nameof(myStr3)}: {b3}");
 
-            Console.WriteLine(Environment.NewLine);
-            Console.WriteLine("Sum of MyStrings with overloaded operator '+':");
-            Console.WriteLine($"{nameof(myStr1)} + {nameof(myStr3)}: {myStr7}");
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine("Sum of MyStrings with Concat():");
+                Console.WriteLine($"{nameof(myStr1)} and '{dot}': {myStr4}");
+                Console.WriteLine($"{nameof(myStr1)} and \"{arrow}\": {myStr5}");
+                Console.WriteLine($"{nameof(myStr1)} and {nameof(myStr2)}: {myStr6}");
 
-            Console.WriteLine(Environment.NewLine);
-            Console.WriteLine($"{nameof(myStr1)}[6] = {myStr1[6]}");
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine("Sum of MyStrings with overloaded operator '+':");
+                Console.WriteLine($"{nameof(myStr1)} + {nameof(myStr3)}: {myStr7}");
+
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine($"{nameof(myStr1)}[6] = {myStr1[6]}");
+            }
+
+            char[] charArray2 = myStr1;
+            StringBuilder sb = myStr1;
+            string myStrAsString = (string)myStr1;
+            MyString myStr8 = (MyString)"Test string";
+            MyString mySstr9 = (MyString)charArray; 
         }
     }
 }
