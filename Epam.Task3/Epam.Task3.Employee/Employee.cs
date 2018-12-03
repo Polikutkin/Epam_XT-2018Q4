@@ -14,11 +14,13 @@ namespace Epam.Task3.Employee
 
         public Employee(string name, string patronymic, string lastName, DateTime birthDate, DateTime hireDate, string position) : base(name, patronymic, lastName, birthDate)
         {
-            if (hireDate.Year - birthDate.Year < 18)
+            DateTime now = DateTime.Now;
+
+            if (now.Year - birthDate.Year > 150 || now.Year - birthDate.Year < 18 || (now.Year - birthDate.Year == 18 && now.DayOfYear < birthDate.DayOfYear))
             {
                 try
                 {
-                    throw new ArgumentException("The employee must be over 18 to hire.");
+                    throw new ArgumentException("User can not be older than 150 years and under 18 years old for hire.");
                 }
                 catch (ArgumentException e)
                 {
@@ -41,13 +43,13 @@ namespace Epam.Task3.Employee
             {
                 DateTime now = DateTime.Now;
 
-                if (now.Month < this.HireDate.Month)
+                if (now.DayOfYear >= this.HireDate.DayOfYear)
                 {
-                    return now.Year - this.HireDate.Year - 1;
+                    return now.Year - this.HireDate.Year;
                 }
                 else
                 {
-                    return now.Year - this.HireDate.Year;
+                    return now.Year - this.HireDate.Year - 1;
                 }
             }
         }

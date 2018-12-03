@@ -47,11 +47,7 @@ namespace Epam.Task3.User
             {
                 DateTime now = DateTime.Now;
 
-                if (now.Month > this.BirthDate.Month)
-                {
-                    return now.Year - this.BirthDate.Year;
-                }
-                else if (now.Month == this.BirthDate.Month && now.Day >= this.BirthDate.Day)
+                if (now.DayOfYear >= this.BirthDate.DayOfYear)
                 {
                     return now.Year - this.BirthDate.Year;
                 }

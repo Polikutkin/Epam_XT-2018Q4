@@ -10,48 +10,20 @@ namespace Epam.Task3.Employee
     {
         public static void Main(string[] args)
         {
-            DateTime now = DateTime.Now;
-
             Console.WriteLine("This program allows you to create an Employee.");
 
             while (true)
             {
                 Console.WriteLine($"{Environment.NewLine}Enter employee data:");
 
-                Console.Write("Name: ");
-                string name = Console.ReadLine();
+                string name = CheckMethods.CheckString("Name");
+                string patronymic = CheckMethods.CheckString("Patronymic");
+                string lastName = CheckMethods.CheckString("LastName");
+                DateTime birthDate = CheckMethods.CheckBirthDate("Birth date (Day/Month/Year. Example: 27 1 2000)");
+                DateTime hireDate = CheckMethods.CheckHireDate("Hire date (Day/Month/Year. Example: 27 1 2000)", birthDate);
+                string position = CheckMethods.CheckString("Position");
 
-                Console.Write("Patronymic: ");
-                string patronymic = Console.ReadLine();
-
-                Console.Write("LastName: ");
-                string lastName = Console.ReadLine();
-
-                Console.Write("Birth date (Day/Month/Year. Example: 27 1 2000): ");
-                string birthDate = Console.ReadLine();
-
-                Console.Write("Position: ");
-                string position = Console.ReadLine();
-
-                Console.Write("Hire date (Day/Month/Year. Example: 27 1 2000):: ");
-                string hireDate = Console.ReadLine();
-
-                bool birthParse = DateTime.TryParse(birthDate, out var birth);
-                bool hireParse = DateTime.TryParse(hireDate, out var hire);
-
-                if (!birthParse || !hireParse || now.CompareTo(birth) < 0 || now.CompareTo(birth) < 0)
-                {
-                    Console.WriteLine("Please enter the date in a valid format.");
-                    continue;
-                }
-
-                if (birth.Year - hire.Year < 18)
-                {
-                    Console.WriteLine("The employee must be over 18 to hire.");
-                    continue;
-                }
-
-                Employee emp = new Employee(name, patronymic, lastName, birth, hire, position);
+                Employee emp = new Employee(name, patronymic, lastName, birthDate, hireDate, position);
 
                 Console.WriteLine($"{Environment.NewLine}Employee info:");
                 emp.ShowInfo();
