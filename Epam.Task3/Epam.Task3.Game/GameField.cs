@@ -8,6 +8,8 @@ namespace Epam.Task3.Game
 {
     public class GameField
     {
+        private bool gameOver = false;
+
         private Player player;
         private List<Block> blocks;
         private List<Bonus> bonuses;
@@ -25,22 +27,20 @@ namespace Epam.Task3.Game
             this.Height = 20 * (int)dif;
 
             this.blocks = new List<Block>();
+            this.bonuses = new List<Bonus>();
+            this.enemies = new List<Enemy>();
+
             for (int i = 0; i < 4 * (int)dif; i++)
             {
                 this.blocks.Add(new BlockTree());
                 this.blocks.Add(new BlockStone());
             }
 
-            this.bonuses = new List<Bonus>();
             for (int i = 0; i < 2 * (int)dif; i++)
             {
                 this.bonuses.Add(new BonusApple());
                 this.bonuses.Add(new BonusCherry());
-            }
 
-            this.enemies = new List<Enemy>();
-            for (int i = 0; i < 2 * (int)dif; i++)
-            {
                 this.enemies.Add(new EnemyBear());
                 this.enemies.Add(new EnemyWolf());
             }

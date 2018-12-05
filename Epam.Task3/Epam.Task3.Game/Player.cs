@@ -33,7 +33,6 @@ namespace Epam.Task3.Game
 
         public void TakeDamage()
         {
-            this.isDead = true;
         }
     }
 }
