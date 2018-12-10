@@ -8,6 +8,8 @@ namespace Epam.Task2.ArrayProcessing
 {
     internal class Program
     {
+        private static Random randomDigit = new Random();
+
         internal static int Max(int[] array)
         {
             int max = array[0];
@@ -85,7 +87,7 @@ namespace Epam.Task2.ArrayProcessing
         {
             for (int i = 0; i < array.Length - 1; i++)
             {
-                Console.Write(array[i] + ", ");
+                Console.Write($"{array[i]}, ");
             }
 
             Console.WriteLine(array[array.Length - 1]);
@@ -93,13 +95,11 @@ namespace Epam.Task2.ArrayProcessing
 
         internal static void Main(string[] args)
         {
-            Random r = new Random();
-
             int[] array = new int[11];
 
             for (int i = 0; i < array.Length; i++)
             {
-                array[i] = r.Next(-50, 50);
+                array[i] = randomDigit.Next(-50, 50);
             }
 
             Console.WriteLine("Array: ");

@@ -8,6 +8,9 @@ namespace Epam.Task2.X_MasTree
 {
     internal class Program
     {
+        internal const char Space = ' ';
+        internal const char Star = '*';
+
         internal static void XMasTree(int n)
         {
             for (int s = 0; s <= n; s++)
@@ -16,11 +19,11 @@ namespace Epam.Task2.X_MasTree
                 {
                     for (int j = 0; j < (n - s) + (s - i); j++)
                     {
-                        Console.Write(' ');
+                        Console.Write(Space);
 
                         for (int k = 0; k < i + (i - 1); k++)
                         {
-                            Console.Write('*');
+                            Console.Write(Star);
                         }
 
                         Console.WriteLine();

@@ -8,18 +8,21 @@ namespace Epam.Task2.AnotherTriangle
 {
     internal class Program
     {
+        internal const char Space = ' ';
+        internal const char Star = '*';
+
         internal static void AnotherTriangle(int n)
         {
             for (int i = 1; i <= n; i++)
             {
                 for (int j = 0; j < n - i; j++)
                 {
-                    Console.Write(' ');
+                    Console.Write(Space);
                 }
 
                 for (int k = 0; k < i + (i - 1); k++)
                 {
-                    Console.Write('*');
+                    Console.Write(Star);
                 }
 
                 Console.WriteLine();

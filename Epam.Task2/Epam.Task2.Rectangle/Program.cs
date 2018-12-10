@@ -34,6 +34,7 @@ namespace Epam.Task2.Rectangle
             }
 
             a = x;
+
             return true;
         }
 
