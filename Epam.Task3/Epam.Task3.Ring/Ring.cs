@@ -8,6 +8,9 @@ namespace Epam.Task3.Ring
 {
     public class Ring
     {
+        private Round outerRadius;
+        private Round innerRadius;
+
         public Ring()
         {
         }
@@ -29,17 +32,17 @@ namespace Epam.Task3.Ring
 
             this.X = x;
             this.Y = y;
-            this.OuterRadius = outerRadius;
-            this.InnerRadius = innerRadius;
+            this.outerRadius = new Round(x, y, outerRadius);
+            this.innerRadius = new Round(x, y, innerRadius);
         }
 
         public double X { get; set; }
 
         public double Y { get; set; }
 
-        public double OuterRadius { get; }
+        public double OuterRadius => outerRadius.Radius;
 
-        public double InnerRadius { get; }
+        public double InnerRadius => innerRadius.Radius;
 
         public double Length => 2 * Math.PI * (this.OuterRadius + this.InnerRadius);
 
@@ -47,7 +50,8 @@ namespace Epam.Task3.Ring
 
         public void ShowInfo()
         {
-            Console.WriteLine($"{Environment.NewLine}Ring parameters is: ");
+            Console.WriteLine();
+            Console.WriteLine("Ring parameters is: ");
             Console.WriteLine($"Coordinate X: {this.X}");
             Console.WriteLine($"Coordinate Y: {this.Y}");
             Console.WriteLine($"OuterRadius: {this.OuterRadius}");
