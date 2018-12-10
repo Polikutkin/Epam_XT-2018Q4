@@ -10,10 +10,7 @@ namespace Epam.Task3.Game
     {
         private bool gameOver = false;
 
-        private Player player;
-        private List<Block> blocks;
-        private List<Bonus> bonuses;
-        private List<Enemy> enemies;
+        private List<GameSubject> gameSubjects;
 
         public GameField() : this(string.Empty, Difficulty.Normal)
         {
@@ -21,28 +18,26 @@ namespace Epam.Task3.Game
 
         public GameField(string playerName, Difficulty dif)
         {
-            this.player = new Player(playerName);
-
             this.Width = 20 * (int)dif;
             this.Height = 20 * (int)dif;
 
-            this.blocks = new List<Block>();
-            this.bonuses = new List<Bonus>();
-            this.enemies = new List<Enemy>();
+            this.gameSubjects = new List<GameSubject>();
+
+            this.gameSubjects.Add(new Player(playerName));
 
             for (int i = 0; i < 4 * (int)dif; i++)
             {
-                this.blocks.Add(new BlockTree());
-                this.blocks.Add(new BlockStone());
+                this.gameSubjects.Add(new BlockTree());
+                this.gameSubjects.Add(new BlockStone());
             }
 
             for (int i = 0; i < 2 * (int)dif; i++)
             {
-                this.bonuses.Add(new BonusApple());
-                this.bonuses.Add(new BonusCherry());
+                this.gameSubjects.Add(new BonusApple());
+                this.gameSubjects.Add(new BonusCherry());
 
-                this.enemies.Add(new EnemyBear());
-                this.enemies.Add(new EnemyWolf());
+                this.gameSubjects.Add(new EnemyBear());
+                this.gameSubjects.Add(new EnemyWolf());
             }
         }
 
@@ -56,6 +51,14 @@ namespace Epam.Task3.Game
 
         public void DamageTaken(Enemy enemy)
         {
+        }
+
+        public void CreateGameField()
+        {
+            foreach (var subject in gameSubjects)
+            {
+                subject.ViewOnScreen();
+            }
         }
     }
 }

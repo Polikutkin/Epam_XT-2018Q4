@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Epam.Task3.Game
 {
-    public class Player
+    public class Player : GameSubject
     {
         private bool isDead = false;
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Epam.Task3.Game
 {
-    public abstract class Enemy
+    public abstract class Enemy : GameSubject
     {
         public abstract void Move();
 

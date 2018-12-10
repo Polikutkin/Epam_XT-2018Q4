@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Epam.Task3.Game
 {
-    public abstract class Block : GameSubject
+    public abstract class GameSubject
     {
+        public void ViewOnScreen()
+        {
+        }
     }
 }

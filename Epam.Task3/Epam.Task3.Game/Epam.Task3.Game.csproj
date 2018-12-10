@@ -53,6 +53,7 @@
     <Compile Include="EnemyBear.cs" />
     <Compile Include="EnemyWolf.cs" />
     <Compile Include="GameField.cs" />
+    <Compile Include="GameSubject.cs" />
     <Compile Include="MoveDirection.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
