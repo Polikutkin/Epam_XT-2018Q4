@@ -9,16 +9,6 @@ namespace Epam.Task4.DynamicArray
 {
     public class Program
     {
-        public static void ShowElementsOnConsole<T>(IEnumerable<T> ar)
-        {
-            Console.WriteLine($"Elements of {ar.GetType().Name}:");
-
-            foreach (var item in ar)
-            {
-                Console.Write($"{item} ");
-            }
-        }
-
         public static void Main(string[] args)
         {
             var ar1 = new DynamicArray<int>();
@@ -28,7 +18,7 @@ namespace Epam.Task4.DynamicArray
                 "A", "B", "C", "D"
             };
 
-            ShowElementsOnConsole(ar3);
+            ConsoleMethods.ShowElementsOnConsole(ar3);
             Console.WriteLine();
             Console.WriteLine(ar3.ShowInfo());
 
@@ -46,7 +36,7 @@ namespace Epam.Task4.DynamicArray
 
             string[] stringArray = ar3.ToArray();
 
-            ShowElementsOnConsole(ar3);
+            ConsoleMethods.ShowElementsOnConsole(ar3);
             Console.WriteLine();
             Console.WriteLine(ar3.ShowInfo());
 

@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleMethods.cs" />
     <Compile Include="CycledDynamicArray.cs" />
     <Compile Include="DynamicArray.cs" />
     <Compile Include="Program.cs" />
