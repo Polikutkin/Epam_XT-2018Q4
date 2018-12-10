@@ -14,7 +14,7 @@ namespace Epam.Task1.Sequence
             {
                 if (n < 1)
                 {
-                    throw new ArgumentOutOfRangeException("The number less than 0.");
+                    throw new ArgumentOutOfRangeException(nameof(n), "The number less than 0.");
                 }
             }
             catch (ArgumentOutOfRangeException e)
@@ -25,7 +25,7 @@ namespace Epam.Task1.Sequence
 
             for (var i = 1; i < n; i++)
             {
-                Console.Write(i + ", ");
+                Console.Write($"{i}, ");
             }
 
             Console.WriteLine(n);
@@ -41,7 +41,7 @@ namespace Epam.Task1.Sequence
 
                 if (!isDigit || data < 1)
                 {
-                    Console.WriteLine("Please, enter correct data.");
+                    Console.WriteLine("Please, enter the correct data.");
                     continue;
                 }
 

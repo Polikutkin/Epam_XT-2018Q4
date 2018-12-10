@@ -8,18 +8,21 @@ namespace Epam.Task1.Square
 {
     internal class Program
     {
+        internal const char Space = ' ';
+        internal const char Star = '*';
+
         internal static void Square(int n)
         {
             try
             {
                 if (n <= 0)
                 {
-                    throw new ArgumentOutOfRangeException("The number less than 0.");
+                    throw new ArgumentOutOfRangeException(nameof(n), "The number less than 0.");
                 }
 
                 if (n % 2 == 0)
                 {
-                    throw new ArgumentOutOfRangeException("The number is even.");
+                    throw new ArgumentOutOfRangeException(nameof(n), "The number is even.");
                 }
             }
             catch (ArgumentOutOfRangeException e)
@@ -34,11 +37,11 @@ namespace Epam.Task1.Square
                 {
                     if (i == n / 2 && j == n / 2)
                     {
-                        Console.Write(' ');
+                        Console.Write(Space);
                     }
                     else
                     {
-                        Console.Write('*');
+                        Console.Write(Star);
                     }
                 }
 
@@ -58,7 +61,7 @@ namespace Epam.Task1.Square
 
                 if (!isDigit || data < 1 || data % 2 == 0)
                 {
-                    Console.WriteLine("Please, enter correct data.");
+                    Console.WriteLine("Please, enter the correct data.");
                     continue;
                 }
 

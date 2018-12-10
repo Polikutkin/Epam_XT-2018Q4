@@ -14,7 +14,7 @@ namespace Epam.Task1.Simple
             {
                 if (n < 1)
                 {
-                    throw new ArgumentOutOfRangeException("The number less than 0.");
+                    throw new ArgumentOutOfRangeException(nameof(n), "The number less than 0.");
                 }
             }
             catch (ArgumentOutOfRangeException e)
@@ -46,13 +46,13 @@ namespace Epam.Task1.Simple
 
                 if (!isDigit || data < 1)
                 {
-                    Console.WriteLine("Please, enter correct data.");
+                    Console.WriteLine("Please, enter the correct data.");
                     continue;
                 }
 
                 bool result = Simple(data);
 
-                Console.WriteLine($"{data} is simple number: {result}");
+                Console.WriteLine($"{data} is a simple number: {result}");
             }
         }
     }
