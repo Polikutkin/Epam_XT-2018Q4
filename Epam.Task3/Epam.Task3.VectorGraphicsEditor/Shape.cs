@@ -8,9 +8,9 @@ namespace Epam.Task3.VectorGraphicsEditor
 {
     public abstract class Shape
     {
-        public abstract double X { get; set; }
+        public double X { get; set; }
 
-        public abstract double Y { get; set; }
+        public double Y { get; set; }
 
         public abstract void ShowInfo();
     }

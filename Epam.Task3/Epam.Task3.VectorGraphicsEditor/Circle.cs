@@ -32,10 +32,6 @@ namespace Epam.Task3.VectorGraphicsEditor
             this.Y = y;
         }
 
-        public override double X { get; set; }
-
-        public override double Y { get; set; }
-
         public double Radius { get; }
 
         public double Length => 2 * Math.PI * this.Radius;

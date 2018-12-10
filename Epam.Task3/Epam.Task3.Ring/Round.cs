@@ -70,7 +70,7 @@ namespace Epam.Task3.Ring
         public void ShowInfo()
         {
             Console.WriteLine();
-            Console.WriteLine("Circle parameters is: ");
+            Console.WriteLine("Round parameters is: ");
             Console.WriteLine($"Coordinate X: {this.X}");
             Console.WriteLine($"Coordinate Y: {this.Y}");
             Console.WriteLine($"Radius: {this.Radius}");

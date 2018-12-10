@@ -69,7 +69,8 @@ namespace Epam.Task3.Round
 
         public void ShowInfo()
         {
-            Console.WriteLine($"{Environment.NewLine}Circle parameters is: ");
+            Console.WriteLine();
+            Console.WriteLine("Round parameters is: ");
             Console.WriteLine($"Coordinate X: {this.X}");
             Console.WriteLine($"Coordinate Y: {this.Y}");
             Console.WriteLine($"Radius: {this.Radius}");

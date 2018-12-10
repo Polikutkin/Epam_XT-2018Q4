@@ -37,10 +37,6 @@ namespace Epam.Task3.VectorGraphicsEditor
 
         public double B { get; }
 
-        public override double X { get; set; }
-
-        public override double Y { get; set; }
-
         public double Perimeter => (this.A + this.B) * 2;
 
         public double Square => this.A * this.B;

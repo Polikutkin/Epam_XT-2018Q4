@@ -18,10 +18,6 @@ namespace Epam.Task3.VectorGraphicsEditor
             this.Y = y;
         }
 
-        public override double X { get; set; }
-
-        public override double Y { get; set; }
-
         public override void ShowInfo()
         {
             Console.WriteLine();
