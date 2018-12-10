@@ -25,8 +25,7 @@ namespace Epam.Task4.Lost
                 {
                     if (counter % 2 == 0)
                     {
-                        list.RemoveAt(i);
-                        i--;
+                        list.RemoveAt(i--);
                     }
 
                     counter++;
