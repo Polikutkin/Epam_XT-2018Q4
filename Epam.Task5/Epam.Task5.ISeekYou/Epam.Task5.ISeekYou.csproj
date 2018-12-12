@@ -45,7 +45,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchMethods.cs" />
-    <Compile Include="TimeTestClass.cs" />
+    <Compile Include="ServantClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

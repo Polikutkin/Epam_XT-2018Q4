@@ -8,7 +8,7 @@ namespace Epam.Task5.ISeekYou
 {
     public static class SearchMethods
     {
-        public static int HowManyZeros(this int[] array)
+        public static void HowManyZeros(this int[] array)
         {
             int counter = 0;
 
@@ -19,11 +19,9 @@ namespace Epam.Task5.ISeekYou
                     counter++;
                 }
             }
-
-            return counter;
         }
 
-        public static int HowManyZeros(this int[] array, Func<int, int, bool> condition)
+        public static void HowManyZeros(this int[] array, Func<int, int, bool> condition)
         {
             int counter = 0;
 
@@ -34,13 +32,6 @@ namespace Epam.Task5.ISeekYou
                     counter++;
                 }
             }
-
-            return counter;
-        }
-
-        public static int HowManyZeros(this Func<int> method)
-        {
-            return method();
         }
 
         public static bool NumberComparer(int a, int b)
