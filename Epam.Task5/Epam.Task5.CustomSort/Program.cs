@@ -8,18 +8,7 @@ namespace Epam.Task5.CustomSort
 {
     public class Program
     {
-        public static void ShowArrayElements<T>(T[] array)
-        {
-            Console.WriteLine();
-
-            foreach (var item in array)
-            {
-                Console.Write($"{item}, ");
-            }
-
-            Console.WriteLine();
-        }
-
+        
         public static void Main(string[] args)
         {
             string[] stringArray = { "what", "So", "ar", "Ar", "where", "so", "when" };
