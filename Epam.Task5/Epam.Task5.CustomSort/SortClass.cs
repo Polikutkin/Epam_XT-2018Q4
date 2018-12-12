@@ -26,9 +26,7 @@ namespace Epam.Task5.CustomSort
                 {
                     if (compare(array[j], array[i]) < 0)
                     {
-                        var temp = array[i];
-                        array[i] = array[j];
-                        array[j] = temp;
+                        Swap(array, i, j);
                     }
                 }
             }
