@@ -9,30 +9,13 @@ namespace Epam.Task5.SortingUnit
 {
     public class Program
     {
-        public static void ShowArrayElements<T>(T[] array)
-        {
-            if (!array.Any())
-            {
-                return;
-            }
-
-            Console.WriteLine();
-
-            foreach (var item in array)
-            {
-                Console.Write($"{item}, ");
-            }
-
-            Console.WriteLine(Environment.NewLine);
-        }
-
         public static void Main(string[] args)
         {
             string[] stringArray = { "what", "So", "ar", "Ar", "where", "so", "when" };
 
             Console.WriteLine($"Array: {nameof(stringArray)}");
 
-            ShowArrayElements(stringArray);
+            WorkWithConsole.ShowCollectionElements(stringArray);
 
             SortClass sc = new SortClass();
             sc.Sorted += (o, e) => Console.WriteLine("Sorting is done.");
@@ -42,7 +25,7 @@ namespace Epam.Task5.SortingUnit
             t.Start();
             t.Join();
 
-            ShowArrayElements(stringArray);
+            WorkWithConsole.ShowCollectionElements(stringArray);
         }
     }
 }
