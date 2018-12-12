@@ -27,19 +27,15 @@ namespace Epam.Task5.ISeekYou
         public static double TimeTest(Action method)
         {
             Stopwatch sw = new Stopwatch();
-            var millisecondsList = new List<long>();
 
             for (int i = 0; i < 100; i++)
             {
                 sw.Start();
                 method();
                 sw.Stop();
-
-                millisecondsList.Add(sw.ElapsedMilliseconds);
-                sw.Reset();
             }
 
-            return millisecondsList.Average();
+            return sw.Elapsed.TotalMilliseconds / 100;
         }
     }
 }

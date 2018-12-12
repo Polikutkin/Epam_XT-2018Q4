@@ -14,7 +14,7 @@ namespace Epam.Task5.ISeekYou
             ServantClass.FillArray(array);
 
             Console.WriteLine("Comparative measurements of the working time of the methods:");
-            Console.WriteLine($"Average call execution time of 100 cycles in an array that contains {array.Length} elements.");
+            Console.WriteLine($"Average call execution time in an array that contains {array.Length} elements.");
 
             var simpleMethod = ServantClass.TimeTest(() => array.HowManyZeros());
 
