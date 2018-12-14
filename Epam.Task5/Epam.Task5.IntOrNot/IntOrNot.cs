@@ -10,9 +10,21 @@ namespace Epam.Task5.IntOrNot
     {
         public static bool IsEvenNumber(this string str)
         {
+            const char CommaChar = ',';
+            const char EBigChar = 'E';
+            const char EsmallChar = 'e';
+            const char PlusChar = '+';
+            const char MinusChar = '-';
+            const char Zero = '0';
+
             if (str == string.Empty || !IsArabicDigit(str.Last()))
             {
                 return false;
+            }
+
+            if (str[0] == PlusChar)
+            {
+                str = str.Skip(1).CharCollectionToString();
             }
 
             if (str.All(IsArabicDigit))
@@ -20,12 +32,10 @@ namespace Epam.Task5.IntOrNot
                 return true;
             }
 
-            const char CommaChar = ',';
-            const char EBigChar = 'E';
-            const char EsmallChar = 'e';
-            const char PlusChar = '+';
-            const char MinusChar = '-';
-            const char Zero = '0';
+            if (!IsArabicDigit(str[0]))
+            {
+                return false;
+            }
 
             bool comma = false;
             bool exponent = false;
@@ -34,16 +44,6 @@ namespace Epam.Task5.IntOrNot
 
             char e = default(char);
             int commaIndex = -1;
-
-            if (str[0] == PlusChar)
-            {
-                str = str.Skip(1).CharCollectionToString();
-            }
-
-            if (!IsArabicDigit(str[0]))
-            {
-                return false;
-            }
 
             try
             {
@@ -177,6 +177,19 @@ namespace Epam.Task5.IntOrNot
         public static bool IsArabicDigit(char c)
         {
             return c >= '0' && c <= '9'; 
+        }
+
+        public static bool IsArabicDigit(IEnumerable<char> collection)
+        {
+            foreach (var c in collection)
+            {
+                if (c < '0' || c > '9')
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private static int CharCollectionAsInt(IEnumerable<char> collection)
