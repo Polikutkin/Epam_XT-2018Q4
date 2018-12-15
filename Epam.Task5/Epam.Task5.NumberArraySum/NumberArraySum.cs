@@ -8,9 +8,114 @@ namespace Epam.Task5.NumberArraySum
 {
     public static class NumberArraySum
     {
-        public static int MySum<T>(this T[] array)
+        public static int MySum(this IEnumerable<int> collection)
         {
-            return 0;
+            if (collection == null)
+            {
+                throw new ArgumentNullException(nameof(collection));
+            }
+
+            int sum = 0;
+
+            foreach (var item in collection)
+            {
+                sum += item;
+            }
+
+            if (sum > int.MaxValue)
+            {
+                throw new OverflowException();
+            }
+
+            return sum;
+        }
+
+        public static long MySum(this IEnumerable<long> collection)
+        {
+            if (collection == null)
+            {
+                throw new ArgumentNullException(nameof(collection));
+            }
+
+            long sum = 0;
+
+            foreach (var item in collection)
+            {
+                sum += item;
+            }
+
+            if (sum > int.MaxValue)
+            {
+                throw new OverflowException();
+            }
+
+            return sum;
+        }
+
+        public static float MySum(this IEnumerable<float> collection)
+        {
+            if (collection == null)
+            {
+                throw new ArgumentNullException(nameof(collection));
+            }
+
+            float sum = 0;
+
+            foreach (var item in collection)
+            {
+                sum += item;
+            }
+
+            if (sum > int.MaxValue)
+            {
+                throw new OverflowException();
+            }
+
+            return sum;
+        }
+
+        public static double MySum(this IEnumerable<double> collection)
+        {
+            if (collection == null)
+            {
+                throw new ArgumentNullException(nameof(collection));
+            }
+
+            double sum = 0;
+
+            foreach (var item in collection)
+            {
+                sum += item;
+            }
+
+            if (sum > int.MaxValue)
+            {
+                throw new OverflowException();
+            }
+
+            return sum;
+        }
+
+        public static decimal MySum(this IEnumerable<decimal> collection)
+        {
+            if (collection == null)
+            {
+                throw new ArgumentNullException(nameof(collection));
+            }
+
+            decimal sum = 0;
+
+            foreach (var item in collection)
+            {
+                sum += item;
+            }
+
+            if (sum > int.MaxValue)
+            {
+                throw new OverflowException();
+            }
+
+            return sum;
         }
     }
 }
