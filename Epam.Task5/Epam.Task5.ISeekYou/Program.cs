@@ -13,8 +13,8 @@ namespace Epam.Task5.ISeekYou
             int[] array = new int[1000000];
             ServantClass.FillArray(array);
 
-            Console.WriteLine("Comparative measurements of the working time of the methods:");
-            Console.WriteLine($"Average call execution time in an array that contains {array.Length} elements.");
+            Console.WriteLine("Comparative measurements of the working time of the methods.");
+            Console.WriteLine($"Average call execution time in an array that contains {array.Length} elements:");
 
             var simpleMethod = ServantClass.TimeTest(() => array.HowManyZeros());
 

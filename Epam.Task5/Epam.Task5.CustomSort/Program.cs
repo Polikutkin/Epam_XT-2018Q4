@@ -18,7 +18,6 @@ namespace Epam.Task5.CustomSort
 
             stringArray.QuickSort(CustomSortDemo.CompareString);
 
-            Console.WriteLine();
             Console.WriteLine($"Sorted array: {nameof(stringArray)}");
 
             WorkWithConsole.ShowCollectionElements(stringArray);

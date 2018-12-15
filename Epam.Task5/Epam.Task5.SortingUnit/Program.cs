@@ -16,7 +16,6 @@ namespace Epam.Task5.SortingUnit
             Console.WriteLine($"Array: {nameof(stringArray)}");
 
             WorkWithConsole.ShowCollectionElements(stringArray);
-            Console.WriteLine();
 
             SortClass sc = new SortClass();
             sc.Sorted += (o, e) => Console.WriteLine("Sorting is done.");

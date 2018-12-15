@@ -23,6 +23,7 @@ namespace Epam.Task5.CustomSort
             }
 
             Console.WriteLine();
+            Console.WriteLine();
         }
     }
 }

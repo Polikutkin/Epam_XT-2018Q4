@@ -22,7 +22,7 @@ namespace Epam.Task5.NumberArraySum
                 Console.Write($"{item}, ");
             }
 
-            Console.WriteLine();
+            Console.WriteLine(Environment.NewLine);
         }
     }
 }
