@@ -45,128 +45,121 @@ namespace Epam.Task5.IntOrNot
             char e = default(char);
             int commaIndex = -1;
 
-            try
+            for (int i = 1; i < str.Length; i++)
             {
-                for (int i = 1; i < str.Length; i++)
+                if (!IsArabicDigit(str[i]))
                 {
-                    if (!IsArabicDigit(str[i]))
+                    if (str[i] != CommaChar && str[i] != EBigChar && str[i] != EsmallChar && str[i] != PlusChar && str[i] != MinusChar)
                     {
-                        if (str[i] != CommaChar && str[i] != EBigChar && str[i] != EsmallChar && str[i] != PlusChar && str[i] != MinusChar)
+                        return false;
+                    }
+
+                    if (str[i] == CommaChar)
+                    {
+                        if (!IsArabicDigit(str[i - 1]) || !IsArabicDigit(str[i + 1]) || comma || exponent || plus || minus)
                         {
                             return false;
                         }
 
-                        if (str[i] == CommaChar)
-                        {
-                            if (!IsArabicDigit(str[i - 1]) || !IsArabicDigit(str[i + 1]) || comma || exponent || plus || minus)
-                            {
-                                return false;
-                            }
-
-                            comma = true;
-                            commaIndex = i;
-                            continue;
-                        }
-
-                        if (str[i] == EsmallChar || str[i] == EBigChar)
-                        {
-                            if (!IsArabicDigit(str[i - 1]) || exponent || plus || minus)
-                            {
-                                return false;
-                            }
-
-                            exponent = true;
-                            e = str[i];
-                            continue;
-                        }
-
-                        if (str[i] == PlusChar)
-                        {
-                            if (!IsArabicDigit(str[i + 1]) || !exponent || plus || minus)
-                            {
-                                return false;
-                            }
-
-                            plus = true;
-                            continue;
-                        }
-
-                        if (str[i] == MinusChar)
-                        {
-                            if (!IsArabicDigit(str[i + 1]) || !exponent || plus || minus)
-                            {
-                                return false;
-                            }
-
-                            minus = true;
-                            continue;
-                        }
+                        comma = true;
+                        commaIndex = i;
+                        continue;
                     }
-                }
 
-                if (!minus)
-                {
-                    plus = true;
-                }
-
-                if (!exponent)
-                {
-                    return false;
-                }
-
-                IEnumerable<char> integer = str.TakeWhile(c => IsArabicDigit(c));
-                IEnumerable<char> fraction = null;
-                IEnumerable<char> order = str.Reverse().TakeWhile(c => IsArabicDigit(c)).Reverse();
-
-                int integerAsNumber = CharCollectionAsInt(integer);
-                int orderAsNumber = CharCollectionAsInt(order);
-                int fractionAsReversedNumber = 0;
-
-                if (comma)
-                {
-                    fraction = str.Skip(commaIndex + 1).TakeWhile(c => IsArabicDigit(c));
-                    fractionAsReversedNumber = CharCollectionAsInt(fraction.Reverse());
-
-                    if (integerAsNumber == 0)
+                    if (str[i] == EsmallChar || str[i] == EBigChar)
                     {
-                        if (fractionAsReversedNumber == 0)
+                        if (!IsArabicDigit(str[i - 1]) || exponent || plus || minus)
                         {
                             return false;
                         }
+
+                        exponent = true;
+                        e = str[i];
+                        continue;
+                    }
+
+                    if (str[i] == PlusChar)
+                    {
+                        if (!IsArabicDigit(str[i + 1]) || !exponent || plus || minus)
+                        {
+                            return false;
+                        }
+
+                        plus = true;
+                        continue;
+                    }
+
+                    if (str[i] == MinusChar)
+                    {
+                        if (!IsArabicDigit(str[i + 1]) || !exponent || plus || minus)
+                        {
+                            return false;
+                        }
+
+                        minus = true;
+                        continue;
                     }
                 }
-                else
+            }
+
+            if (!minus)
+            {
+                plus = true;
+            }
+
+            if (!exponent)
+            {
+                return false;
+            }
+
+            IEnumerable<char> integer = str.TakeWhile(c => IsArabicDigit(c));
+            IEnumerable<char> fraction = null;
+            IEnumerable<char> order = str.Reverse().TakeWhile(c => IsArabicDigit(c)).Reverse();
+
+            int integerAsNumber = CharCollectionAsInt(integer);
+            int orderAsNumber = CharCollectionAsInt(order);
+            int fractionAsReversedNumber = 0;
+
+            if (comma)
+            {
+                fraction = str.Skip(commaIndex + 1).TakeWhile(c => IsArabicDigit(c));
+                fractionAsReversedNumber = CharCollectionAsInt(fraction.Reverse());
+
+                if (integerAsNumber == 0)
                 {
-                    if (integerAsNumber == 0)
+                    if (fractionAsReversedNumber == 0)
                     {
                         return false;
                     }
                 }
-
-                if (comma && plus)
-                {
-                    int fractionCount = fraction.Reverse().SkipWhile(c => c == Zero).Count();
-
-                    if (fractionCount > orderAsNumber)
-                    {
-                        return false;
-                    }
-                }
-                else if (!comma && minus)
-                {
-                    int integerZeroCount = integer.Reverse().TakeWhile(c => c == Zero).Count();
-
-                    if (integerZeroCount < orderAsNumber)
-                    {
-                        return false;
-                    }
-                }
-                else if (comma && minus)
+            }
+            else
+            {
+                if (integerAsNumber == 0)
                 {
                     return false;
                 }
             }
-            catch (Exception)
+
+            if (comma && plus)
+            {
+                int fractionCount = fraction.Reverse().SkipWhile(c => c == Zero).Count();
+
+                if (fractionCount > orderAsNumber)
+                {
+                    return false;
+                }
+            }
+            else if (!comma && minus)
+            {
+                int integerZeroCount = integer.Reverse().TakeWhile(c => c == Zero).Count();
+
+                if (integerZeroCount < orderAsNumber)
+                {
+                    return false;
+                }
+            }
+            else if (comma && minus)
             {
                 return false;
             }
