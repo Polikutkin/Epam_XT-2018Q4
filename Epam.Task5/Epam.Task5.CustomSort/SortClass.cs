@@ -34,6 +34,11 @@ namespace Epam.Task5.CustomSort
 
         public static void MergeSort<T>(this T[] array, Func<T, T, int> compare)
         {
+            if (!array.Any() || array.Length == 1)
+            {
+                return;
+            }
+
             if (compare == null)
             {
                 throw new ArgumentNullException(nameof(compare));
@@ -44,6 +49,11 @@ namespace Epam.Task5.CustomSort
 
         public static void QuickSort<T>(this T[] array, Func<T, T, int> compare)
         {
+            if (!array.Any() || array.Length == 1)
+            {
+                return;
+            }
+
             if (compare == null)
             {
                 throw new ArgumentNullException(nameof(compare));
