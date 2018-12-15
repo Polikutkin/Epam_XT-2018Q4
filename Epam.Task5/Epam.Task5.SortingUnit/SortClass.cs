@@ -42,14 +42,19 @@ namespace Epam.Task5.SortingUnit
 
         public void Sort<T>(T[] array, Func<T, T, int> compare)
         {
-            if (!array.Any() || array.Length == 1)
+            if (array == null)
             {
-                return;
+                throw new ArgumentNullException(nameof(array));
             }
 
             if (compare == null)
             {
                 throw new ArgumentNullException(nameof(compare));
+            }
+
+            if (array.Length == 1)
+            {
+                return;
             }
 
             QuickSort(array, 0, array.Length - 1, compare);
