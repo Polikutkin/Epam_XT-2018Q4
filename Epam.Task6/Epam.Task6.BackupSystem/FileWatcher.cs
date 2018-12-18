@@ -6,10 +6,9 @@ using System.Linq;
 
 namespace Epam.Task6.BackupSystem
 {
-    public class FileWatcher
+    public partial class FileWatcher
     {
         private readonly string path;
-        private string logFileName;
         private FileSystemWatcher watcher;
         private DirectoryInfo changesDirectory;
         private DirectoryInfo fileStateDirectory;
@@ -66,11 +65,6 @@ namespace Epam.Task6.BackupSystem
             this.watcher.Renamed += this.OnRenamed;
 
             this.Now = DateTime.Now;
-            this.logFileName = $@"{this.ChangesPath}\logfile.txt";
-
-            using (File.Create(this.logFileName))
-            {
-            }
 
             using (StreamWriter sw = new StreamWriter(this.FileState))
             {
@@ -78,7 +72,7 @@ namespace Epam.Task6.BackupSystem
                 {
                     sw.WriteLine(txt);
 
-                    File.Copy(txt, $"{this.ChangesPath}{this.TimeToMin}_{GetFileNameWithFormat(txt)}", true);
+                    File.Copy(txt, $"{this.ChangesPath}{this.TimeToMin}_{GetFullFileName(txt)}", true);
                 }
             }
 
@@ -90,6 +84,7 @@ namespace Epam.Task6.BackupSystem
             var states = Directory.EnumerateFileSystemEntries(this.FileStatePath, "*.txt");
 
             string closestState = states.First() ?? string.Empty;
+
             bool fileDTParse = DateTime.TryParseExact(GetFileFriendlyName(closestState), this.DTFormat, null, DateTimeStyles.None, out var closestDateTime);
 
             if (states.Count() == 0 || !fileDTParse || backupDateTime < closestDateTime)
@@ -156,37 +151,9 @@ namespace Epam.Task6.BackupSystem
             return true;
         }
 
-        private static string GetFileFriendlyName(string path)
-        {
-            return path.Reverse().TakeWhile(c => c != '\\').SkipWhile(c => c != '.').Skip(1).Reverse().CharCollectionToString();
-        }
-
-        private static string GetFileNameWithFormat(string path)
-        {
-            return path.Reverse().TakeWhile(c => c != '\\').Reverse().CharCollectionToString();
-        }
-
-        private static string GetFullFileName(string path)
-        {
-            return path.Replace('\\', '.').SkipWhile(c => c != '.').Skip(1).CharCollectionToString();
-        }
-
-        private static string GetDirectory(string path)
-        {
-            return path.Reverse().SkipWhile(c => c != '\\').Reverse().CharCollectionToString();
-        }
-
-        private static string GetLogDateTime(string logNote)
-        {
-            return logNote.TakeWhile(c => c != ' ').CharCollectionToString();
-        }
-
         private void OnChanged(object sender, FileSystemEventArgs e)
         {
             this.Now = DateTime.Now;
-            string logInfo = $"{this.TimeToMin} {e.FullPath} {e.ChangeType}";
-            bool alreadyHappened = false;
-            bool firstInMinute = true;
 
             try
             {
@@ -197,40 +164,11 @@ namespace Epam.Task6.BackupSystem
                 this.watcher.EnableRaisingEvents = true;
             }
 
-            using (StreamReader sr = new StreamReader(this.logFileName))
+            using (StreamWriter sw = new StreamWriter(this.FileState))
             {
-                while (!sr.EndOfStream)
+                foreach (var item in this.OriginalTxtFiles)
                 {
-                    string str = sr.ReadLine();
-
-                    if (str == logInfo)
-                    {
-                        alreadyHappened = true;
-                    }
-
-                    if (GetLogDateTime(str) == GetLogDateTime(logInfo))
-                    {
-                        firstInMinute = false;
-                    }
-                }
-            }
-
-            if (firstInMinute)
-            {
-                using (StreamWriter sw = new StreamWriter(this.FileState))
-                {
-                    foreach (var item in this.OriginalTxtFiles)
-                    {
-                        sw.WriteLine(item);
-                    }
-                }
-            }
-
-            using (StreamWriter sw = new StreamWriter(this.logFileName, true))
-            {
-                if (!alreadyHappened)
-                {
-                    sw.WriteLine(logInfo);
+                    sw.WriteLine(item);
                 }
             }
 
@@ -240,35 +178,12 @@ namespace Epam.Task6.BackupSystem
         private void OnCreated(object sender, FileSystemEventArgs e)
         {
             this.Now = DateTime.Now;
-            string logInfo = $"{this.TimeToMin} {e.FullPath} {e.ChangeType}";
-            bool alreadyHappened = false;
 
             using (StreamWriter sw = new StreamWriter(this.FileState))
             {
                 foreach (var item in this.OriginalTxtFiles)
                 {
                     sw.WriteLine(item);
-                }
-            }
-
-            using (StreamReader sr = new StreamReader(this.logFileName))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string str = sr.ReadLine();
-
-                    if (str == logInfo)
-                    {
-                        alreadyHappened = true;
-                    }
-                }
-            }
-
-            using (StreamWriter sw = new StreamWriter(this.logFileName, true))
-            {
-                if (!alreadyHappened)
-                {
-                    sw.WriteLine(logInfo);
                 }
             }
 
@@ -278,35 +193,12 @@ namespace Epam.Task6.BackupSystem
         private void OnDeleted(object sender, FileSystemEventArgs e)
         {
             this.Now = DateTime.Now;
-            string logInfo = $"{this.TimeToMin} {e.FullPath} {e.ChangeType}";
-            bool alreadyHappened = false;
 
             using (StreamWriter sw = new StreamWriter(this.FileState))
             {
                 foreach (var item in this.OriginalTxtFiles)
                 {
                     sw.WriteLine(item);
-                }
-            }
-
-            using (StreamReader sr = new StreamReader(this.logFileName))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string str = sr.ReadLine();
-
-                    if (str == logInfo)
-                    {
-                        alreadyHappened = true;
-                    }
-                }
-            }
-
-            using (StreamWriter sw = new StreamWriter(this.logFileName, true))
-            {
-                if (!alreadyHappened)
-                {
-                    sw.WriteLine(logInfo);
                 }
             }
 
@@ -319,35 +211,12 @@ namespace Epam.Task6.BackupSystem
         private void OnRenamed(object sender, RenamedEventArgs e)
         {
             this.Now = DateTime.Now;
-            string logInfo = $"{this.TimeToMin} {e.OldFullPath} --> {e.FullPath} {e.ChangeType}";
-            bool alreadyHappened = false;
 
             using (StreamWriter sw = new StreamWriter(this.FileState))
             {
                 foreach (var item in this.OriginalTxtFiles)
                 {
                     sw.WriteLine(item);
-                }
-            }
-
-            using (StreamReader sr = new StreamReader(this.logFileName))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string str = sr.ReadLine();
-
-                    if (str == logInfo)
-                    {
-                        alreadyHappened = true;
-                    }
-                }
-            }
-
-            using (StreamWriter sw = new StreamWriter(this.logFileName, true))
-            {
-                if (!alreadyHappened)
-                {
-                    sw.WriteLine(logInfo);
                 }
             }
 
