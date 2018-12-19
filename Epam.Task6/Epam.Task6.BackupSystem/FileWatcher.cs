@@ -39,9 +39,9 @@ namespace Epam.Task6.BackupSystem
             }
         }
 
-        private string ChangesPath => this.changesDirectory.FullName;
-
         private string DTFormat => "yyyyMMddHHmm";
+
+        private string ChangesPath => this.changesDirectory.FullName;
 
         private string FileStatePath => this.fileStateDirectory.FullName;
 
@@ -81,13 +81,14 @@ namespace Epam.Task6.BackupSystem
 
         public bool Backup(DateTime backupDateTime)
         {
-            var states = Directory.EnumerateFileSystemEntries(this.FileStatePath, "*.txt");
+            var txtFileStates = Directory.EnumerateFileSystemEntries(this.FileStatePath, "*.txt");
 
-            string closestState = states.First() ?? string.Empty;
+            string closestState = txtFileStates.First() ?? string.Empty;
 
-            bool fileDTParse = DateTime.TryParseExact(GetFileFriendlyName(closestState), this.DTFormat, null, DateTimeStyles.None, out var closestDateTime);
+            bool backupDTParse = long.TryParse(backupDateTime.ToString(this.DTFormat), out var backupTime);
+            bool closestDTParse = long.TryParse(GetFileFriendlyName(closestState), out var closestTime);
 
-            if (states.Count() == 0 || !fileDTParse || backupDateTime < closestDateTime)
+            if (txtFileStates.Count() == 0 || !closestDTParse || backupTime < closestTime)
             {
                 return false;
             }
@@ -100,55 +101,63 @@ namespace Epam.Task6.BackupSystem
                 }
             }
 
-            foreach (var state in states)
+            foreach (var state in txtFileStates)
             {
-                bool stateDTParse = DateTime.TryParseExact(GetFileFriendlyName(state), this.DTFormat, null, DateTimeStyles.None, out var stateDateTime);
+                bool stateDTParse = long.TryParse(GetFileFriendlyName(state), out var stateTime);
 
-                if (stateDateTime > closestDateTime && stateDateTime <= backupDateTime)
+                if (stateTime > closestTime && stateTime <= backupTime)
                 {
                     closestState = state;
-                    closestDateTime = stateDateTime;
+                    closestTime = stateTime;
                 }
             }
 
-            using (StreamReader sr = new StreamReader($@"{this.FileStatePath}\{GetFileNameWithFormat(closestState)}"))
+            using (StreamReader sr = new StreamReader(closestState))
             {
                 while (!sr.EndOfStream)
                 {
-                    string txtFile = sr.ReadLine();
-                    string txtFileName = GetFullFileName(txtFile);
+                    string originalTxt = sr.ReadLine();
+                    string originalTxtFullName = GetFullFileName(originalTxt);
 
                     string txtToCopy = string.Empty;
-                    DateTime closestFileDateTIme = default(DateTime);
+                    long closestFileTIme = 0L;
 
                     var backupTxtFiles = Directory.EnumerateFileSystemEntries(this.ChangesPath, "*.txt");
 
-                    foreach (var txt in backupTxtFiles)
+                    foreach (var backupTxt in backupTxtFiles)
                     {
-                        if (txt.Contains(txtFileName))
+                        if (backupTxt.Contains(originalTxtFullName))
                         {
-                            string timePartOfName = GetFileFriendlyName(txt).TakeWhile(c => c != '_').CharCollectionToString();
+                            string timePartOfName = GetFileFriendlyName(backupTxt).TakeWhile(c => c != '_').CharCollectionToString();
 
-                            bool needFileDTParse = DateTime.TryParseExact(timePartOfName, this.DTFormat, null, DateTimeStyles.None, out var backupFileDateTime);
+                            bool needFileDTParse = long.TryParse(timePartOfName, out var needFileTime);
 
-                            if (backupFileDateTime >= closestFileDateTIme && backupFileDateTime <= backupDateTime)
+                            if (needFileTime >= closestFileTIme && needFileTime <= backupTime)
                             {
-                                txtToCopy = txt;
-                                closestFileDateTIme = backupFileDateTime;
+                                txtToCopy = backupTxt;
+                                closestFileTIme = needFileTime;
                             }
                         }
                     }
 
-                    if (!Directory.Exists(GetDirectory(txtFile)))
+                    if (!Directory.Exists(GetDirectory(originalTxt)))
                     {
-                        Directory.CreateDirectory(GetDirectory(txtFile));
+                        Directory.CreateDirectory(GetDirectory(originalTxt));
                     }
 
-                    File.Copy(txtToCopy, txtFile, true);
+                    File.Copy(txtToCopy, originalTxt, true);
                 }
             }
 
             return true;
+        }
+
+        public void StopWatching()
+        {
+            if (watcher != null)
+            {
+                watcher.EnableRaisingEvents = false;
+            }
         }
 
         private void OnChanged(object sender, FileSystemEventArgs e)
