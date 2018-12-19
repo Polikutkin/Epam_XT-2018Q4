@@ -79,14 +79,13 @@ namespace Epam.Task6.BackupSystem
             this.watcher.EnableRaisingEvents = true;
         }
 
-        public bool Backup(DateTime backupDateTime)
+        public bool Backup(DateTime backupTime)
         {
             var txtFileStates = Directory.EnumerateFileSystemEntries(this.FileStatePath, "*.txt");
 
             string closestState = txtFileStates.First() ?? string.Empty;
 
-            bool backupDTParse = long.TryParse(backupDateTime.ToString(this.DTFormat), out var backupTime);
-            bool closestDTParse = long.TryParse(GetFileFriendlyName(closestState), out var closestTime);
+            bool closestDTParse = DateTime.TryParseExact(GetFileFriendlyName(closestState), this.DTFormat, null, DateTimeStyles.None, out var closestTime);
 
             if (txtFileStates.Count() == 0 || !closestDTParse || backupTime < closestTime)
             {
@@ -103,7 +102,7 @@ namespace Epam.Task6.BackupSystem
 
             foreach (var state in txtFileStates)
             {
-                bool stateDTParse = long.TryParse(GetFileFriendlyName(state), out var stateTime);
+                bool stateDTParse = DateTime.TryParseExact(GetFileFriendlyName(state), this.DTFormat, null, DateTimeStyles.None, out var stateTime);
 
                 if (stateTime > closestTime && stateTime <= backupTime)
                 {
@@ -120,7 +119,7 @@ namespace Epam.Task6.BackupSystem
                     string originalTxtFullName = GetFullFileName(originalTxt);
 
                     string txtToCopy = string.Empty;
-                    long closestFileTIme = 0L;
+                    DateTime closestFileTIme = default(DateTime);
 
                     var backupTxtFiles = Directory.EnumerateFileSystemEntries(this.ChangesPath, "*.txt");
 
@@ -130,7 +129,7 @@ namespace Epam.Task6.BackupSystem
                         {
                             string timePartOfName = GetFileFriendlyName(backupTxt).TakeWhile(c => c != '_').CharCollectionToString();
 
-                            bool needFileDTParse = long.TryParse(timePartOfName, out var needFileTime);
+                            bool needFileDTParse = DateTime.TryParseExact(timePartOfName, this.DTFormat, null, DateTimeStyles.None, out var needFileTime);
 
                             if (needFileTime >= closestFileTIme && needFileTime <= backupTime)
                             {
