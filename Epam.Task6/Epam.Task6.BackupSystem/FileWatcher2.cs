@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,17 +9,17 @@ namespace Epam.Task6.BackupSystem
 {
     public partial class FileWatcher
     {
-        private static string GetFileFriendlyName(string path)
+        private static string GetFriendlyName(string path)
         {
             return path.Reverse().TakeWhile(c => c != '\\').SkipWhile(c => c != '.').Skip(1).Reverse().CharCollectionToString();
         }
 
-        private static string GetFileNameWithFormat(string path)
+        private static string GetNameWithFormat(string path)
         {
             return path.Reverse().TakeWhile(c => c != '\\').Reverse().CharCollectionToString();
         }
 
-        private static string GetFullFileName(string path)
+        private static string GetFullName(string path)
         {
             return path.Replace('\\', '.').Replace(":", string.Empty).CharCollectionToString();
         }
@@ -26,6 +27,11 @@ namespace Epam.Task6.BackupSystem
         private static string GetDirectory(string path)
         {
             return path.Reverse().SkipWhile(c => c != '\\').Reverse().CharCollectionToString();
+        }
+
+        private static string TimePartOfName(string path)
+        {
+            return GetFriendlyName(path).TakeWhile(c => c != '_').CharCollectionToString();
         }
     }
 }
