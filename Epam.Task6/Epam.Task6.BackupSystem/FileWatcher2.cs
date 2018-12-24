@@ -25,11 +25,6 @@ namespace Epam.Task6.BackupSystem
             return path.GetHashCode() + path.Replace(Separator, NameSeparator).Replace(Path.VolumeSeparatorChar.ToString(), string.Empty).CharCollectionToString();
         }
 
-        private static string GetFullName(string path)
-        {
-            return path.Replace(Separator, NameSeparator).Replace(Path.VolumeSeparatorChar.ToString(), string.Empty).CharCollectionToString();
-        }
-
         private static string GetDirectory(string path)
         {
             return path.Reverse().SkipWhile(c => c != Separator).Reverse().CharCollectionToString();
