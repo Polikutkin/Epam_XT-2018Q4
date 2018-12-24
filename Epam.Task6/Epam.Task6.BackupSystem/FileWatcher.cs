@@ -8,6 +8,10 @@ namespace Epam.Task6.BackupSystem
 {
     public partial class FileWatcher
     {
+        private static readonly char Separator = Path.DirectorySeparatorChar;
+        private static readonly char NameSeparator = '.';
+        private static readonly char TimePartSeparator = '_';
+
         private readonly string path;
         private FileSystemWatcher txtWatcher;
         private FileSystemWatcher directoryWatcher;
@@ -16,15 +20,15 @@ namespace Epam.Task6.BackupSystem
 
         private DateTime now;
 
-        public FileWatcher() : this(string.Empty)
-        {
-        }
-
         public FileWatcher(string path)
         {
             this.path = path;
-            this.changesDirectory = Directory.CreateDirectory($@"{Path.GetTempPath()}{GetFullName(path)}\");
-            this.fileStateDirectory = Directory.CreateDirectory($@"{this.ChangesPath}\FileState\");
+            this.changesDirectory = Directory.CreateDirectory($@"{Path.GetTempPath()}{GetHashCodeName(path)}{Separator}");
+            this.fileStateDirectory = Directory.CreateDirectory($@"{this.ChangesPath}{Separator}FileState{Separator}");
+        }
+
+        private FileWatcher()
+        {
         }
 
         private DateTime Now
@@ -48,7 +52,9 @@ namespace Epam.Task6.BackupSystem
 
         private string FileStatePath => this.fileStateDirectory.FullName;
 
-        private string FileState => $@"{this.FileStatePath}\{this.TimeToMin}.txt";
+        private string FileState => $@"{this.FileStatePath}{Separator}{this.TimeToMin}.txt";
+
+        private string ChangesPathWithTimePart => $"{this.ChangesPath}{this.TimeToMin}{TimePartSeparator}";
 
         private IEnumerable<string> OriginalTxtFiles => Directory.EnumerateFileSystemEntries(this.path, "*.txt", SearchOption.AllDirectories);
 
@@ -59,11 +65,11 @@ namespace Epam.Task6.BackupSystem
 
             this.txtWatcher.NotifyFilter = NotifyFilters.CreationTime | NotifyFilters.FileName | NotifyFilters.LastWrite | NotifyFilters.Size;
             this.txtWatcher.IncludeSubdirectories = true;
-            this.txtWatcher.InternalBufferSize *= 64;
+            this.txtWatcher.InternalBufferSize *= 8;
 
             this.directoryWatcher.NotifyFilter = NotifyFilters.DirectoryName;
             this.directoryWatcher.IncludeSubdirectories = true;
-            this.directoryWatcher.InternalBufferSize *= 64;
+            this.directoryWatcher.InternalBufferSize *= 8;
 
             this.txtWatcher.Changed += this.OnChanged;
             this.txtWatcher.Created += this.OnCreated;
@@ -80,7 +86,7 @@ namespace Epam.Task6.BackupSystem
                 {
                     sw.WriteLine(txt);
 
-                    File.Copy(txt, $"{this.ChangesPath}{this.TimeToMin}_{GetFullName(txt)}", true);
+                    File.Copy(txt, $"{ChangesPathWithTimePart}{GetHashCodeName(txt)}", true);
                 }
             }
 
@@ -125,7 +131,7 @@ namespace Epam.Task6.BackupSystem
                 while (!sr.EndOfStream)
                 {
                     string originalTxt = sr.ReadLine();
-                    string originalTxtFullName = GetFullName(originalTxt);
+                    string originalTxtFullName = GetHashCodeName(originalTxt);
 
                     string txtToCopy = string.Empty;
                     DateTime closestTxtTime = default(DateTime);
@@ -153,7 +159,10 @@ namespace Epam.Task6.BackupSystem
                         Directory.CreateDirectory(GetDirectory(originalTxt));
                     }
 
-                    File.Copy(txtToCopy, originalTxt, true);
+                    if (txtToCopy != string.Empty)
+                    {
+                        File.Copy(txtToCopy, originalTxt, true);
+                    }
                 }
             }
 
@@ -196,7 +205,7 @@ namespace Epam.Task6.BackupSystem
                 }
             }
 
-            File.Copy(e.FullPath, $"{this.ChangesPath}{this.TimeToMin}_{GetFullName(e.FullPath)}", true);
+            File.Copy(e.FullPath, $"{ChangesPathWithTimePart}{GetHashCodeName(e.FullPath)}", true);
         }
 
         private void OnCreated(object sender, FileSystemEventArgs e)
@@ -211,7 +220,7 @@ namespace Epam.Task6.BackupSystem
                 }
             }
 
-            File.Copy(e.FullPath, $"{this.ChangesPath}{this.TimeToMin}_{GetFullName(e.FullPath)}", true);
+            File.Copy(e.FullPath, $"{ChangesPathWithTimePart}{GetHashCodeName(e.FullPath)}", true);
         }
 
         private void OnDeleted(object sender, FileSystemEventArgs e)
@@ -226,9 +235,9 @@ namespace Epam.Task6.BackupSystem
                 }
             }
 
-            if (File.Exists($"{this.ChangesPath}{this.TimeToMin}_{GetFullName(e.FullPath)}"))
+            if (File.Exists($"{ChangesPathWithTimePart}{GetHashCodeName(e.FullPath)}"))
             {
-                File.Delete($"{this.ChangesPath}{this.TimeToMin}_{GetFullName(e.FullPath)}");
+                File.Delete($"{ChangesPathWithTimePart}{GetHashCodeName(e.FullPath)}");
             }
         }
 
@@ -244,19 +253,20 @@ namespace Epam.Task6.BackupSystem
                 }
             }
 
-            if (File.Exists($"{this.ChangesPath}{this.TimeToMin}_{GetFullName(e.OldFullPath)}"))
+            if (File.Exists($"{ChangesPathWithTimePart}{GetHashCodeName(e.OldFullPath)}"))
             {
-                File.Move($"{this.ChangesPath}{this.TimeToMin}_{GetFullName(e.OldFullPath)}", $"{this.ChangesPath}{this.TimeToMin}_{GetFullName(e.FullPath)}");
+                File.Move($"{ChangesPathWithTimePart}{GetHashCodeName(e.OldFullPath)}", $"{ChangesPathWithTimePart}{GetHashCodeName(e.FullPath)}");
             }
             else
             {
-                File.Copy(e.FullPath, $"{this.ChangesPath}{this.TimeToMin}_{GetFullName(e.FullPath)}", true);
+                File.Copy(e.FullPath, $"{ChangesPathWithTimePart}{GetHashCodeName(e.FullPath)}", true);
             }
         }
 
         private void OnDirecroryRenamed(object sender, RenamedEventArgs e)
         {
             this.Now = DateTime.Now;
+            var renamedDirTxt = Directory.EnumerateFileSystemEntries(e.FullPath, "*.txt");
             bool directoryChanged = false;
 
             if (File.Exists(this.FileState))
@@ -267,7 +277,7 @@ namespace Epam.Task6.BackupSystem
                     {
                         string state = sr.ReadLine();
 
-                        if (GetFullName(state).Contains(GetFullName(e.OldFullPath)))
+                        if (state.Contains(e.OldFullPath))
                         {
                             directoryChanged = true;
                             break;
@@ -275,7 +285,7 @@ namespace Epam.Task6.BackupSystem
                     }
                 } 
             }
-            else
+            else if (renamedDirTxt.Any())
             {
                 directoryChanged = true;
             }
@@ -290,17 +300,19 @@ namespace Epam.Task6.BackupSystem
                     }
                 }
 
-                var renamedDirTxt = Directory.EnumerateFileSystemEntries(e.FullPath, "*.txt");
-
                 foreach (var txt in renamedDirTxt)
                 {
-                    if (File.Exists($"{this.ChangesPath}{this.TimeToMin}_{GetFullName(e.OldFullPath)}.{GetNameWithFormat(txt)}"))
+                    string oldPathTxt = $"{ChangesPathWithTimePart}{GetHashCodeName($"{e.OldFullPath}{Separator}{GetNameWithFormat(txt)}")}";
+                    string renamedTxt = $"{ChangesPathWithTimePart}{GetHashCodeName($"{e.FullPath}{Separator}{GetNameWithFormat(txt)}")}";
+                    string originalTxt = $@"{e.FullPath}{Separator}{GetNameWithFormat(txt)}";
+
+                    if (File.Exists(oldPathTxt))
                     {
-                        File.Move($"{this.ChangesPath}{this.TimeToMin}_{GetFullName(e.OldFullPath)}.{GetNameWithFormat(txt)}", $"{this.ChangesPath}{this.TimeToMin}_{GetFullName(e.FullPath)}.{GetNameWithFormat(txt)}");
+                        File.Move(oldPathTxt, renamedTxt);
                     }
-                    else if (File.Exists($@"{e.FullPath}\{GetNameWithFormat(txt)}"))
+                    else if (File.Exists(originalTxt))
                     {
-                        File.Copy($@"{e.FullPath}\{GetNameWithFormat(txt)}", $"{this.ChangesPath}{this.TimeToMin}_{GetFullName(e.FullPath)}.{GetNameWithFormat(txt)}", true);
+                        File.Copy(originalTxt, renamedTxt, true);
                     }
                 }
             }
