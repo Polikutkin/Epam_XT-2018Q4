@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AwardDao.cs" />
+    <Compile Include="ServantClass.cs" />
     <Compile Include="UserAwardDao.cs" />
     <Compile Include="UserDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

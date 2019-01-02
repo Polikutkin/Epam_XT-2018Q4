@@ -70,10 +70,10 @@ namespace Epam.Task7.DAL.TextFiles
                 return false;
             }
 
-            string strUserId = $"{userToUpdate.Id}{InfoSeparator}";
-            string strAwardId = $"{awardToGive.Id}{AwardsSeparator}";
+            string userIdTemplate = $"{userToUpdate.Id}{InfoSeparator}";
+            string awardIdTemplate = $"{awardToGive.Id}{AwardsSeparator}";
 
-            Action appendAllText = () => File.AppendAllText(UserAwardsFilePath, $"{strUserId}{strAwardId}{Environment.NewLine}");
+            Action appendAllText = () => File.AppendAllText(UserAwardsFilePath, $"{userIdTemplate}{awardIdTemplate}{Environment.NewLine}");
 
             if (File.Exists(UserAwardsFilePath))
             {
@@ -89,11 +89,11 @@ namespace Epam.Task7.DAL.TextFiles
                         line = sr.ReadLine();
                         lineNumber++;
 
-                        if (line.Contains(strUserId))
+                        if (line.Contains(userIdTemplate))
                         {
                             hasUser = true;
 
-                            if (line.Replace(strUserId, string.Empty).Contains(strAwardId))
+                            if (line.Replace(userIdTemplate, string.Empty).Contains(awardIdTemplate))
                             {
                                 hasAward = true;
                                 break;
@@ -111,7 +111,7 @@ namespace Epam.Task7.DAL.TextFiles
                 else if (hasUser && !hasAward)
                 {
                     var userAwards = File.ReadAllLines(UserAwardsFilePath);
-                    userAwards[lineNumber - 1] += strAwardId;
+                    userAwards[lineNumber - 1] += awardIdTemplate;
 
                     File.WriteAllLines(UserAwardsFilePath, userAwards);
                 }
@@ -175,14 +175,12 @@ namespace Epam.Task7.DAL.TextFiles
                     userAwards[lineNumber - 1] = userAwards[lineNumber - 1].Replace(strAwardId, string.Empty);
 
                     File.WriteAllLines(UserAwardsFilePath, userAwards);
+
+                    return true;
                 }
             }
-            else
-            {
-                return false;
-            }
 
-            return true;
+            return false;
         }
 
         public bool Remove(int id)

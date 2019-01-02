@@ -9,11 +9,16 @@ namespace Epam.Task7.BLL
 {
     public class UserLogic : IUserLogic
     {
-        private readonly IUserDao userDao;
+        internal const string UsersCacheKey = "GetAllUsers";
+        internal const string LastUserCacheKey = "GetUserById";
 
-        public UserLogic(IUserDao userDao)
+        private readonly IUserDao userDao;
+        private readonly ICacheLogic cacheLogic;
+
+        public UserLogic(IUserDao userDao, ICacheLogic cacheLogic)
         {
             this.userDao = userDao;
+            this.cacheLogic = cacheLogic;
         }
 
         public bool Add(User user)
@@ -31,6 +36,7 @@ namespace Epam.Task7.BLL
 
             try
             {
+                this.cacheLogic.Remove(UsersCacheKey);
                 this.userDao.Add(user);
 
                 return true;
@@ -43,7 +49,18 @@ namespace Epam.Task7.BLL
 
         public IEnumerable<User> GetAll()
         {
-            return this.userDao.GetAll().ToList();
+            bool cacheResult = this.cacheLogic.Get(UsersCacheKey, out IEnumerable<User> cacheData);
+
+            if (!cacheResult)
+            {
+                var data = this.userDao.GetAll().ToList();
+
+                this.cacheLogic.Add(UsersCacheKey, data);
+
+                return data;
+            }
+
+            return cacheData;
         }
 
         public User GetById(int id)
@@ -53,7 +70,20 @@ namespace Epam.Task7.BLL
                 throw new ArgumentOutOfRangeException(nameof(id), "ID must be above 0.");
             }
 
-            return this.userDao.GetById(id);
+            bool cacheResult = this.cacheLogic.Get(LastUserCacheKey, out User cacheData);
+
+            if (cacheResult && cacheData.Id == id)
+            {
+                return cacheData;
+            }
+            else
+            {
+                var data = this.userDao.GetById(id);
+
+                this.cacheLogic.Remove(LastUserCacheKey);
+                this.cacheLogic.Add(LastUserCacheKey, data);
+                return data;
+            }
         }
 
         public bool Remove(int id)
@@ -61,6 +91,15 @@ namespace Epam.Task7.BLL
             if (id < 1)
             {
                 throw new ArgumentOutOfRangeException(nameof(id), "ID must be above 0.");
+            }
+
+            this.cacheLogic.Remove(UsersCacheKey);
+
+            bool cacheResult = this.cacheLogic.Get(LastUserCacheKey, out User cacheData);
+
+            if (cacheResult && cacheData.Id == id)
+            {
+                this.cacheLogic.Remove(LastUserCacheKey);
             }
 
             return this.userDao.Remove(id);
@@ -82,6 +121,15 @@ namespace Epam.Task7.BLL
                 user.LastName.Length < 1 || user.LastName.Length > 30 || user.BirthDate > DateTime.Now || DateTime.Now.Year - user.BirthDate.Year >= 150)
             {
                 throw new ArgumentException("Wrong user data");
+            }
+
+            this.cacheLogic.Remove(UsersCacheKey);
+
+            bool cacheResult = this.cacheLogic.Get(LastUserCacheKey, out User cacheData);
+
+            if (cacheResult && cacheData.Id == id)
+            {
+                this.cacheLogic.Remove(LastUserCacheKey);
             }
 
             return this.userDao.Update(id, user);

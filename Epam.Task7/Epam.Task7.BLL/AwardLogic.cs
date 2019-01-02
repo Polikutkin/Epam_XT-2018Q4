@@ -9,11 +9,15 @@ namespace Epam.Task7.BLL
 {
     public class AwardLogic : IAwardLogic
     {
-        private readonly IAwardDao awardDao;
+        internal const string AwardsCacheKey = "GetAllAwards";
 
-        public AwardLogic(IAwardDao awardDao)
+        private readonly IAwardDao awardDao;
+        private readonly ICacheLogic cacheLogic;
+
+        public AwardLogic(IAwardDao awardDao, ICacheLogic cacheLogic)
         {
             this.awardDao = awardDao;
+            this.cacheLogic = cacheLogic;
         }
 
         public bool Add(Award award)
@@ -30,6 +34,7 @@ namespace Epam.Task7.BLL
 
             try
             {
+                this.cacheLogic.Remove(AwardsCacheKey);
                 this.awardDao.Add(award);
 
                 return true;
@@ -42,7 +47,18 @@ namespace Epam.Task7.BLL
 
         public IEnumerable<Award> GetAll()
         {
-            return this.awardDao.GetAll().ToList();
+            bool cacheResult = this.cacheLogic.Get(AwardsCacheKey, out IEnumerable<Award> cacheData);
+
+            if (!cacheResult)
+            {
+                var data = this.awardDao.GetAll().ToList();
+
+                this.cacheLogic.Add(AwardsCacheKey, data);
+
+                return data;
+            }
+
+            return cacheData;
         }
 
         public bool GiveAward(int userId, int awardId)
@@ -59,7 +75,21 @@ namespace Epam.Task7.BLL
 
             try
             {
-                return this.awardDao.GiveAward(userId, awardId) ? true : false;
+                this.cacheLogic.Remove(UserLogic.UsersCacheKey);
+
+                bool result = this.awardDao.GiveAward(userId, awardId) ? true : false;
+
+                if (result)
+                {
+                    bool cacheResult = this.cacheLogic.Get(UserLogic.LastUserCacheKey, out User cacheData);
+
+                    if (cacheResult && cacheData.Id == userId)
+                    {
+                        this.cacheLogic.Remove(UserLogic.LastUserCacheKey);
+                    }
+                }
+
+                return result;
             }
             catch (Exception)
             {
@@ -81,7 +111,21 @@ namespace Epam.Task7.BLL
 
             try
             {
-                return this.awardDao.TakeAward(userId, awardId) ? true : false;
+                this.cacheLogic.Remove(UserLogic.UsersCacheKey);
+
+                bool result = this.awardDao.TakeAward(userId, awardId) ? true : false;
+
+                if (result)
+                {
+                    bool cacheResult = this.cacheLogic.Get(UserLogic.LastUserCacheKey, out User cacheData);
+
+                    if (cacheResult && cacheData.Id == userId)
+                    {
+                        this.cacheLogic.Remove(UserLogic.LastUserCacheKey);
+                    }
+                }
+
+                return result;
             }
             catch (Exception)
             {
@@ -91,6 +135,8 @@ namespace Epam.Task7.BLL
 
         public bool Remove(int id)
         {
+            this.cacheLogic.Remove(AwardsCacheKey);
+
             return this.awardDao.Remove(id);
         }
     }

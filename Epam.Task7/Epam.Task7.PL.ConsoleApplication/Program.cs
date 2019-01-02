@@ -11,43 +11,43 @@
 
                 switch (option)
                 {
-                    case "1":
+                    case ServantClass.ShowUsers:
                         WorkWithUsers.ShowUsers();
                         ServantClass.PressAnyKey();
                         break;
-                    case "2":
+                    case ServantClass.GetUser:
                         WorkWithUsers.GetUserById();
                         ServantClass.PressAnyKey();
                         break;
-                    case "3":
+                    case ServantClass.AddUser:
                         WorkWithUsers.AddUser();
                         ServantClass.PressAnyKey();
                         break;
-                    case "4":
+                    case ServantClass.UpdateUser:
                         WorkWithUsers.UpdateUser();
                         ServantClass.PressAnyKey();
                         break;
-                    case "5":
+                    case ServantClass.RemoveUser:
                         WorkWithUsers.RemoveUser();
                         ServantClass.PressAnyKey();
                         break;
-                    case "6":
+                    case ServantClass.ShowAwards:
                         WorkWithAwards.ShowAwards();
                         ServantClass.PressAnyKey();
                         break;
-                    case "7":
+                    case ServantClass.AddAward:
                         WorkWithAwards.AddAward();
                         ServantClass.PressAnyKey();
                         break;
-                    case "8":
+                    case ServantClass.GiveAward:
                         WorkWithAwards.GiveToUser();
                         ServantClass.PressAnyKey();
                         break;
-                    case "9":
+                    case ServantClass.TakeAward:
                         WorkWithAwards.TakeFromUser();
                         ServantClass.PressAnyKey();
                         break;
-                    case "q":
+                    case ServantClass.Quit:
                         return;
                     default:
                         break;

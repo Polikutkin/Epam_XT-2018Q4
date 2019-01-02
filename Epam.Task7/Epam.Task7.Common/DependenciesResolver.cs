@@ -13,12 +13,16 @@ namespace Epam.Task7.Common
         private static IAwardLogic awardLogic;
         private static IAwardDao awardDao;
 
-        public static IUserLogic UserLogic => userLogic ?? (userLogic = new UserLogic(UserDao));
+        private static ICacheLogic cacheLogic;
+
+        public static IUserLogic UserLogic => userLogic ?? (userLogic = new UserLogic(UserDao, CacheLogic));
 
         public static IUserDao UserDao => userDao ?? (userDao = new UserDao());
 
-        public static IAwardLogic AwardLogic => awardLogic ?? (awardLogic = new AwardLogic(AwardDao));
+        public static IAwardLogic AwardLogic => awardLogic ?? (awardLogic = new AwardLogic(AwardDao, CacheLogic));
         
         public static IAwardDao AwardDao => awardDao ?? (awardDao = new AwardDao());
+
+        public static ICacheLogic CacheLogic => cacheLogic ?? (cacheLogic = new CacheLogic());
     }
 }

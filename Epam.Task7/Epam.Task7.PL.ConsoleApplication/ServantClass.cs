@@ -5,19 +5,30 @@ namespace Epam.Task7.PL.ConsoleApplication
 {
     public static class ServantClass
     {
+        public const string ShowUsers = "1";
+        public const string GetUser = "2";
+        public const string AddUser = "3";
+        public const string UpdateUser = "4";
+        public const string RemoveUser = "5";
+        public const string ShowAwards = "6";
+        public const string AddAward = "7";
+        public const string GiveAward = "8";
+        public const string TakeAward = "9";
+        public const string Quit = "q";
+
         public static void ShowMenu()
         {
             Console.Clear();
-            Console.WriteLine("1 - Show all users");
-            Console.WriteLine("2 - Get user by ID");
-            Console.WriteLine("3 -Add a new user");
-            Console.WriteLine("4 - Update user by ID");
-            Console.WriteLine("5 - Remove user by ID");
-            Console.WriteLine("6 - Show all awards");
-            Console.WriteLine("7 - Add a new award");
-            Console.WriteLine("8 - Give an award to a user");
-            Console.WriteLine("9 - Take an award from a user");
-            Console.WriteLine("q - Quit the program");
+            Console.WriteLine($"{ShowUsers} - Show all users");
+            Console.WriteLine($"{GetUser} - Get user by ID");
+            Console.WriteLine($"{AddUser} - Add a new user");
+            Console.WriteLine($"{UpdateUser} - Update user by ID");
+            Console.WriteLine($"{RemoveUser} - Remove user by ID");
+            Console.WriteLine($"{ShowAwards} - Show all awards");
+            Console.WriteLine($"{AddAward} - Add a new award");
+            Console.WriteLine($"{GiveAward} - Give an award to a user");
+            Console.WriteLine($"{TakeAward} - Take an award from a user");
+            Console.WriteLine($"{Quit} - Quit the program");
             Console.Write("Enter option: ");
         }
 

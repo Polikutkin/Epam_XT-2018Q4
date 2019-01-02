@@ -156,12 +156,14 @@ namespace Epam.Task7.Entities
 
             StringBuilder sb = new StringBuilder();
 
-            foreach (var award in this.Awards)
+            for (int i = 0; i < this.Awards.Count - 1; i++)
             {
-                sb.Append($"{award.Id} {award.Title}{Environment.NewLine}");
+                sb.AppendLine($"{this.Awards[i].Id} {this.Awards[i].Title}");
             }
 
-            return this.ToString() + $"{Environment.NewLine}User awards:{Environment.NewLine}" + sb.ToString();
+            sb.Append($"{this.Awards.Last().Id} {this.Awards.Last().Title}");
+
+            return $"{this.ToString()}{Environment.NewLine}User awards:{Environment.NewLine}{sb.ToString()}";
         }
     }
 }

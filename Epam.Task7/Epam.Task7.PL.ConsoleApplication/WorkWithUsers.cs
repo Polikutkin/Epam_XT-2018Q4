@@ -17,6 +17,7 @@ namespace Epam.Task7.PL.ConsoleApplication
             foreach (var user in UserLogic.GetAll())
             {
                 Console.WriteLine(user.ShowUserInfo());
+                Console.WriteLine();
             }
         }
 

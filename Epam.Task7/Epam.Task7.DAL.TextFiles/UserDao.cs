@@ -59,10 +59,44 @@ namespace Epam.Task7.DAL.TextFiles
 
         public User GetById(int id)
         {
-            var users = this.GetAll().ToList();
-            User user = users.FirstOrDefault(u => u.Id == id);
+            if (File.Exists(UsersFilePath))
+            {
+                using (var sr = new StreamReader(UsersFilePath))
+                {
+                    string line = string.Empty;
 
-            return user;
+                    while (!sr.EndOfStream)
+                    {
+                        line = sr.ReadLine();
+
+                        if (line.TakeWhile(c => c != InfoSeparator).CharCollectionAsString().Contains(id.ToString()))
+                        {
+                            var userData = line.Split(new[] { InfoSeparator }, 5);
+
+                            var newUser = new User
+                            {
+                                Id = int.Parse(userData[0]),
+                                FirstName = userData[1],
+                                LastName = userData[2],
+                                BirthDate = DateTime.ParseExact(userData[3], DateFormat, null),
+                            };
+
+                            if (File.Exists(UserAwardDao.UserAwardsFilePath))
+                            {
+                                newUser.Awards = UserAwardDao.GetUserAwards(newUser.Id, UserAwardDao.GetAwards()).ToList();
+                            }
+
+                            return newUser;
+                        }
+                    }
+                }
+
+                return null;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public bool Remove(int id)
@@ -103,9 +137,9 @@ namespace Epam.Task7.DAL.TextFiles
             return true;
         }
 
-        private static string UserAsTxt(User user)
+        private static string UserAsTxt(User u)
         {
-            return $"{user.Id}{InfoSeparator}{user.FirstName}{InfoSeparator}{user.LastName}{InfoSeparator}{user.BirthDate.ToString(DateFormat)}{InfoSeparator}{user.Age}";
+            return $"{u.Id}{InfoSeparator}{u.FirstName}{InfoSeparator}{u.LastName}{InfoSeparator}{u.BirthDate.ToString(DateFormat)}{InfoSeparator}{u.Age}";
         }
     }
 }

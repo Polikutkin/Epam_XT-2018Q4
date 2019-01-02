@@ -82,8 +82,9 @@ namespace Epam.Task7.DAL.TextFiles
 
         internal static IEnumerable<Award> GetUserAwards(int userId, IEnumerable<Award> awards)
         {
+            bool hasAward = false;
             var userAwards = new List<Award>();
-            string id = $"{userId}{InfoSeparator}";
+            string idTemplate = $"{userId}{InfoSeparator}";
 
             string userLine = string.Empty;
 
@@ -93,29 +94,33 @@ namespace Epam.Task7.DAL.TextFiles
                 {
                     userLine = sr.ReadLine();
 
-                    if (userLine.Contains(id))
+                    if (userLine.Contains(idTemplate))
                     {
-                        userLine = userLine.Replace(id, string.Empty);
+                        userLine = userLine.Replace(idTemplate, string.Empty);
+                        hasAward = true;
                         break;
                     }
                 }
             }
 
-            string[] stringAwards = userLine.Split(AwardsSeparator);
-
-            if (awards.Any())
+            if (hasAward)
             {
-                foreach (var sa in stringAwards)
+                string[] stringAwards = userLine.Split(AwardsSeparator);
+
+                if (awards.Any())
                 {
                     foreach (var award in awards)
                     {
-                        if (sa == award.Id.ToString())
+                        foreach (var sa in stringAwards)
                         {
-                            userAwards.Add(award);
-                            break;
+                            if (sa == award.Id.ToString())
+                            {
+                                userAwards.Add(award);
+                                break;
+                            }
                         }
                     }
-                }
+                } 
             }
 
             return userAwards;
