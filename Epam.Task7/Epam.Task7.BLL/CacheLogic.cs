@@ -11,6 +11,10 @@ namespace Epam.Task7.BLL
     {
         private static Dictionary<string, object> data = new Dictionary<string, object>();
 
+        public CacheLogic()
+        {
+        }
+
         public bool Add<T>(string key, T value)
         {
             if (data.ContainsKey(key))

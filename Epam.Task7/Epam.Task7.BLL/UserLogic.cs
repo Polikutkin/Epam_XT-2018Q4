@@ -15,6 +15,10 @@ namespace Epam.Task7.BLL
         private readonly IUserDao userDao;
         private readonly ICacheLogic cacheLogic;
 
+        public UserLogic()
+        {
+        }
+
         public UserLogic(IUserDao userDao, ICacheLogic cacheLogic)
         {
             this.userDao = userDao;

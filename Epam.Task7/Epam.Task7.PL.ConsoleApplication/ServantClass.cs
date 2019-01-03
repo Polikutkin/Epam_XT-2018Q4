@@ -16,27 +16,6 @@ namespace Epam.Task7.PL.ConsoleApplication
         public const string TakeAward = "9";
         public const string Quit = "q";
 
-        public static void ShowMenu()
-        {
-            Console.Clear();
-            Console.WriteLine($"{ShowUsers} - Show all users");
-            Console.WriteLine($"{GetUser} - Get user by ID");
-            Console.WriteLine($"{AddUser} - Add a new user");
-            Console.WriteLine($"{UpdateUser} - Update user by ID");
-            Console.WriteLine($"{RemoveUser} - Remove user by ID");
-            Console.WriteLine($"{ShowAwards} - Show all awards");
-            Console.WriteLine($"{AddAward} - Add a new award");
-            Console.WriteLine($"{GiveAward} - Give an award to a user");
-            Console.WriteLine($"{TakeAward} - Take an award from a user");
-            Console.WriteLine($"{Quit} - Quit the program");
-            Console.Write("Enter option: ");
-        }
-
-        public static string ReadInput()
-        {
-            return Console.ReadLine();
-        }
-
         public static string AddAwardTitle(string message)
         {
             while (true)
@@ -59,37 +38,6 @@ namespace Epam.Task7.PL.ConsoleApplication
                 }
 
                 return title;
-            }
-        }
-
-        public static void PressAnyKey()
-        {
-            Console.WriteLine("Press any key to continue");
-            Console.ReadKey();
-        }
-
-        public static string AddUserName(string message)
-        {
-            while (true)
-            {
-                Console.Write(message);
-                string name = Console.ReadLine();
-
-                name = name.Trim();
-
-                if (name.Length < 1 || name.Length > 30)
-                {
-                    Console.WriteLine("Please enter a valid name. Must contain 1 - 30 symbols.");
-                    continue;
-                }
-
-                if (!name.Any(c => char.IsLetter(c)))
-                {
-                    Console.WriteLine("Please enter a valid name. Must contain only letters.");
-                    continue;
-                }
-
-                return name;
             }
         }
 
@@ -119,6 +67,31 @@ namespace Epam.Task7.PL.ConsoleApplication
             }
         }
 
+        public static string AddUserName(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+                string name = Console.ReadLine();
+
+                name = name.Trim();
+
+                if (name.Length < 1 || name.Length > 30)
+                {
+                    Console.WriteLine("Please enter a valid name. Must contain 1 - 30 symbols.");
+                    continue;
+                }
+
+                if (!name.Any(c => char.IsLetter(c)))
+                {
+                    Console.WriteLine("Please enter a valid name. Must contain only letters.");
+                    continue;
+                }
+
+                return name;
+            }
+        }
+
         public static int CheckId(string message)
         {
             while (true)
@@ -130,12 +103,39 @@ namespace Epam.Task7.PL.ConsoleApplication
 
                 if (!idParse || id < 1)
                 {
-                    Console.WriteLine("Please enter a valid number. Id Must be above 0.");
+                    Console.WriteLine("Please enter a valid number. Id must be above 0.");
                     continue;
                 }
 
                 return id;
             }
+        }
+
+        public static void PressAnyKey()
+        {
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+        }
+
+        public static string ReadInput()
+        {
+            return Console.ReadLine();
+        }
+
+        public static void ShowMenu()
+        {
+            Console.Clear();
+            Console.WriteLine($"{ShowUsers} - Show all users");
+            Console.WriteLine($"{GetUser} - Get user by ID");
+            Console.WriteLine($"{AddUser} - Add a new user");
+            Console.WriteLine($"{UpdateUser} - Update user by ID");
+            Console.WriteLine($"{RemoveUser} - Remove user by ID");
+            Console.WriteLine($"{ShowAwards} - Show all awards");
+            Console.WriteLine($"{AddAward} - Add a new award");
+            Console.WriteLine($"{GiveAward} - Give an award to a user");
+            Console.WriteLine($"{TakeAward} - Take an award from a user");
+            Console.WriteLine($"{Quit} - Quit the program");
+            Console.Write("Enter option: ");
         }
     }
 }

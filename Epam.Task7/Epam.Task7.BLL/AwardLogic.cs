@@ -14,6 +14,10 @@ namespace Epam.Task7.BLL
         private readonly IAwardDao awardDao;
         private readonly ICacheLogic cacheLogic;
 
+        public AwardLogic()
+        {
+        }
+
         public AwardLogic(IAwardDao awardDao, ICacheLogic cacheLogic)
         {
             this.awardDao = awardDao;

@@ -9,15 +9,19 @@ namespace Epam.Task7.PL.ConsoleApplication
     {
         public static readonly IUserLogic UserLogic = DependenciesResolver.UserLogic;
 
-        public static void ShowUsers()
+        public static void AddUser()
         {
-            Console.WriteLine();
-            Console.WriteLine("Users:");
+            string firstName = ServantClass.AddUserName("Enter user FirstName: ");
+            string lasttName = ServantClass.AddUserName("Enter user LastName: ");
+            DateTime birthDate = ServantClass.AddUserBirthDate($"Enter birth date of a user.{Environment.NewLine}Format: year month day (Example: 2018 12 24): ");
 
-            foreach (var user in UserLogic.GetAll())
+            if (UserLogic.Add(new User(firstName, lasttName, birthDate)))
             {
-                Console.WriteLine(user.ShowUserInfo());
-                Console.WriteLine();
+                Console.WriteLine("User successfully added.");
+            }
+            else
+            {
+                Console.WriteLine("Cannot to add user.");
             }
         }
 
@@ -36,19 +40,39 @@ namespace Epam.Task7.PL.ConsoleApplication
             }
         }
 
-        public static void AddUser()
+        public static void RemoveUser()
         {
-            string firstName = ServantClass.AddUserName("Enter user FirstName: ");
-            string lasttName = ServantClass.AddUserName("Enter user LastName: ");
-            DateTime birthDate = ServantClass.AddUserBirthDate($"Enter birth date of a user.{Environment.NewLine}Format: year month day (Example: 2018 12 24): ");
+            int id = ServantClass.CheckId("Enter user ID to remove user: ");
+            User user = UserLogic.GetById(id);
 
-            if (UserLogic.Add(new User(firstName, lasttName, birthDate)))
+            if (user != null)
             {
-                Console.WriteLine("User successfully added.");
+                Console.WriteLine($"User: {user.ToString()}");
+
+                if (UserLogic.Remove(id))
+                {
+                    Console.WriteLine("User successfully removed.");
+                }
+                else
+                {
+                    Console.WriteLine("Cannot to remove user.");
+                }
             }
             else
             {
-                Console.WriteLine("Cannot to add user.");
+                Console.WriteLine("There are no users with this ID.");
+            }
+        }
+
+        public static void ShowUsers()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Users:");
+
+            foreach (var user in UserLogic.GetAll())
+            {
+                Console.WriteLine(user.ShowUserInfo());
+                Console.WriteLine();
             }
         }
 
@@ -80,30 +104,6 @@ namespace Epam.Task7.PL.ConsoleApplication
             else
             {
                 Console.WriteLine("Cannot to update user.");
-            }
-        }
-
-        public static void RemoveUser()
-        {
-            int id = ServantClass.CheckId("Enter user ID to remove user: ");
-            User user = UserLogic.GetById(id);
-
-            if (user != null)
-            {
-                Console.WriteLine($"User: {user.ToString()}");
-
-                if (UserLogic.Remove(id))
-                {
-                    Console.WriteLine("User successfully removed.");
-                }
-                else
-                {
-                    Console.WriteLine("Cannot to remove user.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("There are no users with this ID.");
             }
         }
     }
