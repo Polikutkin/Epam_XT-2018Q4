@@ -9,15 +9,7 @@ namespace Epam.Task7.PL.ConsoleApplication
     {
         public static readonly IAwardLogic AwardLogic = DependenciesResolver.AwardLogic;
 
-        internal static void ShowAwards()
-        {
-            foreach (var award in AwardLogic.GetAll())
-            {
-                Console.WriteLine(award.ToString());
-            }
-        }
-
-        internal static void AddAward()
+        public static void AddAward()
         {
             string awardName = ServantClass.AddAwardTitle("Enter Award title: ");
 
@@ -31,21 +23,7 @@ namespace Epam.Task7.PL.ConsoleApplication
             }
         }
 
-        internal static void RemoveAward()
-        {
-            int id = ServantClass.CheckId("Enter award ID to remove award: ");
-
-            if (AwardLogic.Remove(id))
-            {
-                Console.WriteLine("Award successfully removed.");
-            }
-            else
-            {
-                Console.WriteLine("Cannot to remove award.");
-            }
-        }
-
-        internal static void GiveToUser()
+        public static void GiveToUser()
         {
             int userId = ServantClass.CheckId("Enter user ID: ");
             int awardId = ServantClass.CheckId("Enter award ID: ");
@@ -60,7 +38,29 @@ namespace Epam.Task7.PL.ConsoleApplication
             }
         }
 
-        internal static void TakeFromUser()
+        public static void RemoveAward()
+        {
+            int id = ServantClass.CheckId("Enter award ID to remove award: ");
+
+            if (AwardLogic.Remove(id))
+            {
+                Console.WriteLine("Award successfully removed.");
+            }
+            else
+            {
+                Console.WriteLine("Cannot to remove award.");
+            }
+        }
+
+        public static void ShowAwards()
+        {
+            foreach (var award in AwardLogic.GetAll())
+            {
+                Console.WriteLine(award.ToString());
+            }
+        }
+
+        public static void TakeFromUser()
         {
             int userId = ServantClass.CheckId("Enter user ID: ");
             int awardId = ServantClass.CheckId("Enter award ID: ");
