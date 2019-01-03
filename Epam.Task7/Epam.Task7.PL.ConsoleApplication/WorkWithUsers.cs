@@ -84,7 +84,7 @@ namespace Epam.Task7.PL.ConsoleApplication
             if (user != null)
             {
                 Console.Write("User: ");
-                Console.WriteLine(user.ToString());
+                Console.WriteLine(user.ShowUserInfo());
             }
             else
             {
