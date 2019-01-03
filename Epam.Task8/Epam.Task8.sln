@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task8.DateExistance", "Epam.Task8.DateExistance\Epam.Task8.DateExistance.csproj", "{6CDC1398-2AE9-4E87-81B4-534209D8533C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task8.HtmlReplacer", "Epam.Task8.HtmlReplacer\Epam.Task8.HtmlReplacer.csproj", "{851A23AA-FE0F-455E-9F4D-66192606AAA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task8.EmailFinder", "Epam.Task8.EmailFinder\Epam.Task8.EmailFinder.csproj", "{84C4C582-BC09-4463-B3BE-884B018A939B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task8.NumberValidator", "Epam.Task8.NumberValidator\Epam.Task8.NumberValidator.csproj", "{34CD525F-1029-48FF-9AB8-540789381180}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task8.TimeCounter", "Epam.Task8.TimeCounter\Epam.Task8.TimeCounter.csproj", "{4DFE8C0A-48B9-4433-A4C7-101FFF05BBD3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6CDC1398-2AE9-4E87-81B4-534209D8533C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CDC1398-2AE9-4E87-81B4-534209D8533C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CDC1398-2AE9-4E87-81B4-534209D8533C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CDC1398-2AE9-4E87-81B4-534209D8533C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{851A23AA-FE0F-455E-9F4D-66192606AAA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{851A23AA-FE0F-455E-9F4D-66192606AAA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{851A23AA-FE0F-455E-9F4D-66192606AAA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{851A23AA-FE0F-455E-9F4D-66192606AAA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84C4C582-BC09-4463-B3BE-884B018A939B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84C4C582-BC09-4463-B3BE-884B018A939B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84C4C582-BC09-4463-B3BE-884B018A939B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84C4C582-BC09-4463-B3BE-884B018A939B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34CD525F-1029-48FF-9AB8-540789381180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34CD525F-1029-48FF-9AB8-540789381180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34CD525F-1029-48FF-9AB8-540789381180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34CD525F-1029-48FF-9AB8-540789381180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DFE8C0A-48B9-4433-A4C7-101FFF05BBD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DFE8C0A-48B9-4433-A4C7-101FFF05BBD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DFE8C0A-48B9-4433-A4C7-101FFF05BBD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DFE8C0A-48B9-4433-A4C7-101FFF05BBD3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
