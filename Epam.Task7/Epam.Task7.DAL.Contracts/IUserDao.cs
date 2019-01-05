@@ -17,6 +17,6 @@ namespace Epam.Task7.DAL.Contracts
 
         bool Remove(int id);
 
-        bool Update(int id, User user);
+        void Update(int id, User user);
     }
 }

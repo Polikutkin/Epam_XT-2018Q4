@@ -82,48 +82,34 @@ namespace Epam.Task7.DAL.TextFiles
 
         internal static IEnumerable<Award> GetUserAwards(int userId, IEnumerable<Award> awards)
         {
-            bool hasAward = false;
-            var userAwards = new List<Award>();
-            string idTemplate = $"{userId}{InfoSeparator}";
+            string userIdTemplate = $"{userId}{InfoSeparator}";
 
-            string userLine = string.Empty;
+            bool hasUser = false;
+            string line = string.Empty;
 
-            using (var sr = new StreamReader(UserAwardsFilePath))
+            using (var reader = new StreamReader(UserAwardsFilePath))
             {
-                while (!sr.EndOfStream)
+                while (!reader.EndOfStream)
                 {
-                    userLine = sr.ReadLine();
+                    line = reader.ReadLine();
 
-                    if (userLine.Contains(idTemplate))
+                    if (line.Contains(userIdTemplate))
                     {
-                        userLine = userLine.Replace(idTemplate, string.Empty);
-                        hasAward = true;
+                        line = line.Replace(userIdTemplate, string.Empty);
+                        hasUser = true;
                         break;
                     }
                 }
             }
 
-            if (hasAward)
+            if (hasUser)
             {
-                string[] stringAwards = userLine.Split(AwardsSeparator);
-
-                if (awards.Any())
-                {
-                    foreach (var award in awards)
-                    {
-                        foreach (var sa in stringAwards)
-                        {
-                            if (sa == award.Id.ToString())
-                            {
-                                userAwards.Add(award);
-                                break;
-                            }
-                        }
-                    }
-                } 
+                return FillUserAwards(awards, line);
             }
-
-            return userAwards;
+            else
+            {
+                return Enumerable.Empty<Award>();
+            }
         }
 
         internal static void RemoveUserAwards(int userId)
@@ -131,6 +117,7 @@ namespace Epam.Task7.DAL.TextFiles
             if (File.Exists(UserAwardsFilePath))
             {
                 var userAwards = File.ReadAllLines(UserAwardsFilePath);
+
                 var tempArray = new string[userAwards.Length - 1];
 
                 for (int i = 0; i < userAwards.Length; i++)
@@ -145,6 +132,27 @@ namespace Epam.Task7.DAL.TextFiles
                     }
                 }
             }
+        }
+
+        private static IEnumerable<Award> FillUserAwards(IEnumerable<Award> awards, string awardIdLine)
+        {
+            var userAwards = new List<Award>();
+
+            string[] stringAwardsId = awardIdLine.Split(AwardsSeparator);
+
+            foreach (var award in awards)
+            {
+                foreach (var stringId in stringAwardsId)
+                {
+                    if (stringId == award.Id.ToString())
+                    {
+                        userAwards.Add(award);
+                        break;
+                    }
+                }
+            }
+
+            return userAwards;
         }
     }
 }

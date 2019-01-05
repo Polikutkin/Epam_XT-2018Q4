@@ -57,9 +57,11 @@ namespace Epam.Task7.PL.ConsoleApplication
                     continue;
                 }
 
-                if (now.Year - birthDate.Year > 150 || birthDate > now)
+                if (now.Year - birthDate.Year > 150
+                    || now.Year - birthDate.Year < 5
+                    || birthDate > now)
                 {
-                    Console.WriteLine("Please enter a valid date. User must be 0 - 150 years old.");
+                    Console.WriteLine("Please enter a valid date. User must be 5 - 150 years old.");
                     continue;
                 }
 
@@ -82,7 +84,7 @@ namespace Epam.Task7.PL.ConsoleApplication
                     continue;
                 }
 
-                if (!name.Any(c => char.IsLetter(c)))
+                if (!CheckSymbol(name))
                 {
                     Console.WriteLine("Please enter a valid name. Must contain only letters.");
                     continue;
@@ -136,6 +138,27 @@ namespace Epam.Task7.PL.ConsoleApplication
             Console.WriteLine($"{TakeAward} - Take an award from a user");
             Console.WriteLine($"{Quit} - Quit the program");
             Console.Write("Enter option: ");
+        }
+
+        private static bool CheckSymbol(string stringToCheck)
+        {
+            var allowedSeparatorSymbols = new char[] { '-', '\'', ' ' };
+
+            if (!char.IsLetter(stringToCheck.First())
+                || !char.IsLetter(stringToCheck.Last()))
+            {
+                return false;
+            }
+
+            for (int i = 1; i < stringToCheck.Length - 1; i++)
+            {
+                if (!char.IsLetter(stringToCheck[i]) && !allowedSeparatorSymbols.Contains(stringToCheck[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

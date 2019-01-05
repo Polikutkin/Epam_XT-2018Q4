@@ -9,9 +9,9 @@ namespace Epam.Task7.BLL.Contracts
 
         User GetById(int id);
 
-        bool Add(User user);
+        void Add(User user);
 
-        bool Update(int id, User user);
+        void Update(int id, User user);
 
         bool Remove(int id);
     }

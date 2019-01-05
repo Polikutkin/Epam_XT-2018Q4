@@ -11,7 +11,7 @@ namespace Epam.Task7.BLL.Contracts
     {
         IEnumerable<Award> GetAll();
 
-        bool Add(Award award);
+        void Add(Award award);
 
         bool Remove(int id);
 

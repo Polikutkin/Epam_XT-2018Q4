@@ -33,14 +33,7 @@ namespace Epam.Task7.DAL.TextFiles
             {
                 bool idParse = int.TryParse(File.ReadAllText(CurrentIdFilePath), out var id);
 
-                if (!idParse)
-                {
-                    this.maxId = 0;
-                }
-                else
-                {
-                    this.maxId = id;
-                }
+                this.maxId = id;
             }
         }
 
@@ -61,15 +54,17 @@ namespace Epam.Task7.DAL.TextFiles
         {
             if (File.Exists(UsersFilePath))
             {
-                using (var sr = new StreamReader(UsersFilePath))
+                using (var reader = new StreamReader(UsersFilePath))
                 {
                     string line = string.Empty;
 
-                    while (!sr.EndOfStream)
+                    while (!reader.EndOfStream)
                     {
-                        line = sr.ReadLine();
+                        line = reader.ReadLine();
 
-                        if (line.TakeWhile(c => c != InfoSeparator).CharCollectionAsString().Contains(id.ToString()))
+                        if (line.TakeWhile(c => c != InfoSeparator)
+                            .CharCollectionAsString()
+                            .Contains(id.ToString()))
                         {
                             var userData = line.Split(new[] { InfoSeparator }, 5);
 
@@ -112,29 +107,29 @@ namespace Epam.Task7.DAL.TextFiles
             users.Remove(user);
             UserAwardDao.RemoveUserAwards(user.Id);
 
-            File.WriteAllLines(UsersFilePath, users.Select(UserAsTxt));
+            var usersAsTxt = users.Select(UserAsTxt);
+
+            File.WriteAllLines(UsersFilePath, usersAsTxt);
 
             return true;
         }
 
-        public bool Update(int id, User user)
+        public void Update(int id, User user)
         {
             var users = this.GetAll().ToList();
             User userToUpdate = users.FirstOrDefault(u => u.Id == id);
 
-            if (userToUpdate == null)
+            if (userToUpdate != null)
             {
-                return false;
+                int index = users.IndexOf(userToUpdate);
+
+                user.Id = userToUpdate.Id;
+                users[index] = user;
+
+                var usersAsTxt = users.Select(UserAsTxt);
+
+                File.WriteAllLines(UsersFilePath, usersAsTxt);
             }
-
-            int index = users.IndexOf(userToUpdate);
-
-            user.Id = userToUpdate.Id;
-            users[index] = user;
-
-            File.WriteAllLines(UsersFilePath, users.Select(UserAsTxt));
-
-            return true;
         }
 
         private static string UserAsTxt(User u)

@@ -33,14 +33,7 @@ namespace Epam.Task7.DAL.TextFiles
             {
                 bool idParse = int.TryParse(File.ReadAllText(CurrentIdFilePath), out var id);
 
-                if (!idParse)
-                {
-                    this.maxId = 0;
-                }
-                else
-                {
-                    this.maxId = id;
-                }
+                this.maxId = id;
             }
         }
 
@@ -79,30 +72,9 @@ namespace Epam.Task7.DAL.TextFiles
             {
                 bool hasUser = false;
                 bool hasAward = false;
-                string line = string.Empty;
                 int lineNumber = 0;
 
-                using (var sr = new StreamReader(UserAwardsFilePath))
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        line = sr.ReadLine();
-                        lineNumber++;
-
-                        if (line.Contains(userIdTemplate))
-                        {
-                            hasUser = true;
-
-                            if (line.Replace(userIdTemplate, string.Empty).Contains(awardIdTemplate))
-                            {
-                                hasAward = true;
-                                break;
-                            }
-
-                            break;
-                        }
-                    }
-                }
+                CheckUserAwards(userIdTemplate, awardIdTemplate, ref hasUser, ref hasAward, ref lineNumber);
 
                 if (!hasUser)
                 {
@@ -123,56 +95,37 @@ namespace Epam.Task7.DAL.TextFiles
 
             return true;
         }
-
+        
         public bool TakeAward(int userId, int awardId)
         {
             var users = UserAwardDao.GetUsers();
             var awards = this.GetAll();
 
             User userToUpdate = users.FirstOrDefault(u => u.Id == userId);
-            Award awardToGive = awards.FirstOrDefault(a => a.Id == awardId);
+            Award awardToTake = awards.FirstOrDefault(a => a.Id == awardId);
 
-            if (userToUpdate == null || awardToGive == null)
+            if (userToUpdate == null || awardToTake == null)
             {
                 return false;
             }
 
-            string strUserId = $"{userToUpdate.Id}{InfoSeparator}";
-            string strAwardId = $"{awardToGive.Id}{AwardsSeparator}";
+            string userIdTemplate = $"{userToUpdate.Id}{InfoSeparator}";
+            string awardIdTemplate = $"{awardToTake.Id}{AwardsSeparator}";
 
             if (File.Exists(UserAwardsFilePath))
             {
                 bool hasUser = false;
                 bool hasAward = false;
-                string line = string.Empty;
                 int lineNumber = 0;
 
-                using (var sr = new StreamReader(UserAwardsFilePath))
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        line = sr.ReadLine();
-                        lineNumber++;
-
-                        if (line.Contains(strUserId))
-                        {
-                            hasUser = true;
-
-                            if (line.Replace(strUserId, string.Empty).Contains(strAwardId))
-                            {
-                                hasAward = true;
-                                break;
-                            }
-
-                            break;
-                        }
-                    }
-                }
+                CheckUserAwards(userIdTemplate, awardIdTemplate, ref hasUser, ref hasAward, ref lineNumber);
 
                 if (hasUser && hasAward)
                 {
                     var userAwards = File.ReadAllLines(UserAwardsFilePath);
-                    userAwards[lineNumber - 1] = userAwards[lineNumber - 1].Replace(strAwardId, string.Empty);
+
+                    userAwards[lineNumber - 1] = userAwards[lineNumber - 1]
+                        .Replace(awardIdTemplate, string.Empty);
 
                     File.WriteAllLines(UserAwardsFilePath, userAwards);
 
@@ -203,6 +156,33 @@ namespace Epam.Task7.DAL.TextFiles
         private static string AwardAsTxt(Award award)
         {
             return $"{award.Id}{InfoSeparator}{award.Title}";
+        }
+
+        private static void CheckUserAwards(string userIdTemplate, string awardIdTemplate, ref bool hasUser, ref bool hasAward, ref int lineNumber)
+        {
+            string line = string.Empty;
+
+            using (var reader = new StreamReader(UserAwardsFilePath))
+            {
+                while (!reader.EndOfStream)
+                {
+                    line = reader.ReadLine();
+                    lineNumber++;
+
+                    if (line.Contains(userIdTemplate))
+                    {
+                        hasUser = true;
+
+                        if (line.Replace(userIdTemplate, string.Empty)
+                            .Contains(awardIdTemplate))
+                        {
+                            hasAward = true;
+                        }
+
+                        break;
+                    }
+                }
+            }
         }
     }
 }

@@ -9,24 +9,32 @@ namespace Epam.Task7.PL.ConsoleApplication
     {
         public static readonly IAwardLogic AwardLogic = DependenciesResolver.AwardLogic;
 
+        private static readonly string UserIdMessage = "Enter user ID: ";
+        private static readonly string AwardIdMessage = "Enter award ID: ";
+
         public static void AddAward()
         {
             string awardName = ServantClass.AddAwardTitle("Enter Award title: ");
 
-            if (AwardLogic.Add(new Award(awardName)))
+            try
             {
+                AwardLogic.Add(new Award(awardName));
+
                 Console.WriteLine("Award successfully added.");
             }
-            else
+            catch (Exception e)
             {
                 Console.WriteLine("Cannot to add award.");
+                Console.WriteLine(e.Message);
+
+                throw;
             }
         }
 
         public static void GiveToUser()
         {
-            int userId = ServantClass.CheckId("Enter user ID: ");
-            int awardId = ServantClass.CheckId("Enter award ID: ");
+            int userId = ServantClass.CheckId(UserIdMessage);
+            int awardId = ServantClass.CheckId(AwardIdMessage);
 
             if (AwardLogic.GiveAward(userId, awardId))
             {
@@ -62,8 +70,8 @@ namespace Epam.Task7.PL.ConsoleApplication
 
         public static void TakeFromUser()
         {
-            int userId = ServantClass.CheckId("Enter user ID: ");
-            int awardId = ServantClass.CheckId("Enter award ID: ");
+            int userId = ServantClass.CheckId(UserIdMessage);
+            int awardId = ServantClass.CheckId(AwardIdMessage);
 
             if (AwardLogic.TakeAward(userId, awardId))
             {

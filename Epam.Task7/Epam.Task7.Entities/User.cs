@@ -12,7 +12,6 @@ namespace Epam.Task7.Entities
         private string firstName;
         private string lastName;
         private DateTime birthDate;
-        private List<Award> awards = new List<Award>();
 
         public User()
         {
@@ -114,18 +113,7 @@ namespace Epam.Task7.Entities
             }
         }
 
-        public List<Award> Awards
-        {
-            get
-            {
-                return this.awards;
-            }
-
-            set
-            {
-                this.awards = value;
-            }
-        }
+        public List<Award> Awards { get; set; } = new List<Award>();
 
         public void AddAward(Award award)
         {
@@ -134,12 +122,12 @@ namespace Epam.Task7.Entities
                 throw new ArgumentException();
             }
 
-            this.awards.Add(award);
+            this.Awards.Add(award);
         }
 
         public void RemoveAward(Award award)
         {
-            this.awards.Remove(award);
+            this.Awards.Remove(award);
         }
 
         public override string ToString()

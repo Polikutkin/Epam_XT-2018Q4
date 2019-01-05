@@ -11,6 +11,7 @@ namespace Epam.Task7.BLL
     {
         internal const string UsersCacheKey = "GetAllUsers";
         internal const string LastUserCacheKey = "GetUserById";
+        internal const string IdExceptionMessage = "ID must be above 0.";
 
         private readonly IUserDao userDao;
         private readonly ICacheLogic cacheLogic;
@@ -25,83 +26,84 @@ namespace Epam.Task7.BLL
             this.cacheLogic = cacheLogic;
         }
 
-        public bool Add(User user)
+        public void Add(User user)
         {
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user));
             }
 
-            if (user.FirstName == null || user.LastName == null || user.BirthDate == null || user.FirstName.Length < 1 || user.FirstName.Length > 30 ||
-                user.LastName.Length < 1 || user.LastName.Length > 30 || user.BirthDate > DateTime.Now || DateTime.Now.Year - user.BirthDate.Year >= 150)
+            if (user.FirstName == null 
+                || user.FirstName.Length < 1 
+                || user.FirstName.Length > 30 
+                || user.LastName == null 
+                || user.LastName.Length < 1 
+                || user.LastName.Length > 30 
+                || user.BirthDate == null 
+                || user.BirthDate > DateTime.Now 
+                || DateTime.Now.Year - user.BirthDate.Year > 150)
             {
                 throw new ArgumentException("Wrong user data");
             }
 
-            try
-            {
-                this.cacheLogic.Remove(UsersCacheKey);
-                this.userDao.Add(user);
-
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            this.cacheLogic.Remove(UsersCacheKey);
+            this.userDao.Add(user);
         }
 
         public IEnumerable<User> GetAll()
         {
             bool cacheResult = this.cacheLogic.Get(UsersCacheKey, out IEnumerable<User> cacheData);
 
-            if (!cacheResult)
+            if (cacheResult)
             {
-                var data = this.userDao.GetAll().ToList();
-
-                this.cacheLogic.Add(UsersCacheKey, data);
-
-                return data;
+                return cacheData;
             }
 
-            return cacheData;
+            var data = this.userDao.GetAll().ToList();
+
+            this.cacheLogic.Add(UsersCacheKey, data);
+
+            return data;
         }
 
         public User GetById(int id)
         {
             if (id < 1)
             {
-                throw new ArgumentOutOfRangeException(nameof(id), "ID must be above 0.");
+                throw new ArgumentOutOfRangeException(nameof(id), IdExceptionMessage);
             }
 
             bool cacheResult = this.cacheLogic.Get(LastUserCacheKey, out User cacheData);
 
-            if (cacheResult && cacheData.Id == id)
+            if (cacheResult 
+                && cacheData != null 
+                && cacheData.Id == id)
             {
                 return cacheData;
             }
-            else
-            {
-                var data = this.userDao.GetById(id);
 
-                this.cacheLogic.Remove(LastUserCacheKey);
-                this.cacheLogic.Add(LastUserCacheKey, data);
-                return data;
-            }
+            var data = this.userDao.GetById(id);
+
+            this.cacheLogic.Remove(LastUserCacheKey);
+            this.cacheLogic.Add(LastUserCacheKey, data);
+
+            return data;
         }
 
         public bool Remove(int id)
         {
             if (id < 1)
             {
-                throw new ArgumentOutOfRangeException(nameof(id), "ID must be above 0.");
+                throw new ArgumentOutOfRangeException(nameof(id), IdExceptionMessage);
             }
 
             this.cacheLogic.Remove(UsersCacheKey);
 
             bool cacheResult = this.cacheLogic.Get(LastUserCacheKey, out User cacheData);
 
-            if (cacheResult && cacheData.Id == id)
+            if (cacheResult
+                && cacheData != null
+                && cacheData.Id == id)
             {
                 this.cacheLogic.Remove(LastUserCacheKey);
             }
@@ -109,11 +111,11 @@ namespace Epam.Task7.BLL
             return this.userDao.Remove(id);
         }
 
-        public bool Update(int id, User user)
+        public void Update(int id, User user)
         {
             if (id < 1)
             {
-                throw new ArgumentOutOfRangeException(nameof(id), "ID must be above 0.");
+                throw new ArgumentOutOfRangeException(nameof(id), IdExceptionMessage);
             }
 
             if (user == null)
@@ -121,8 +123,15 @@ namespace Epam.Task7.BLL
                 throw new ArgumentNullException(nameof(user));
             }
 
-            if (user.FirstName == null || user.LastName == null || user.BirthDate == null || user.FirstName.Length < 1 || user.FirstName.Length > 30 ||
-                user.LastName.Length < 1 || user.LastName.Length > 30 || user.BirthDate > DateTime.Now || DateTime.Now.Year - user.BirthDate.Year >= 150)
+            if (user.FirstName == null 
+                || user.FirstName.Length < 1 
+                || user.FirstName.Length > 30 
+                || user.LastName == null 
+                || user.LastName.Length < 1 
+                || user.LastName.Length > 30 
+                || user.BirthDate == null 
+                || user.BirthDate > DateTime.Now 
+                || DateTime.Now.Year - user.BirthDate.Year > 150)
             {
                 throw new ArgumentException("Wrong user data");
             }
@@ -131,12 +140,14 @@ namespace Epam.Task7.BLL
 
             bool cacheResult = this.cacheLogic.Get(LastUserCacheKey, out User cacheData);
 
-            if (cacheResult && cacheData.Id == id)
+            if (cacheResult
+                && cacheData != null
+                && cacheData.Id == id)
             {
                 this.cacheLogic.Remove(LastUserCacheKey);
             }
 
-            return this.userDao.Update(id, user);
+            this.userDao.Update(id, user);
         }
     }
 }
