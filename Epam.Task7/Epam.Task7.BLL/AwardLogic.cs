@@ -44,9 +44,9 @@ namespace Epam.Task7.BLL
 
         public IEnumerable<Award> GetAll()
         {
-            bool cacheResult = this.cacheLogic.Get(AwardsCacheKey, out IEnumerable<Award> cacheData);
+            bool cacheResultParse = this.cacheLogic.Get(AwardsCacheKey, out IEnumerable<Award> cacheData);
 
-            if (!cacheResult)
+            if (!cacheResultParse)
             {
                 var data = this.awardDao.GetAll().ToList();
 
@@ -76,9 +76,9 @@ namespace Epam.Task7.BLL
 
             if (result)
             {
-                bool cacheResult = this.cacheLogic.Get(UserLogic.LastUserCacheKey, out User cacheData);
+                bool cacheResultParse = this.cacheLogic.Get(UserLogic.LastUserCacheKey, out User cacheData);
 
-                if (cacheResult && cacheData.Id == userId)
+                if (cacheResultParse && cacheData.Id == userId)
                 {
                     this.cacheLogic.Remove(UserLogic.LastUserCacheKey);
                 }
@@ -105,9 +105,9 @@ namespace Epam.Task7.BLL
 
             if (result)
             {
-                bool cacheResult = this.cacheLogic.Get(UserLogic.LastUserCacheKey, out User cacheData);
+                bool cacheResultParse = this.cacheLogic.Get(UserLogic.LastUserCacheKey, out User cacheData);
 
-                if (cacheResult && cacheData.Id == userId)
+                if (cacheResultParse && cacheData.Id == userId)
                 {
                     this.cacheLogic.Remove(UserLogic.LastUserCacheKey);
                 }
@@ -119,6 +119,8 @@ namespace Epam.Task7.BLL
         public bool Remove(int id)
         {
             this.cacheLogic.Remove(AwardsCacheKey);
+            this.cacheLogic.Remove(UserLogic.UsersCacheKey);
+            this.cacheLogic.Remove(UserLogic.LastUserCacheKey);
 
             return this.awardDao.Remove(id);
         }

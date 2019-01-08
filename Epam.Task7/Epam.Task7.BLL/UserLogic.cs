@@ -33,15 +33,7 @@ namespace Epam.Task7.BLL
                 throw new ArgumentNullException(nameof(user));
             }
 
-            if (user.FirstName == null 
-                || user.FirstName.Length < 1 
-                || user.FirstName.Length > 30 
-                || user.LastName == null 
-                || user.LastName.Length < 1 
-                || user.LastName.Length > 30 
-                || user.BirthDate == null 
-                || user.BirthDate > DateTime.Now 
-                || DateTime.Now.Year - user.BirthDate.Year > 150)
+            if (CheckUserState(user))
             {
                 throw new ArgumentException("Wrong user data");
             }
@@ -52,9 +44,9 @@ namespace Epam.Task7.BLL
 
         public IEnumerable<User> GetAll()
         {
-            bool cacheResult = this.cacheLogic.Get(UsersCacheKey, out IEnumerable<User> cacheData);
+            bool cacheResultParse = this.cacheLogic.Get(UsersCacheKey, out IEnumerable<User> cacheData);
 
-            if (cacheResult)
+            if (cacheResultParse)
             {
                 return cacheData;
             }
@@ -73,9 +65,9 @@ namespace Epam.Task7.BLL
                 throw new ArgumentOutOfRangeException(nameof(id), IdExceptionMessage);
             }
 
-            bool cacheResult = this.cacheLogic.Get(LastUserCacheKey, out User cacheData);
+            bool cacheResultParse = this.cacheLogic.Get(LastUserCacheKey, out User cacheData);
 
-            if (cacheResult 
+            if (cacheResultParse 
                 && cacheData != null 
                 && cacheData.Id == id)
             {
@@ -99,9 +91,9 @@ namespace Epam.Task7.BLL
 
             this.cacheLogic.Remove(UsersCacheKey);
 
-            bool cacheResult = this.cacheLogic.Get(LastUserCacheKey, out User cacheData);
+            bool cacheResultParse = this.cacheLogic.Get(LastUserCacheKey, out User cacheData);
 
-            if (cacheResult
+            if (cacheResultParse
                 && cacheData != null
                 && cacheData.Id == id)
             {
@@ -123,24 +115,16 @@ namespace Epam.Task7.BLL
                 throw new ArgumentNullException(nameof(user));
             }
 
-            if (user.FirstName == null 
-                || user.FirstName.Length < 1 
-                || user.FirstName.Length > 30 
-                || user.LastName == null 
-                || user.LastName.Length < 1 
-                || user.LastName.Length > 30 
-                || user.BirthDate == null 
-                || user.BirthDate > DateTime.Now 
-                || DateTime.Now.Year - user.BirthDate.Year > 150)
+            if (CheckUserState(user))
             {
                 throw new ArgumentException("Wrong user data");
             }
 
             this.cacheLogic.Remove(UsersCacheKey);
 
-            bool cacheResult = this.cacheLogic.Get(LastUserCacheKey, out User cacheData);
+            bool cacheResultParse = this.cacheLogic.Get(LastUserCacheKey, out User cacheData);
 
-            if (cacheResult
+            if (cacheResultParse
                 && cacheData != null
                 && cacheData.Id == id)
             {
@@ -148,6 +132,45 @@ namespace Epam.Task7.BLL
             }
 
             this.userDao.Update(id, user);
+        }
+
+        private static bool CheckUserState(User user)
+        {
+            bool state = user.FirstName == null
+                || user.FirstName.Length < 1
+                || user.FirstName.Length > 30
+                || !CheckSymbol(user.FirstName)
+                || user.LastName == null
+                || user.LastName.Length < 1
+                || user.LastName.Length > 30
+                || !CheckSymbol(user.LastName)
+                || user.BirthDate == null
+                || user.BirthDate > DateTime.Now
+                || DateTime.Now.Year - user.BirthDate.Year > 150
+                || DateTime.Now.Year - user.BirthDate.Year < 5;
+
+            return state;
+
+            bool CheckSymbol(string stringToCheck)
+            {
+                var allowedSeparatorSymbols = new char[] { '-', '\'', ' ' };
+
+                if (!char.IsLetter(stringToCheck.First())
+                    || !char.IsLetter(stringToCheck.Last()))
+                {
+                    return false;
+                }
+
+                for (int i = 1; i < stringToCheck.Length - 1; i++)
+                {
+                    if (!char.IsLetter(stringToCheck[i]) && !allowedSeparatorSymbols.Contains(stringToCheck[i]))
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
         }
     }
 }

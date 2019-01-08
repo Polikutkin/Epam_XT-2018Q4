@@ -12,8 +12,9 @@ namespace Epam.Task7.PL.ConsoleApplication
         public const string RemoveUser = "5";
         public const string ShowAwards = "6";
         public const string AddAward = "7";
-        public const string GiveAward = "8";
-        public const string TakeAward = "9";
+        public const string RemoveAward = "8";
+        public const string GiveAward = "9";
+        public const string TakeAward = "0";
         public const string Quit = "q";
 
         public static string AddAwardTitle(string message)
@@ -134,6 +135,7 @@ namespace Epam.Task7.PL.ConsoleApplication
             Console.WriteLine($"{RemoveUser} - Remove user by ID");
             Console.WriteLine($"{ShowAwards} - Show all awards");
             Console.WriteLine($"{AddAward} - Add a new award");
+            Console.WriteLine($"{RemoveAward} - Remove award");
             Console.WriteLine($"{GiveAward} - Give an award to a user");
             Console.WriteLine($"{TakeAward} - Take an award from a user");
             Console.WriteLine($"{Quit} - Quit the program");

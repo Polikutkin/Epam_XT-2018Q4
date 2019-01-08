@@ -39,6 +39,10 @@
                         WorkWithAwards.AddAward();
                         ServantClass.PressAnyKey();
                         break;
+                    case ServantClass.RemoveAward:
+                        WorkWithAwards.RemoveAward();
+                        ServantClass.PressAnyKey();
+                        break;
                     case ServantClass.GiveAward:
                         WorkWithAwards.GiveToUser();
                         ServantClass.PressAnyKey();

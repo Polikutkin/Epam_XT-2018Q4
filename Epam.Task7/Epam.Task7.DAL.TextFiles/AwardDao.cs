@@ -52,10 +52,9 @@ namespace Epam.Task7.DAL.TextFiles
 
         public bool GiveAward(int userId, int awardId)
         {
-            var users = UserAwardDao.GetUsers();
             var awards = this.GetAll();
 
-            User userToUpdate = users.FirstOrDefault(u => u.Id == userId);
+            User userToUpdate = UserAwardDao.GetUserById(userId);
             Award awardToGive = awards.FirstOrDefault(a => a.Id == awardId);
 
             if (userToUpdate == null || awardToGive == null)
@@ -98,10 +97,9 @@ namespace Epam.Task7.DAL.TextFiles
         
         public bool TakeAward(int userId, int awardId)
         {
-            var users = UserAwardDao.GetUsers();
             var awards = this.GetAll();
 
-            User userToUpdate = users.FirstOrDefault(u => u.Id == userId);
+            User userToUpdate = UserAwardDao.GetUserById(userId);
             Award awardToTake = awards.FirstOrDefault(a => a.Id == awardId);
 
             if (userToUpdate == null || awardToTake == null)
@@ -146,8 +144,28 @@ namespace Epam.Task7.DAL.TextFiles
                 return false;
             }
 
+            var newUserAwards = new List<string>();
+
+            string line = string.Empty;
+
+            if (File.Exists(UserAwardsFilePath))
+            {
+                using (var reader = new StreamReader(UserAwardsFilePath))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        line = reader.ReadLine();
+
+                        line = line.Replace($"{id}{AwardsSeparator}", string.Empty);
+
+                        newUserAwards.Add(line);
+                    }
+                }
+            }
+
             awards.Remove(award);
 
+            File.WriteAllLines(UserAwardsFilePath, newUserAwards);
             File.WriteAllLines(AwardsFilePath, awards.Select(AwardAsTxt));
 
             return true;

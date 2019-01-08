@@ -52,46 +52,7 @@ namespace Epam.Task7.DAL.TextFiles
 
         public User GetById(int id)
         {
-            if (File.Exists(UsersFilePath))
-            {
-                using (var reader = new StreamReader(UsersFilePath))
-                {
-                    string line = string.Empty;
-
-                    while (!reader.EndOfStream)
-                    {
-                        line = reader.ReadLine();
-
-                        if (line.TakeWhile(c => c != InfoSeparator)
-                            .CharCollectionAsString()
-                            .Contains(id.ToString()))
-                        {
-                            var userData = line.Split(new[] { InfoSeparator }, 5);
-
-                            var newUser = new User
-                            {
-                                Id = int.Parse(userData[0]),
-                                FirstName = userData[1],
-                                LastName = userData[2],
-                                BirthDate = DateTime.ParseExact(userData[3], DateFormat, null),
-                            };
-
-                            if (File.Exists(UserAwardDao.UserAwardsFilePath))
-                            {
-                                newUser.Awards = UserAwardDao.GetUserAwards(newUser.Id, UserAwardDao.GetAwards()).ToList();
-                            }
-
-                            return newUser;
-                        }
-                    }
-                }
-
-                return null;
-            }
-            else
-            {
-                return null;
-            }
+            return UserAwardDao.GetUserById(id);            
         }
 
         public bool Remove(int id)

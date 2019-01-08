@@ -56,18 +56,7 @@ namespace Epam.Task7.DAL.TextFiles
                     {
                         var userData = user.Split(new[] { InfoSeparator }, 5);
 
-                        var newUser = new User
-                        {
-                            Id = int.Parse(userData[0]),
-                            FirstName = userData[1],
-                            LastName = userData[2],
-                            BirthDate = DateTime.ParseExact(userData[3], UserDao.DateFormat, null),
-                        };
-
-                        if (File.Exists(UserAwardsFilePath))
-                        {
-                            newUser.Awards = GetUserAwards(newUser.Id, awards).ToList();
-                        }
+                        User newUser = InitializeNewUser(awards, userData);
 
                         return newUser;
                     });
@@ -78,6 +67,57 @@ namespace Epam.Task7.DAL.TextFiles
             {
                 return Enumerable.Empty<User>();
             }
+        }
+
+        internal static User GetUserById(int id)
+        {
+            if (File.Exists(UserDao.UsersFilePath))
+            {
+                using (var reader = new StreamReader(UserDao.UsersFilePath))
+                {
+                    string line = string.Empty;
+
+                    while (!reader.EndOfStream)
+                    {
+                        line = reader.ReadLine();
+
+                        if (line.TakeWhile(c => c != InfoSeparator)
+                            .CharCollectionAsString()
+                            .Contains(id.ToString()))
+                        {
+                            var userData = line.Split(new[] { InfoSeparator }, 5);
+
+                            var newUser = InitializeNewUser(GetAwards(), userData);
+
+                            return newUser;
+                        }
+                    }
+                }
+
+                return null;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        internal static User InitializeNewUser(IEnumerable<Award> awards, params string[] userData)
+        {
+            var newUser = new User
+            {
+                Id = int.Parse(userData[0]),
+                FirstName = userData[1],
+                LastName = userData[2],
+                BirthDate = DateTime.ParseExact(userData[3], UserDao.DateFormat, null),
+            };
+
+            if (File.Exists(UserAwardsFilePath))
+            {
+                newUser.Awards = GetUserAwards(newUser.Id, awards).ToList();
+            }
+
+            return newUser;
         }
 
         internal static IEnumerable<Award> GetUserAwards(int userId, IEnumerable<Award> awards)
