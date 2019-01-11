@@ -13,7 +13,7 @@ namespace Epam.Task8.HtmlReplacer
         {
             Console.WriteLine($"This program will swap all tags in your text to \"_\" symbol.{Environment.NewLine}Example: <b>Some text</b> --> _Some text_");
 
-            Regex r = new Regex(@"<\/?\w+.*?>");
+            Regex r = new Regex(@"<[^>]*>");
 
             while (true)
             {
