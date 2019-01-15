@@ -11,8 +11,7 @@ namespace Epam.Task8.TimeCounter
     {
         public static void Main(string[] args)
         {
-            string timeFormat = "t";
-            Regex timeTemplate = new Regex(@"\b[0-9]+:[0-9]+\b");
+            Regex timeTemplate = new Regex(@"\b(1[0-9]|2[0-3]|0?[0-9]):[0-5][0-9]\b");
 
             while (true)
             {
@@ -25,10 +24,7 @@ namespace Epam.Task8.TimeCounter
 
                 foreach (var match in timeMatches)
                 {
-                    if (DateTime.TryParseExact(match.ToString(), timeFormat, null, System.Globalization.DateTimeStyles.None, out var time))
-                    {
-                        timeCounter++;
-                    }
+                    timeCounter++;
                 }
 
                 Console.WriteLine($"Time in the text meets {timeCounter} times");
