@@ -1,0 +1,41 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.anapest{
+    display: inline-block;
+    position: relative;
+    margin:  10px 10px;
+    padding: 0;
+    width: 96%;
+}
+
+.anapest .header{
+    position: relative;
+    width: 100%;
+    height: 60px;
+    background-color: #008B66;
+}
+
+.header h3{
+    position: absolute;
+    margin: 0 0 0 10px;
+    top: 50%;
+    transform: translate(0, -50%);
+    color: white;
+    font-size: 1.3em;
+    font-weight: 100;
+}
+
+.anapest .text{
+    position: absolute;
+    margin: -10px 0 0 30px;
+    border-left: 1px solid white;
+    border-top: 1px solid white;
+    background-color: #DFE6E1;
+}
+
+.text p{
+    margin: 10px;
+}

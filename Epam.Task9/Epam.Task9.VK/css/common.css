@@ -1,0 +1,48 @@
+body {
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+    font-weight: 400;
+    /* line-height: 1.154; */
+    font-size: 12px;
+    font-style: normal;
+    font-size-adjust: none;
+
+    background-color: #EDEEF0;
+}
+
+a {
+    color: #2a5885;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+span.blind_label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    visibility: hidden;
+    opacity: 0;
+    outline: none;
+}
+
+.page_common_cont {
+    position: relative;
+    width: 960px;
+    margin: 0 auto;
+}
+
+div.arrow_container {
+    display: block;
+    float: right;
+    width: 6px;
+}
+
+div.arrow_container > .arrow_down {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 6px;
+    height: 6px;
+    transform: rotate(-45deg);
+    border: 1.5px solid #94ACC6;
+    border-top: none;
+    border-right: none;
+}

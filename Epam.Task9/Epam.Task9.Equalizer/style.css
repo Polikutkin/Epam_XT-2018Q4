@@ -1,0 +1,45 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: #333333;
+}
+
+.equalizer{
+    display: flex;
+    align-items: flex-end;
+    height: 200px;
+    margin: 30px;
+}
+
+.equalizer > div{
+    margin: 6px;
+    width: 40px;
+    border-radius: 5px 5px 0 0;
+    background:
+        repeating-linear-gradient(180deg, transparent, transparent 16px, #333333 16px, #333333 20px),
+        linear-gradient(180deg, #FFCD55, #FF8D02);
+}
+
+.equalizer .e1{
+    height: 50%;
+}
+
+.equalizer .e2{
+    height: 20%;
+}
+
+.equalizer .e3{
+    height: 80%;
+}
+
+.equalizer .e4{
+    height: 100%;
+}
+
+.equalizer .e5{
+    height: 50%;
+}
+
+.equalizer .e6{
+    height: 30%;
+}

@@ -1,0 +1,176 @@
+.page_header_cont {
+    position: fixed;
+    height: 42px;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 120;
+    background-color: #4A76A8;
+    font-size: 12.5px;
+}
+
+.header_nav {
+    position: relative;
+    width: 960px;
+    height: 42px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.header_nav .to_main {
+    width: 165px;
+    height: 42px;
+    display: block;
+    float: left;
+}
+
+.header_nav .to_main > .logo {
+    background: url(../images/vk_logo.png) no-repeat 50% / contain;
+    height: 22px;
+    width: 34px;
+    margin: 10px 10px 0 0;
+}
+
+.header_nav .search_input {
+    float: left;
+    border: 0;
+    box-sizing: border-box;
+    padding: 6px 6px 6px 19px;
+    margin: 7px 15px 7px 0;
+    height: 28px;
+    line-height: 16px;
+    width: 230px;
+    border-radius: 14px;
+    background: #224b7a url(../images/ic_head_loupe.png) no-repeat;
+    padding-left: 19px;
+    border-left: 8px solid transparent;
+    background-position: left 8px;
+    color: #7F9EBC;
+}
+
+.header_nav .search_input:focus {
+    color: #000;
+    outline: none;
+    background: #fff url(../images/ic_head_loupe.png) no-repeat;
+    background-position: left 8px;
+}
+
+.header_nav .search_input::placeholder {
+    color: #7F9EBC;
+}
+
+.header_nav .search_input:focus::placeholder {
+    color: transparent;
+}
+
+.header_nav .dop_content {
+    position: relative;
+    padding-left: 15px;
+}
+
+.dop_content .block_ref {
+    position: relative;
+    display: block;
+    float: left;
+    width: 46px;
+}
+
+.dop_content .block_ref:hover {
+    background: #3D6898;
+}
+
+.dop_content .notifications .image {
+    margin: 11px auto;
+    background: url(../images/ic_head_notify.png) 50% / contain no-repeat;
+    height: 20px;
+    width: 20px;
+}
+
+.dop_content .to_music_page .image {
+    margin: 11px auto;
+    background: url(../images/ic_head_audio.png) 50% / contain no-repeat;
+    height: 20px;
+    width: 20px;
+}
+
+.dop_content .play_button {
+    position: relative;
+    display: block;
+    float: left;
+    width: 22px;
+    top: 11px;
+    height: 20px;
+    border: none;
+    border-radius: 3px;
+    background-color: #224b7a;
+    overflow: visible;
+    cursor: pointer;
+}
+
+.dop_content .play_button::before {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: #224b7a;
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    top: 6px;
+    left: -2px;
+    border-radius: 1px;
+}
+
+.dop_content .play_button::after {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 7px;
+    height: 10px;
+    top: 5px;
+    left: 8px;
+    background: url(../images/play_icon.png) no-repeat;
+    background-size: 7px 10px;
+}
+
+.dop_content .play_button:hover {
+    background: #1C416B;
+}
+
+.dop_content .play_button:hover::before {
+    background: #1C416B;
+}
+
+.header_nav .user_info {
+    display: block;
+    float: right;
+}
+
+.user_info a.to_user_info {
+    display: block;
+    line-height: 42px;
+    height: 42px;
+    overflow: hidden;
+    padding: 0 6px 0 10px;
+    color: #fff;
+    font-weight: 700;
+}
+
+.user_info a.to_user_info:hover {
+    background: #3D6898;
+}
+
+.user_info a.to_user_info .user_name {
+    display: inline-block;
+    padding-right: 7px;
+    vertical-align: top;
+}
+
+.user_info a.to_user_info .user_photo_mini {
+    width: 28px;
+    height: 28px;
+    border:  none;
+    border-radius: 14px;
+    margin: 7px 10px 7px 0;
+    color: transparent;
+}

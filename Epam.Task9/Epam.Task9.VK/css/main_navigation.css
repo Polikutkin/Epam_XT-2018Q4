@@ -1,0 +1,105 @@
+.main_nav {
+    width: 158px;
+    margin-top: 42px;
+    padding-top: 15px;
+}
+
+.main_nav > a {
+    display: block;
+    height: 28px;
+}
+
+.main_nav > a:hover {
+    background: #E1E5EB;
+}
+
+.main_nav a .nav_text {
+    line-height: 28px;
+}
+
+.main_nav a .nav_icon {
+    display: block;
+    float: left;
+    width: 35px;
+    height: 25px;
+    background: url(../images/main_nav_icons.png) no-repeat;
+    background-position: 7px 4px;
+}
+
+.main_nav a .nav_icon.news {
+    background-position-y: -24px;
+}
+
+.main_nav a .nav_icon.messages {
+    background-position-y: -52px;
+}
+
+.main_nav a .nav_icon.friends {
+    background-position-y: -80px;
+}
+
+.main_nav a .nav_icon.groups {
+    background-position-y: -108px;
+}
+
+.main_nav a .nav_icon.music {
+    background-position-y: -136px;
+}
+
+.main_nav a .nav_icon.video {
+    background-position-y: -164px;
+}
+
+.main_nav a .nav_icon.games {
+    background-position-y: -192px;
+}
+
+.main_nav a .nav_icon.favorite {
+    background-position-y: -240px;
+}
+
+.main_nav a .nav_icon.documents {
+    background-position-y: -268px;
+}
+
+.main_nav .dividing_line {
+    margin: 9px 6px 9px 27px;
+    border-top: 1px solid #E7E8EC;
+}
+
+.main_nav .dop_references {
+    margin-top: 10px;
+    line-height: 19px;
+    padding: 14px 0 4px;
+    font-size: 12px;
+    text-align: left;
+}
+
+.main_nav .dop_references > a {
+    display: inline;
+    color: #939699;
+    padding-right: 10px;
+}
+
+.main_nav .dop_references > a:hover {
+    text-decoration: underline;
+}
+
+.main_nav .dop_references > a.more {
+    display: inline-block;
+}
+
+.main_nav .dop_references > a.more .arrow_container {
+    margin: -2px 0 0 6px;
+}
+
+.main_nav .dop_references > a.more .arrow_container .arrow_down {
+    width: 5px;
+    height: 5px;
+    border-width: 1px;
+    border-color: #b3b6b9;
+}
+
+.main_nav .dop_references > a.more:hover .arrow_container .arrow_down {
+    border-color: #97999c;
+}
