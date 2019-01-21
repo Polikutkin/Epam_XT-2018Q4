@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" type="text/css" href="css/header.css">
     <link rel="stylesheet" type="text/css" href="css/main_navigation.css">
+    <link rel="stylesheet" type="text/css" href="css/settings_navigation.css">
+    <link rel="stylesheet" type="text/css" href="css/section_content.css">
     <title>Мои настройки</title>
 </head>
 
@@ -42,7 +44,9 @@
                     <span class="blind_label">Настройки страницы</span>
                     <div class="user_name">Роман</div>
                     <img class="user_photo_mini" src="images/user_photo_mini.jpg" alt="Роман">
-                    <div class="arrow_container"><div class="arrow_down"></div></div>
+                    <div class="arrow_container">
+                        <div class="arrow_down"></div>
+                    </div>
                 </a>
             </div>
         </nav>
@@ -72,7 +76,7 @@
             </div>
         </nav>
 
-        <nav class="rigth_nav">
+        <nav class="right_nav">
             <a href="">Общее</a>
             <a href="">Безопасность</a>
             <a href="">Приватность</a>
@@ -83,65 +87,123 @@
             <a href="">Платежи, подписки, переводы</a>
         </nav>
 
-        <section>
-            <h3>Общее</h3>
+        <section class="section_content">
+            <h2>Общее</h2>
 
-            <ul class="settings_info">
-                <li>
-                    <h6>Меню сайта</h6>
+            <div class="settings_info">
+                <div>
+                    <span class="setting_name">Меню сайта</span>
                     <a href="">Настроить отображение пунктов меню</a>
-                </li>
-                <li>
-                    <h6>Настройки профиля</h6>
-                    <div class="info">
-                        <label><input type="checkbox">Скрывать блок подарков</label>
-                        <label><input type="checkbox">При открытии профиля показывать мои записи</label>
-                        <label><input type="checkbox">Отключить комментирование записей</label>
-                        <label><input type="checkbox">Специальные возможности</label>
-                        <div class="special_abilities_question">
-                            <img src="..........." alt="Значок вопроса">
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <h6>Настройки контента</h6>
-                    <div class="info">
-                        <label><input type="checkbox">Скрывать блок подарков</label>
-                        <label><input type="checkbox">При открытии профиля показывать мои записи</label>
-                        <label><input type="checkbox">Отключить комментирование записей</label>
-                        <label><input type="checkbox">Специальные возможности</label>
-                        <a href="">Посмотреть заблокированные приложения</a>
-                    </div>
-                </li>
-                <li>
-                    <h6>Пароль</h6>
-                    <span>обновдён четыре года назад</span>
-                    <a href="">Изменить</a>
-                </li>
-                <li>
-                    <h6>Электронная почта</h6>
-                    <span>ex***@gmail.com</span>
-                    <a href="">Изменить</a>
-                </li>
-                <li>
-                    <h6>Номер телефона</h6>
-                    <span>+7 *** *** ** 45</span>
-                    <a href="">Изменить</a>
-                </li>
-                <li>
-                    <h6>Адрес страницы</h6>
-                    <span><span style="opacity: 0.8">https://vk.com/</span>useridenticalid</span>
-                    <a href="">Изменить</a>
-                </li>
-                <li>
-                    <h6>Язык</h6>
-                    <span>Русский</span>
-                    <a href="">Изменить</a>
-                </li>
-            </ul>
+                </div>
+                <div class="with_checkboxes">
+                    <span class="setting_name">Настройки профиля</span>
 
+                    <div class="info" id="check_list">
+                        <li class="options_container">
+                            <label>
+                                <span>Скрывать блок подарков</span>
+                                <input type="checkbox" hidden>
+                                <span></span>
+                            </label>
+                        </li>
+
+                        <li class="options_container">
+                            <label>
+                            <span>При открытии профиля показывать мои записи</span>
+                                <input type="checkbox" hidden>
+                                <span></span>
+                            </label>
+                        </li>     
+
+                        <li class="options_container">
+                            <label>
+                                <span>Отключить комментирование записей</span>
+                                <input type="checkbox" hidden>
+                                <span></span>
+                            </label>
+                        </li>
+
+                        <li class="options_container">
+                            <label>
+                                <span>Специальные возможности</span>
+                                <input type="checkbox" hidden>
+                                <span></span>
+                            </label>
+                            <img class="special_abilities" src="images/question_icon.png" alt="Значок вопроса про специальные возможности">
+                        </li>
+                    </div>
+                </div>
+
+                <div class="with_checkboxes">
+                    <span class="setting_name">Настройки контента</span>
+                    
+                    <div class="info" id="check_list">
+                        <li class="options_container">
+                            <label>
+                                <span>Автоматически воспроизводить видеозаписи</span>
+                                <input type="checkbox" hidden>
+                                <span></span>
+                            </label>
+                        </li>
+                        
+                        <li class="options_container">
+                            <label>
+                                <span>Автоматически воспроизводить GIF-анимации</span>
+                                <input type="checkbox" hidden>
+                                <span></span>
+                            </label>
+                        </li>
+                        
+                        <li class="options_container">
+                            <label>
+                                <span>Подсказывать стикеры в полях ввода</span>
+                                <input type="checkbox" hidden>
+                                <span></span>
+                            </label>
+                        </li>
+                        
+                        <li class="options_container">
+                            <label>
+                                <span>Автоматически отмечать друзей на фотографиях</span>
+                                <input type="checkbox" hidden>
+                                <span></span>
+                            </label>
+                        </li>
+
+                        <li>
+                            <a href="">Посмотреть заблокированные приложения</a>
+                        </li>
+                    </div>
+                </div>
+                <a href="">
+                    <span class="setting_name">Пароль</span>
+                    <span class="user_data">обновлён четыре года назад</span>
+                    <span class="href_label">Изменить</span>
+                </a>
+                <a href="">
+                    <span class="setting_name">Электронная почта</span>
+                    <span class="user_data">ex***@gmail.com</span>
+                    <span class="href_label">Изменить</span>
+                </a>
+                <a href="">
+                    <span class="setting_name">Номер телефона</span>
+                    <span class="user_data">+7 *** *** ** 45</span>
+                    <span class="href_label">Изменить<span>
+                </a>
+                <a href="">
+                    <span class="setting_name">Адрес страницы</span>
+                    <span class="user_data"><span style="color :#656565">https://vk.com/</span>userid</span>
+                    <span class="href_label">Изменить<span>
+                </a>
+                <a href="">
+                    <span class="setting_name">Язык</span>
+                    <span class="user_data">Русский</span>
+                    <span class="href_label">Изменить<span>
+                </a>
+            </div>
+                    
             <div class="delete_profile">
-                <span>Вы можете <a href="">удалить свою страницу.</a></span>
+                <div>Вы можете <a href="">удалить свою страницу.</a></div>
             </div>
         </section>
     </div>

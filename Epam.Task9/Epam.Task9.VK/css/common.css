@@ -1,18 +1,32 @@
 body {
-    font-family: -apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
     font-weight: 400;
-    /* line-height: 1.154; */
-    font-size: 12px;
+    font-size: 13px;
     font-style: normal;
     font-size-adjust: none;
-
     background-color: #EDEEF0;
+}
+
+h2 {
+    font-size: 16px;
 }
 
 a {
     color: #2a5885;
     text-decoration: none;
     cursor: pointer;
+}
+
+li {
+    list-style: none;
+}
+
+div {
+    position: relative;
+}
+
+button:focus {
+    outline: none;
 }
 
 span.blind_label {
@@ -27,22 +41,23 @@ span.blind_label {
 .page_common_cont {
     position: relative;
     width: 960px;
-    margin: 0 auto;
+    margin: 57px auto 0 auto;
 }
 
 div.arrow_container {
     display: block;
-    float: right;
     width: 6px;
+    height: 6px;
+    float: right;
 }
 
 div.arrow_container > .arrow_down {
     display: inline-block;
-    box-sizing: border-box;
     width: 6px;
     height: 6px;
-    transform: rotate(-45deg);
     border: 1.5px solid #94ACC6;
     border-top: none;
     border-right: none;
+    box-sizing: border-box;
+    transform: rotate(-45deg);
 }

@@ -1,47 +1,46 @@
-.regform{
-    background-color: #0690CF;
-    color: #F8F7F4;
-    font-family: arial;
+.regform {
     width: 400px;
     border: 2px solid #0074B1;
+    color: #F8F7F4;
+    font-family: arial;
+    background-color: #0690CF;
 }
 
-.regform h3{
+.regform h3 {
     display: inline-block;
     margin: 20px 0 8px 20px;
     font-size: 1.4em;
     font-weight: 200;
 }
 
-.regform hr{
+.regform hr {
     color: #F8F7F4;
 }
 
-.regform label{
+.regform label {
     cursor: pointer;
 }
 
-.regform input{
-    box-sizing: border-box;
-    margin: 0;
+.regform input {
     width: 150px;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-.regform .field{
+.regform .field {
     display: inline-block;
     margin: 20px 0 0 20px;
 }
 
-.regform #email{
+.regform #email {
     width: 320px;
     box-sizing: content-box;
-
 }
 
 .regform button{
-    background-color: #FFDF7F;
-    border: none;
-    color: black;
     margin: 30px 20px 20px 20px;
     padding: 5px 8px;
+    border: none;
+    color: black;
+    background-color: #FFDF7F;
 }

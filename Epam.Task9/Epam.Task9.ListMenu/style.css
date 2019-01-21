@@ -1,20 +1,21 @@
 .menu{
     display: inline-block;
-    background-color: #F9E497;
-    border-radius: 12px;
     border: 1px inset black;
+    border-radius: 12px;
+    background-color: #F9E497;
     box-shadow: 5px 5px #880000;
 }
 
 .dishes{
     margin: 10px 0;
+    padding: 0;
     color: #880000;
-    text-shadow: 0.4px 0 #880000
+    text-shadow: 0.4px 0 #880000;
+    list-style: none;
 }
 
 .dishes li{
     width: 200px;
-    list-style-type: none;
     padding: 4px 10px;
-    margin-left: -40px;
+    list-style-type: none;
 }
