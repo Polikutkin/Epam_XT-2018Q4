@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    min-height: 980px;
+    overflow: scroll;
+    font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 13px;
     font-style: normal;
@@ -9,6 +13,7 @@ body {
 
 h2 {
     font-size: 16px;
+    font-weight: 400;
 }
 
 a {
@@ -46,18 +51,25 @@ span.blind_label {
 
 div.arrow_container {
     display: block;
+    float: right;
     width: 6px;
     height: 6px;
-    float: right;
 }
 
 div.arrow_container > .arrow_down {
     display: inline-block;
     width: 6px;
     height: 6px;
+    box-sizing: border-box;
     border: 1.5px solid #94ACC6;
     border-top: none;
     border-right: none;
-    box-sizing: border-box;
     transform: rotate(-45deg);
+}
+
+.section_content,
+.right_nav {
+    border-radius: 2px;
+    background-color: #fff;
+    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
 }

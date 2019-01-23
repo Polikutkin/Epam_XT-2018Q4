@@ -1,10 +1,10 @@
 .page_header_cont {
     position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 120;
     height: 42px;
     width: 100%;
-    left: 0;
-    top: 0;
-    z-index: 120;
     background-color: #4A76A8;
     font-size: 12.5px;
 }
@@ -18,34 +18,34 @@
 }
 
 .header_nav .to_main {
-    width: 164px;
-    height: 42px;
     display: block;
     float: left;
+    width: 164px;
+    height: 42px;
 }
 
 .header_nav .to_main > .logo {
-    background: url(../images/vk_logo.png) no-repeat 50% / contain;
-    height: 22px;
     width: 34px;
+    height: 22px;
     margin: 10px 10px 0 0;
+    background: url(../images/ic_head_logo.png) no-repeat 50% / contain;
 }
 
 .header_nav .search_input {
     float: left;
-    border: 0;
-    box-sizing: border-box;
-    padding: 6px 6px 6px 19px;
-    margin: 7px 15px 7px 0;
-    height: 28px;
-    line-height: 16px;
     width: 230px;
-    border-radius: 14px;
-    background: #224b7a url(../images/ic_head_loupe.png) no-repeat;
+    height: 28px;
+    margin: 7px 15px 7px 0;
+    padding: 6px 6px 6px 19px;
     padding-left: 19px;
+    box-sizing: border-box;
+    border: 0;
     border-left: 8px solid transparent;
-    background-position: left 8px;
+    border-radius: 14px;
+    line-height: 16px;
     color: #7F9EBC;
+    background: #224b7a url(../images/ic_head_loupe.png) no-repeat;
+    background-position: left 8px;
 }
 
 .header_nav .search_input:focus {
@@ -79,26 +79,27 @@
     background: #3D6898;
 }
 
-.dop_content .notifications .image {
-    margin: 11px auto;
-    background: url(../images/ic_head_notify.png) 50% / contain no-repeat;
-    height: 20px;
+.dop_content .notifications .image,
+.dop_content .to_music_page .image {
     width: 20px;
+    height: 20px;
+    margin: 11px auto;
+}
+
+.dop_content .notifications .image {
+    background: url(../images/ic_head_notify.png) 50% / contain no-repeat;
 }
 
 .dop_content .to_music_page .image {
-    margin: 11px auto;
     background: url(../images/ic_head_audio.png) 50% / contain no-repeat;
-    height: 20px;
-    width: 20px;
 }
 
 .dop_content .play_button {
     position: relative;
     display: block;
     float: left;
-    width: 22px;
     top: 11px;
+    width: 22px;
     height: 20px;
     border: none;
     border-radius: 3px;
@@ -109,34 +110,29 @@
 
 .dop_content .play_button::before {
     position: absolute;
-    content: '';
     display: block;
-    width: 8px;
-    height: 8px;
-    background-color: #224b7a;
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
     top: 6px;
     left: -2px;
-    border-radius: 1px;
+    width: 8px;
+    height: 8px;
+    content: '';
+    background-color: #224b7a;
+    transform: rotate(45deg);
 }
 
 .dop_content .play_button::after {
-    display: block;
-    content: '';
     position: absolute;
-    width: 7px;
-    height: 10px;
+    display: block;
     top: 5px;
     left: 8px;
-    background: url(../images/play_icon.png) no-repeat;
-    background-size: 7px 10px;
+    width: 0px;
+    height: 0px;
+    border: 5px solid transparent;
+    border-left: 7px solid #b4c8e0;
+    content: '';
 }
 
-.dop_content .play_button:hover {
-    background: #1C416B;
-}
-
+.dop_content .play_button:hover,
 .dop_content .play_button:hover::before {
     background: #1C416B;
 }
@@ -148,10 +144,10 @@
 
 .user_info a.to_user_info {
     display: block;
-    line-height: 42px;
     height: 42px;
-    overflow: hidden;
     padding: 0 10px;
+    line-height: 42px;
+    overflow: hidden;
     color: #fff;
     font-weight: 700;
 }
@@ -168,8 +164,8 @@
 .user_info a.to_user_info .user_photo_mini {
     width: 28px;
     height: 28px;
+    margin: 7px;
     border:  none;
     border-radius: 14px;
-    margin: 7px;
     color: transparent;
 }

@@ -1,9 +1,6 @@
 .section_content {
     float: left;
     width: 550px;
-    border-radius: 2px;
-    background-color: #fff;
-    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
 }
 
 .section_content > h2 {
@@ -11,9 +8,14 @@
     width: 10%;
     height: 55px;
     padding-left: 20px;
-    line-height: 55px;
     border-bottom: 1px solid #e3e4e8;
+    line-height: 55px;
     vertical-align: middle;
+}
+
+.section_content > h2,
+.section_content .delete_profile {
+    background-color: #fafbfc;
 }
 
 .section_content .settings_info {
@@ -25,8 +27,8 @@
 .section_content .settings_info > div {
     position: relative;
     display: block;
+    padding: 20px 0;
     border-bottom: 1px solid #e3e4e8;
-    padding: 22px 0 22px 0;
 }
 
 .section_content .settings_info > a:last-child,
@@ -34,49 +36,56 @@
     border-bottom: none;
 }
 
-.section_content .setting_name {
+.section_content .setting_name,
+.settings_info .info {
     display: inline-block;
-    width: 155px;
+}
+
+.settings_info .setting_name {
+    width: 150px;
+    margin-bottom: 4px;
     vertical-align: top;
     color: #656565;
 }
 
-.settings_info .info {
-    display: inline-block;
-    line-height: 24px;
+.settings_info .info > li {
+    margin-bottom: 10px;
+}
+
+.settings_info .info > li:last-child {
+    margin-bottom: 0;
 }
 
 .info li.options_container label {
-    display: inline-block;
     position: relative;
-    height: 16px;
+    display: inline-block;
+    height: 15px;
     padding-left: 24px; 
 }
 
-.info input[type="checkbox"] + span {
+.info input[type="checkbox"] + span.checkbox_icon_label {
     position: absolute;
-    top: 2px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
+    top: -2px;
+    left: 0;
+    width: 15px;
+    height: 15px;
     background: url(../images/checkbox_icons.png) no-repeat;
+    background-size: 15px;
     background-position-y: -24px;
     cursor: pointer;
 }
 
-.info input[type="checkbox"]:checked + span {
+.info input[type="checkbox"]:checked + span.checkbox_icon_label {
     background-position-y: 0;
 }
 
 .info .options_container > img.special_abilities {
+    position: absolute;
     display: inline-block;
+    bottom: -3px;
     width: 17px;
     height: 17px;
-    vertical-align: -6px;
-    margin-left: 6px;
-}
-
-.info .options_container > img.special_abilities:hover {
+    margin-left: 12px;
     cursor: pointer;
 }
 
@@ -94,7 +103,7 @@
 }
 
 .section_content .delete_profile{
-    height: 56px;
+    height: 50px;
 }
 
 .section_content .delete_profile > div {

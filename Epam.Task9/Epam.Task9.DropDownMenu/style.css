@@ -1,4 +1,6 @@
-body {
+body,
+ul,
+li {
     margin: 0;
     padding: 0;
 }
@@ -8,61 +10,69 @@ nav {
 }
 
 ul {
-    display: block;
-    margin: 0;
-    padding: 0;
     list-style: none;
 }
 
-li {
-    margin: 0;
-    padding: 0;
+li,
+a {
+  display: block;
 }
 
-ul.menu > li {
+ul.menu > li.main {
     position: relative;
     float: left;
-    height: 15px;
-    width: auto;
     margin-right: 20px;
-    padding: 0;
 }
 
-ul.menu > li > a {
-    display: block;
+ul.menu > li > a.down {
     padding: 5px;
-    border-radius: 6px 6px 0 0;
     color: #475BE4;
 }
 
-ul.menu > li:hover > a {
+ul.menu > li:hover > a.down,
+ul.menu > li:hover > ul.submenu {
+    background: white;
+}
+
+ul.menu > li:hover > a.down {
+    display: block;
     text-decoration: none;
     color: black;
-    background-color: white;
-    box-shadow:  0 5px white, 0px 0px 8px 0px gray;
+    border-radius: 6px 6px 0 0;
+}
+
+a.down:after {
+  content: "";
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px 6px 0 0;
 }
 
 ul.submenu {
     position: absolute;
     display: none;
-    top: 25px;
+    top: 26px;
     left: 0;
     width: auto;
     height: auto;
-    padding: 6px;
-    background-color: white;
+    padding: 2px;
 }
 
-ul.submenu > li {
-    display: block;
-}
-
-ul.submenu > li:first-child {
-    padding-top: 4px;
+ul.submenu:after {
+  content: "";
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 ul.submenu > li > a {
-    display: block;
     padding: 2px 20px 2px 2px;
     color: #5B64EF;
     text-decoration: none;
@@ -74,7 +84,12 @@ ul.submenu > li > a:hover {
 }
 
 ul.menu > li:hover > ul.submenu {
+  display: block;
+}
+
+ul.menu > li:hover > a.down:after,
+ul.menu > li:hover > ul.submenu:after {
     display: block;
-    box-shadow: 0 0 8px 0px gray;
     z-index: -1;
+    box-shadow: 0 0 10px 0 gray;
 }

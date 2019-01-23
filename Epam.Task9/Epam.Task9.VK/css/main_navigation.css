@@ -22,46 +22,53 @@
 .main_nav a .nav_icon {
     display: block;
     float: left;
-    width: 28px;
-    height: 25px;
+    width: 18px;
+    height: 18px;
+    margin: 5px 10px 0 0;
     background: url(../images/main_nav_icons.png) no-repeat;
-    background-position: 0px 4px;
+    background-size: 18px;
+    background-position-y: 1px;
+    opacity: 0.75;
+}
+
+.main_nav a:hover .nav_icon {
+    opacity: 1;
 }
 
 .main_nav a .nav_icon.news {
-    background-position-y: -24px;
+    background-position-y: -922px;
 }
 
 .main_nav a .nav_icon.messages {
-    background-position-y: -52px;
+    background-position-y: -26px;
 }
 
 .main_nav a .nav_icon.friends {
-    background-position-y: -80px;
+    background-position-y: -82px;
 }
 
 .main_nav a .nav_icon.groups {
-    background-position-y: -108px;
+    background-position-y: -110px;
 }
 
 .main_nav a .nav_icon.music {
-    background-position-y: -136px;
+    background-position-y: -166px;
 }
 
 .main_nav a .nav_icon.video {
-    background-position-y: -164px;
+    background-position-y: -194px;
 }
 
 .main_nav a .nav_icon.games {
-    background-position-y: -192px;
+    background-position-y: -222px;
 }
 
 .main_nav a .nav_icon.favorite {
-    background-position-y: -240px;
+    background-position-y: -306px;
 }
 
 .main_nav a .nav_icon.documents {
-    background-position-y: -268px;
+    background-position-y: -278px;
 }
 
 .main_nav .dividing_line {
@@ -71,16 +78,16 @@
 
 .main_nav .dop_references {
     margin-top: 10px;
-    line-height: 19px;
     padding: 14px 0 4px;
+    line-height: 19px;
     font-size: 12px;
     text-align: left;
 }
 
 .main_nav .dop_references > a {
     display: inline;
-    color: #939699;
     padding-right: 10px;
+    color: #939699;
 }
 
 .main_nav .dop_references > a:hover {
