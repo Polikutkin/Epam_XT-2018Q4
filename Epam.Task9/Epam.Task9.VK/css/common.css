@@ -47,6 +47,7 @@ span.blind_label {
     position: relative;
     width: 960px;
     margin: 57px auto 0 auto;
+    padding: 0 15px;
 }
 
 div.arrow_container {
