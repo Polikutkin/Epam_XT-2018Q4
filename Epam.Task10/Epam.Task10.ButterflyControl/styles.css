@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+}
+
+.choice_block {
+    margin: 10px;
+}
+
+.choice_block .options,
+.choice_block .buttons {
+    display: inline-block;
+}
+
+.options select {
+    width: 200px;
+    overflow: auto;
+}
+
+.options span {
+    display: block;
+    text-align: center;
+    font-weight: 600;
+}
+
+.buttons button {
+    display: block;
+    width: 30px;
+    height: 20px;
+    margin: 4px;
+}

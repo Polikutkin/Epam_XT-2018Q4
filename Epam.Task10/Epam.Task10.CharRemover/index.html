@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Char Remover</title>
+</head>
+<body>
+    <h4>Enter any text to delete letters that meet in any word 2 or more times</h4>
+
+    <input type="text" id="CheckText" style="width: 300px;">
+    <input type="button" value="Check Result" onclick="removeDoubleLetters()">
+
+    <div>
+        <br>
+        <span>Result:</span>
+        <div id="res" style="width: 300px; min-height: 40px; padding: 6px; border: 1px solid gray;"></div>
+    </div>
+
+    <script>
+        "use strict";
+        
+        function removeDoubleLetters() {
+            var text = document.getElementById("CheckText").value;
+
+            var words = text.split(" ");
+            var ignoredSymbols = [" ", ".", ",", ";", ":", "!", "?", "\t", "\n"];
+            var doubledLetters = {};
+
+            words.forEach(function (word) {
+                word.split("").forEach(function (letter, i) {
+                    if (!doubledLetters[letter]
+                        && ignoredSymbols.indexOf(letter) == -1
+                        && word.indexOf(letter, i + 1) != -1) {
+                            doubledLetters[letter] = true;
+                    }
+                });
+            });
+ 
+            var result = text.split("").filter(function (letter) {
+                return !doubledLetters[letter];
+            }).join("");
+
+            document.getElementById("res").innerText = result;
+        }
+    </script>
+</body>
+</html>

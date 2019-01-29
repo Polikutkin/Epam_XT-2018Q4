@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Butterfly Control</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="choice_block">
+        <div class="options">
+            <span>Aviable</span>
+            <select id="aviable" multiple="multiple" size="4">
+                <option value="option1">option1</option>
+                <option value="option2">option2</option>
+                <option value="option3">option3</option>
+                <option value="option4">option4</option>
+                <option value="option5">option5</option>
+            </select>
+        </div>
+        <div class="buttons">
+            <button id="moveAllToSelected" onclick="moveAllToSelect('aviable', 'selected')">>></button>
+            <button id="moveToSelected" onclick="moveToSelect('aviable', 'selected')">></button>
+            <button id="moveToAviable" onclick="moveToAviable('selected', 'aviable')"><</button>
+            <button id="moveAllToAviable" onclick="moveAllToAviable('selected', 'aviable')"><<</button>
+        </div>
+        <div class="options">
+                <span>Selected</span>
+                <select id="selected" multiple="multiple" size="4"></select>
+            </div>
+    </div>
+
+    <div class="choice_block">
+        <div class="options">
+            <span>Aviable</span>
+            <select id="aviable2" multiple="multiple" size="4">
+                <option value="option1">option1111</option>
+                <option value="option2">option2222</option>
+                <option value="option3">option3333</option>
+                <option value="option4">option44444</option>
+                <option value="option5">option555555</option>
+            </select>
+        </div>
+        <div class="buttons">
+            <button id="moveAllToSelected2" onclick="moveAllToSelect('aviable2', 'selected2')">>></button>
+            <button id="moveToSelected2" onclick="moveToSelect('aviable2', 'selected2')">></button>
+            <button id="moveToAviable2" onclick="moveToAviable('selected2', 'aviable2')"><</button>
+            <button id="moveAllToAviable2" onclick="moveAllToAviable('selected2', 'aviable2')"><<</button>
+        </div>
+        <div class="options">
+                <span>Selected</span>
+                <select id="selected2" multiple="multiple" size="4"></select>
+            </div>
+    </div>
+    
+    <script src="workWithOptions.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Simple Gallery</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <h1>Page 3</h1>
+    <h2>You will be redirected to the next page in...</h2>
+
+    <p id="timer"></p>
+    <a id="timeoutPageRef" href="lastpage.html"></a>
+    
+    <button id="pauseTime" onclick="pauseTimer(this)">|| Pause timer</button>
+    <button id="previousPage" onclick="goToPage('page2.html')"><< To previous page</button>
+
+    <script src="timer.js"></script>
+    <script src="pagerefs.js"></script>
+</body>
+</html>
