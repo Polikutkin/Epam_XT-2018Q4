@@ -1,4 +1,4 @@
-window.onload = startTimer();
+
 var timer;
 var paused = false;
 var min = 0;
@@ -13,9 +13,9 @@ function startTimer() {
             timerBlock.innerHTML = min +" : " + sec ;
             sec--;
             
-            if (sec == -1)
+            if (sec <= -1)
             {
-                if (min == 0) {
+                if (min <= 0) {
                     clearInterval();
                     goToNextPage()
                 }
@@ -34,7 +34,7 @@ function goToNextPage() {
         var nextPageRef = nextPage.getAttribute("href");
     }
 
-    document.location.replace(nextPageRef);
+    document.location.replace("" + nextPageRef);
 }
 
 function pauseTimer(pauseButton) {
@@ -54,4 +54,16 @@ function pauseTimer(pauseButton) {
             startTimer();
         }
     }
+}
+
+function goToPage(pageRef) {
+    if (pageRef) {
+        document.location.replace("" + pageRef);
+    }
+}
+
+function closePage(page) {
+    document.location.replace("" + page);
+    window.open(page, '_self', '');
+    window.close();
 }
