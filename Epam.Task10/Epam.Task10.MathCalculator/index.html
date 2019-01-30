@@ -27,6 +27,11 @@
 
             var elementsTemplate = /(\+|-|\*|\/)|([0-9]+(\.[0-9]+)*)/g;
             var elements = text.match(elementsTemplate);
+            var operators = "+-";
+            
+            if (operators.indexOf(elements[0]) != -1) {
+                elements[0] += elements[1];
+            }
 
             var result = +elements[0];
 
