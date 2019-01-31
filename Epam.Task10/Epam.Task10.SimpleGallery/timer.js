@@ -1,3 +1,4 @@
+"use strict";
 
 var timer;
 var paused = false;
@@ -16,8 +17,8 @@ function startTimer() {
             if (sec <= -1)
             {
                 if (min <= 0) {
-                    clearInterval();
-                    goToNextPage()
+                    clearInterval(timer);
+                    goToNextPage();
                 }
                 
                 min--;
