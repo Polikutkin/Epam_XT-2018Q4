@@ -1,0 +1,217 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{70DC2C9D-50F1-48FE-A1C8-9EF4A8FD74C7}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Epam.Task11.WebPages</RootNamespace>
+    <AssemblyName>Epam.Task11.WebPages</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\autorization.css" />
+    <Content Include="Content\css\content.css" />
+    <Content Include="Content\css\navigation.css" />
+    <Content Include="Content\css\normalize.css" />
+    <Content Include="Content\css\styles.css" />
+    <Content Include="Content\images\favicon-32x32.png" />
+    <Content Include="Content\images\DefaultAwardIcon.png" />
+    <Content Include="Content\images\DefaultUserIcon.png" />
+    <Content Include="packages.config" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Pages\Autorization\Login.cshtml" />
+    <Content Include="Pages\Autorization\Logout.cshtml" />
+    <Content Include="Pages\Autorization\Registration.cshtml" />
+    <Content Include="Pages\Partial\_NavigationPartial.cshtml" />
+    <Content Include="Pages\Partial\_ContentPartial.cshtml" />
+    <Content Include="Pages\User\AllUsers.cshtml" />
+    <Content Include="Pages\User\UserById.cshtml" />
+    <Content Include="Pages\Admin\AddUser.cshtml" />
+    <Content Include="Pages\Admin\UpdateUser.cshtml" />
+    <Content Include="Pages\Admin\RemoveUser.cshtml" />
+    <Content Include="Pages\Admin\AllAwards.cshtml" />
+    <Content Include="Pages\Admin\AddAward.cshtml" />
+    <Content Include="Pages\Admin\RemoveAward.cshtml" />
+    <Content Include="Pages\Admin\GiveAward.cshtml" />
+    <Content Include="Pages\Admin\TakeAward.cshtml" />
+    <Content Include="Pages\Admin\WorkWithSiteUsers\UserRoles.cshtml" />
+    <Content Include="Pages\Ajax\AddUserAjax.cshtml" />
+    <Content Include="Pages\Ajax\UpdateUserAjax.cshtml" />
+    <Content Include="Pages\Ajax\AddAwardAjax.cshtml" />
+    <Content Include="Pages\Ajax\GiveAwardAjax.cshtml" />
+    <Content Include="Pages\Ajax\RemoveAwardAjax.cshtml" />
+    <Content Include="Pages\Ajax\RemoveUserAjax.cshtml" />
+    <Content Include="Pages\Ajax\TakeAwardAjax.cshtml" />
+    <Content Include="Pages\Ajax\UserRolesAjax.cshtml" />
+    <Content Include="Pages\Admin\WorkWithImages\AddUserImage.cshtml" />
+    <Content Include="Pages\Admin\WorkWithImages\AddAwardImage.cshtml" />
+    <Content Include="Pages\Admin\WorkWithImages\RemoveUserImage.cshtml" />
+    <Content Include="Pages\Admin\WorkWithImages\RemoveAwardImage.cshtml" />
+    <Content Include="Pages\Partial\_AwardViewPartial.cshtml" />
+    <Content Include="Pages\Partial\_UserNotesPartial.cshtml" />
+    <Content Include="Pages\Partial\_NewUserFieldsPartial.cshtml" />
+    <Content Include="Pages\Partial\_UserInfoPartial.cshtml" />
+    <Content Include="Pages\Partial\_IdFieldPartial.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Index.cshtml" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="_MainLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CS\BLLProvider.cs" />
+    <Compile Include="CS\HelperClass.cs" />
+    <Compile Include="CS\MyRoleProvider.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Epam.Task11.BLL.Contracts\Epam.Task7.BLL.Contracts.csproj">
+      <Project>{48f82b4c-0548-4dc4-825c-a03e75754ffc}</Project>
+      <Name>Epam.Task7.BLL.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.Task11.Common\Epam.Task7.Common.csproj">
+      <Project>{c4908d58-6bb0-49ae-880e-06fcb4b89813}</Project>
+      <Name>Epam.Task7.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.Task11.Entities\Epam.Task7.Entities.csproj">
+      <Project>{b08c485e-2b91-4d77-a238-5ca1652a8891}</Project>
+      <Name>Epam.Task7.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\images\awardIcons\" />
+    <Folder Include="Content\images\userIcons\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>57866</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:57866/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

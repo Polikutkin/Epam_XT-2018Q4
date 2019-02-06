@@ -1,0 +1,92 @@
+﻿.content {
+    float: right;
+    width: 78%;
+    min-height: 600px;
+    margin-bottom: 100px;
+    padding: 20px;
+    border: 1px solid #e3e4e8;
+    background-color: #FFF;
+}
+
+.content h4 {
+    margin-left: 24px;
+}
+
+.content ul {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.content ul li,
+.content .option,
+#result {
+    padding: 10px;
+}
+
+.content ul li {
+    position: relative;
+    display: flex;
+    border-bottom: 1px solid #e3e4e8;
+    align-items: center;
+}
+
+.content li:last-child {
+    border-bottom: none;
+}
+
+.content #form {
+    display: inline-block;
+    width: 400px;
+}
+
+.content form input {
+    float: right;
+    margin-left: 10px;
+    width: 200px;
+}
+
+form #submit {
+    width: 120px;
+    padding: 6px 0;
+    margin: 10px;
+}
+
+#result {
+    color: cornflowerblue;
+    font-weight: 700;
+}
+
+.change_role {
+    position: absolute;
+    bottom: 7px;
+    right: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.user_info {
+    display: block;
+    align-items: center;
+}
+
+.user_photo {
+    display: inline-flex;
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+    border-radius: 30px;
+    color: transparent;
+}
+
+.award_photo {
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    border-radius: 20px;
+    color: transparent;
+}

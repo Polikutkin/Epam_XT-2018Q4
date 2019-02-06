@@ -1,0 +1,17 @@
+﻿@using Epam.Task11.WebPages.CS;
+@using Epam.Task7.Entities;
+
+@{
+    if (IsAjax)
+    {
+        var awardTitle = Request.Params["id"];
+
+        if (HelperClass.CheckAwardTitle(awardTitle))
+        {
+            BLLProvider.AwardLogic.Add(new Award(awardTitle));
+            @(1)
+        }
+
+        return;
+    }
+}

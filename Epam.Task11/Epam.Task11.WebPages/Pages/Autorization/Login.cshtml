@@ -1,0 +1,45 @@
+﻿@using Epam.Task11.WebPages.CS;
+
+@{
+    Layout = "~/_MainLayout.cshtml";
+    Page.Title = "Log In";
+
+    string login = Request["login"];
+
+    if (IsPost)
+    {
+        string password = HelperClass.HashStringWithSha512(Request["password"]);
+
+        if (BLLProvider.AccountLogic.Login(login, password))
+        {
+            FormsAuthentication.SetAuthCookie(login, createPersistentCookie: false);
+            Response.Redirect("/Index");
+
+            return;
+        }
+    }
+}
+
+@section styles {
+    <link href="/Content/css/autorization.css" rel="stylesheet" />
+}
+
+<div class="log_form">
+    <form method="post">
+        @if (IsPost)
+        {
+            <span class="alert form_option">Login or password are incorrect</span>
+        }
+        <div class="form_option">
+            <label for="login">Login: </label>
+            <input type="text" id="login" name="login" autocomplete="off" required value="@(IsPost ? login : null)" />
+        </div>
+        <div class="form_option">
+            <label for="password">Password: </label>
+            <input type="password" id="password" name="password" required />
+        </div>
+        <div class="button">
+            <button type="submit">Log In</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,36 @@
+﻿@using Epam.Task11.WebPages.CS;
+@using System.Drawing;
+
+@{
+    Layout = "~/_MainLayout.cshtml";
+    Page.Title = "All Users";
+    var users = BLLProvider.UserLogic.GetAll();
+}
+
+@section styles {
+    <link href="/Content/css/navigation.css" rel="stylesheet" />
+    <link href="/Content/css/content.css" rel="stylesheet" />
+}
+
+@section scripts {
+    <script>
+        function addImage(img, user) {
+
+        }
+    </script>
+}
+
+@RenderPage("/Pages/Partial/_NavigationPartial.cshtml")
+
+<section class="content">
+    <ul>
+        <li>Users count: @users.Count()</li>
+
+        @foreach (var user in users)
+        {
+            <li>
+                @RenderPage("/Pages/Partial/_UserInfoPartial.cshtml", new { User = user })
+            </li>
+        }
+    </ul>
+</section>

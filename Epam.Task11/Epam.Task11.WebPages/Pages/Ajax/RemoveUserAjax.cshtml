@@ -1,0 +1,19 @@
+﻿@using Epam.Task11.WebPages.CS;
+
+@{
+    if (IsAjax)
+    {
+        int.TryParse(Request.Params["id"], out var id);
+
+        if (id > 0)
+        {
+            if (BLLProvider.UserLogic.Remove(id))
+            {
+                HelperClass.DeleteImage(id, BLLProvider.UserImageFIlePath);
+                @(1)
+            }
+
+            return;
+        }
+    }
+}

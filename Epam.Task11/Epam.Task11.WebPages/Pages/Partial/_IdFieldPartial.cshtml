@@ -1,0 +1,9 @@
+﻿@{ 
+    var message = Page.Message;
+    var id = Page.Id;
+}
+
+<div class="option">
+    <label for="@id">@message</label>
+    <input type="number" id="@id" name="@id" required />
+</div>

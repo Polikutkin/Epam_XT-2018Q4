@@ -1,0 +1,68 @@
+﻿@using Epam.Task11.WebPages.CS;
+
+@{
+    if (!User.IsInRole("admin"))
+    {
+        Response.Redirect("~");
+    }
+
+    Layout = "~/_MainLayout.cshtml";
+    Page.Title = "Add user image";
+
+    WebImage photo = null;
+    var messageToAdmin = string.Empty;
+    var errorMessage = "Cannot to add user image";
+
+    if (IsPost)
+    {
+        photo = WebImage.GetImageFromRequest();
+        int.TryParse(Request.Params["id"], out var id);
+
+        if (photo != null && id > 0)
+        {
+            var user = BLLProvider.UserLogic.GetById(id);
+
+            if (user != null)
+            {
+                HelperClass.WorkWithImage(photo, 60, 60);
+
+                BLLProvider.UserLogic.AddImage(user.Id, photo.GetBytes());
+
+                messageToAdmin = "User image successfully added";
+            }
+            else
+            {
+                messageToAdmin = errorMessage;
+            }
+        }
+        else
+        {
+            messageToAdmin = errorMessage;
+        }
+    }
+    }
+
+    @section styles {
+    <link href="/Content/css/navigation.css" rel="stylesheet" />
+    <link href="/Content/css/content.css" rel="stylesheet" />
+}
+
+@RenderPage("/Pages/Partial/_NavigationPartial.cshtml")
+
+<section class="content">
+    <div class="form">
+        <form method="post" id="form" enctype="multipart/form-data">
+            
+            @RenderPage("/Pages/Partial/_IdFieldPartial.cshtml", new { Message = "Enter user ID: ", Id = "id" })
+
+            <div class="option">
+                <label for="image">Image</label>
+                <input type="file" id="image" name="image" />
+            </div>
+
+            <button type="submit" id="submit">Add user image</button>
+        </form>
+    </div>
+
+    <div id="result">@messageToAdmin</div>
+</section>

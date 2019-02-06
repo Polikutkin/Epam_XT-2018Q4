@@ -1,0 +1,34 @@
+﻿@using Epam.Task11.WebPages.CS;
+
+<div class="navigation">
+        <a href="/Pages/User/AllUsers">Users list</a>
+        <a href="/Pages/User/UserById">User by ID</a>
+    @if (User.IsInRole("admin"))
+    {
+        <a href="/Pages/Admin/AddUser">Add new user</a>
+        <a href="/Pages/Admin/UpdateUser">Update user</a>
+        <a href="/Pages/Admin/RemoveUser">Remove user</a>
+
+        <br /><hr /><br />
+
+        <a href="/Pages/Admin/AllAwards">All awards</a>
+        <a href="/Pages/Admin/AddAward">Add new award</a>
+        <a href="/Pages/Admin/RemoveAward">Remove award</a>
+        <a href="/Pages/Admin/GiveAward">Give award</a>
+        <a href="/Pages/Admin/TakeAward">Take award</a>
+
+        <br /><hr /><br />
+
+        <a href="/Pages/Admin/WorkWithImages/AddUserImage">Add user image</a>
+        <a href="/Pages/Admin/WorkWithImages/AddAwardImage">Add award image</a>
+
+        <br />
+
+        <a href="/Pages/Admin/WorkWithImages/RemoveUserImage">Remove user image</a>
+        <a href="/Pages/Admin/WorkWithImages/RemoveAwardImage">Remove award image</a>
+
+        <br /><hr /><br />
+
+        <a href="/Pages/Admin/WorkWithSiteUsers/UserRoles">Work with site users</a>
+    }
+</div>

@@ -1,0 +1,26 @@
+﻿@using Epam.Task11.WebPages.CS;
+
+@{ 
+    var user = Page.User;
+}
+
+<img src="@HelperClass.GetUserImagePath(user)" class="photo user_photo" alt="user photo" />
+<div class="user_info">
+    <p>@user.ToString()</p>
+
+    @if (User.Identity.IsAuthenticated && user.Awards.Count > 0)
+    {
+        <h4>User awards:</h4>
+        <ul>
+            @foreach (var award in user.Awards)
+            {
+                <li>
+                    <img src="@HelperClass.GetAwardImagePath(award)" class="photo award_photo" alt="award photo" />
+                    <div class="user_info">
+                        @award.ToString()
+                    </div>
+                </li>
+            }
+        </ul>
+    }
+</div>

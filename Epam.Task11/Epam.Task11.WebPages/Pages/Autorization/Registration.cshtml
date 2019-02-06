@@ -1,0 +1,55 @@
+﻿@using Epam.Task11.WebPages.CS;
+
+@{
+    Layout = "~/_MainLayout.cshtml";
+    Page.Title = "Registration";
+
+    string email = Request["email"];
+    string login = Request["login"];
+    string password = Request["password"];
+    string repeatPassword = Request["repeatPassword"];
+
+    if (IsPost && HelperClass.IsValidRegistrationInfo(email, login, password, repeatPassword))
+    {
+        password = HelperClass.HashStringWithSha512(Request["password"]);
+
+        if (BLLProvider.AccountLogic.Register(email, login, password))
+        {
+            FormsAuthentication.SetAuthCookie(login, createPersistentCookie: false);
+            Response.Redirect("/Index");
+
+            return;
+        }
+    }
+}
+
+@section styles {
+    <link href="/Content/css/autorization.css" rel="stylesheet" />
+}
+
+<div class="log_form">
+    <form method="post">
+        @if (IsPost)
+        {
+            <span class="alert form_option">Registration data are incorrect</span>
+        }
+        <div class="form_option">
+            <label for="email">Email: </label>
+            <input type="email" id="email" name="email" autocomplete="off" required value="@(IsPost ? email : null)" placeholder="example@email.com" />
+        </div>
+        <div class="form_option">
+            <label for="login">Login: </label>
+            <input type="text" id="login" name="login" autocomplete="off" required value="@(IsPost ? login : null)" maxlength="20" title="3-20 symbols. Only letters" />
+        </div>
+        <div class="form_option">
+            <label for="password">Password: </label>
+            <input type="password" id="password" name="password" required title="6-20 symbols. Letters and digits" />
+        </div>
+        <div class="form_option">
+            <label for="repeatPassword">Repeat password: </label>
+            <input type="password" id="repeatPassword" name="repeatPassword" required title="6-20 symbols. Letters and digits" />
+        </div>
+
+        <button type="submit">Registration</button>
+    </form>
+</div>

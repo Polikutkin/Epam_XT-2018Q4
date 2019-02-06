@@ -1,0 +1,38 @@
+﻿.alert {
+    color: crimson;
+    font-weight: 700;
+}
+
+.log_form {
+    display: flex;
+    margin: 0 auto;
+    padding: 20px 10px;
+    width: 300px;
+    border: 1px solid #e3e4e8;
+    background-color: #FFF;
+}
+
+.log_form .form_option,
+.log_form button {
+    position: relative;
+    display: flex;
+    float: right;
+    margin: 10px;
+}
+
+.form_option label {
+    padding-right: 2px;
+}
+
+.log_form button {
+    height: 28px;
+}
+
+.log_form input {
+    font-size: 12px;
+    padding: 4px;
+}
+
+.log_form input:focus::placeholder {
+    color: transparent;
+}

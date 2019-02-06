@@ -1,0 +1,54 @@
+﻿@using Epam.Task7.Entities;
+@using Epam.Task11.WebPages.CS;
+
+@{
+    Layout = "~/_MainLayout.cshtml";
+    Page.Title = "Get user by ID";
+    User user = default(User);
+
+    if (IsPost)
+    {
+        int.TryParse(Request.Params["id"], out var id);
+
+        if (id > 0)
+        {
+            user = Epam.Task11.WebPages.CS.BLLProvider.UserLogic.GetById(id);
+        }
+    }
+}
+
+@section styles {
+    <link href="/Content/css/navigation.css" rel="stylesheet" />
+    <link href="/Content/css/content.css" rel="stylesheet" />
+}
+
+@RenderPage("/Pages/Partial/_NavigationPartial.cshtml")
+
+<section class="content">
+    <div class="form">
+        <form method="post" id="form">
+            
+            @RenderPage("/Pages/Partial/_IdFieldPartial.cshtml", new { Message = "Enter user ID: ", Id = "id" })
+
+            <button type="submit" id="submit">Get user</button>
+        </form>
+    </div>
+
+    <div id="result">
+        @if (user != null)
+        {
+            <div id="result" style="color: black; font-weight: 400;">
+                <ul>
+                    <li>
+                        @RenderPage("/Pages/Partial/_UserInfoPartial.cshtml", new { User = user })
+                    </li>
+                </ul>
+            </div>
+        }
+        else if (IsPost)
+        {
+            @:Cannot to find user with this ID
+        }
+    </div>
+</section>
+

@@ -1,0 +1,36 @@
+﻿@using Epam.Task11.WebPages.CS;
+@using Epam.Task7.Entities;
+
+@{
+    if (IsAjax)
+    {
+        bool IsAdminNow = false;
+        bool IsUserNow = false;
+
+        var login = Request.Params["site_user_login"];
+        var role = Request.Params["site_user_role"];
+
+
+        if (role == "user")
+        {
+            IsAdminNow = BLLProvider.AccountLogic.GiveAdminRights(login);
+        }
+        else if (role == "admin")
+        {
+            IsUserNow = BLLProvider.AccountLogic.TakeAdminRights(login);
+        }
+
+        Account account = BLLProvider.AccountLogic.GetAccount(login);
+
+        if ((IsAdminNow || IsUserNow) && account != null)
+        {
+            @(account.Role)
+        }
+        else
+        {
+            @(0)
+        }
+
+        return;
+    }
+}

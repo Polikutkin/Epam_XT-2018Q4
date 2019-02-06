@@ -1,0 +1,57 @@
+﻿@using Epam.Task11.WebPages.CS;
+
+@{
+    if (!User.IsInRole("admin"))
+    {
+        Response.Redirect("~");
+    }
+
+    Layout = "~/_MainLayout.cshtml";
+    Page.Title = "Remove user image";
+
+    var messageToAdmin = string.Empty;
+    var errorMessage = "Cannot to remove user image";
+
+    if (IsPost)
+    {
+        int.TryParse(Request.Params["id"], out var id);
+
+        if (id > 0)
+        {
+            if (BLLProvider.UserLogic.RemoveImage(id))
+            {
+                HelperClass.DeleteImage(id, BLLProvider.UserImageFIlePath);
+
+                messageToAdmin = "User image successfully removed";
+            }
+            else
+            {
+                messageToAdmin = errorMessage;
+            }
+        }
+        else
+        {
+            messageToAdmin = errorMessage;
+        }
+    }
+}
+
+@section styles {
+    <link href="/Content/css/navigation.css" rel="stylesheet" />
+    <link href="/Content/css/content.css" rel="stylesheet" />
+}
+
+@RenderPage("/Pages/Partial/_NavigationPartial.cshtml")
+
+<section class="content">
+    <div class="form">
+        <form method="post" id="form">
+            
+            @RenderPage("/Pages/Partial/_IdFieldPartial.cshtml", new { Message = "Enter user ID: ", Id = "id" })
+
+            <button type="submit" id="submit">Remove user image</button>
+        </form>
+    </div>
+
+    <div id="result">@messageToAdmin</div>
+</section>

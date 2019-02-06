@@ -1,0 +1,39 @@
+﻿@using System.Text;
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Page.Title</title>
+    <link rel="stylesheet" type="text/css" href="/Content/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/css/styles.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/images/favicon-32x32.png">
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <div class="header">
+        <div class="header_cont">
+            <a href="/Index">Main page</a>
+
+            <div class="autorization">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <span class="user_name">@User.Identity.Name</span> <a href="/Pages/Autorization/Logout">Log Out</a>
+                }
+                else
+                {
+                    @:<span class="user_name">Guest</span> <a href="/Pages/Autorization/Login">Log In</a> or <a href="/Pages/Autorization/Registration">Registration</a>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="page_common_cont">
+        @RenderBody()
+    </div>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

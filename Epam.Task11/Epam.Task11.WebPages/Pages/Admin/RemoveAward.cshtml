@@ -1,0 +1,58 @@
+﻿@{
+    if (!User.IsInRole("admin"))
+    {
+        Response.Redirect("~");
+    }
+
+    Layout = "~/_MainLayout.cshtml";
+    Page.Title = "Remove award";
+}
+
+@section styles {
+    <link href="/Content/css/navigation.css" rel="stylesheet" />
+    <link href="/Content/css/content.css" rel="stylesheet" />
+}
+
+@section scripts {
+    <script>
+        $("#form").submit(function () {
+            if (confirm("Do you really want to remove this award?\nIn this case it will be removed from all users.")) {
+                var error_message = "Cannot to remove award";
+                var success_message = "Award succefully removed"
+                var $userId = $("#award_id");
+                var $result = $("#result");
+                $.ajax({
+                    method: "POST",
+                    url: "/Pages/Ajax/RemoveAwardAjax",
+                    data: { id: $userId.val() },
+                    success: function (response) {
+                        if (response == 1) {
+                            $('#form')[0].reset();
+                            $result.text(success_message);
+                        }
+                        else {
+                            $result.text(error_message);
+                        }
+                    },
+                    error: function (response) { $result.text(error_message); }
+                })
+                return false;
+            }
+        });
+    </script>
+}
+
+@RenderPage("/Pages/Partial/_NavigationPartial.cshtml")
+
+<section class="content">
+    <div class="form">
+        <form method="post" id="form">
+            
+            @RenderPage("/Pages/Partial/_IdFieldPartial.cshtml", new { Message = "Enter award ID: ", Id = "award_id" })
+
+            <button type="submit" id="submit">Remove award</button>
+        </form>
+    </div>
+
+    <div id="result"></div>
+</section>

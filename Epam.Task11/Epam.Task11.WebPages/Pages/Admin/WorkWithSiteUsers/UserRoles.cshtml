@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "/_MainLayout.cshtml";
+    Page.Title = "Work with site users roles";
+    var accounts = Epam.Task11.WebPages.CS.BLLProvider.AccountLogic.GetAll().ToList();
+    int accCount = accounts.Count() - 1;
+}
+
+@section styles {
+    <link href="/Content/css/navigation.css" rel="stylesheet" />
+    <link href="/Content/css/content.css" rel="stylesheet" />
+}
+
+@section scripts {
+    <script>
+        function sendForm(form) {
+            var error_message = "Cannot to give/take admin role";
+            var $site_user_login = form.site_user_login.value;
+            var $site_user_role = form.site_user_role.value;
+            var $result = $("#result");
+            $.ajax({
+                method: "POST",
+                url: "/Pages/Ajax/UserRolesAjax",
+                data: {
+                    site_user_login: $site_user_login,
+                    site_user_role: $site_user_role,
+                },
+                success: function (response) {
+                    if (response == 0) {
+                        $result.text(error_message);
+                    }
+                    else {
+                        $site_user_role.text(response);
+                    }
+                },
+                error: function () { $result.text(error_message); }
+            })
+        }
+    </script>
+}
+
+@RenderPage("/Pages/Partial/_NavigationPartial.cshtml")
+
+<section class="content">
+    <div id="result"></div>
+
+    <ul>
+        <li>Site users count: @accCount</li>
+
+        @for (int i = 1; i < accounts.Count(); i++)
+        {
+            <li>
+                <form class="submit_role" id="@i" onsubmit="sendForm(this)" method="post">
+                    <span class="role">login: @accounts[i].Login role: @accounts[i].Role</span>
+
+                    <input type="text" class="hidden" name="site_user_login" value="@accounts[i].Login" />
+                    <input type="text" class="hidden" name="site_user_role" value="@accounts[i].Role" />
+
+                    <button class="change_role" type="submit">Change Role</button>
+                </form>
+            </li>
+        }
+    </ul>
+</section>

@@ -1,0 +1,57 @@
+﻿@using Epam.Task11.WebPages.CS;
+
+@{
+    if (!User.IsInRole("admin"))
+    {
+        Response.Redirect("~");
+    }
+
+    Layout = "~/_MainLayout.cshtml";
+    Page.Title = "Remove award image";
+
+    var messageToAdmin = string.Empty;
+    var errorMessage = "Cannot to remove award image";
+
+    if (IsPost)
+    {
+        int.TryParse(Request.Params["id"], out var id);
+
+        if (id > 0)
+        {
+            if (BLLProvider.AwardLogic.RemoveImage(id))
+            {
+                HelperClass.DeleteImage(id, BLLProvider.AwardImageFIlePath);
+
+                messageToAdmin = "Award image successfully removed";
+            }
+            else
+            {
+                messageToAdmin = errorMessage;
+            }
+        }
+        else
+        {
+            messageToAdmin = errorMessage;
+        }
+    }
+}
+
+@section styles {
+    <link href="/Content/css/navigation.css" rel="stylesheet" />
+    <link href="/Content/css/content.css" rel="stylesheet" />
+}
+
+@RenderPage("/Pages/Partial/_NavigationPartial.cshtml")
+
+<section class="content">
+    <div class="form">
+        <form method="post" id="form">
+            
+            @RenderPage("/Pages/Partial/_IdFieldPartial.cshtml", new { Message = "Enter award ID: ", Id = "id" })
+
+            <button type="submit" id="submit">Remove award image</button>
+        </form>
+    </div>
+
+    <div id="result">@messageToAdmin</div>
+</section>
