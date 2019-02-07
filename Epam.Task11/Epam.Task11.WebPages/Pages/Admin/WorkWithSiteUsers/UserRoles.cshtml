@@ -3,6 +3,7 @@
     Page.Title = "Work with site users roles";
     var accounts = Epam.Task11.WebPages.CS.BLLProvider.AccountLogic.GetAll().ToList();
     int accCount = accounts.Count() - 1;
+    int i = 1;
 }
 
 @section styles {
@@ -29,7 +30,7 @@
                         $result.text(error_message);
                     }
                     else {
-                        $site_user_role.text(response);
+                        $("@(i)role").text(response);
                     }
                 },
                 error: function () { $result.text(error_message); }
@@ -46,16 +47,16 @@
     <ul>
         <li>Site users count: @accCount</li>
 
-        @for (int i = 1; i < accounts.Count(); i++)
+        @for (; i < accounts.Count(); i++)
         {
             <li>
                 <form class="submit_role" id="@i" onsubmit="sendForm(this)" method="post">
-                    <span class="role">login: @accounts[i].Login role: @accounts[i].Role</span>
+                    <span>login: @accounts[i].Login role: <span id="@(i)role">@accounts[i].Role</span></span>
 
-                    <input type="text" class="hidden" name="site_user_login" value="@accounts[i].Login" />
-                    <input type="text" class="hidden" name="site_user_role" value="@accounts[i].Role" />
+                    <input type="hidden" name="site_user_login" value="@accounts[i].Login" />
+                    <input type="hidden" name="site_user_role" value="@accounts[i].Role" />
 
-                    <button class="change_role" type="submit">Change Role</button>
+                    <input type="submit" class="change_role" value="Change Role" />
                 </form>
             </li>
         }
