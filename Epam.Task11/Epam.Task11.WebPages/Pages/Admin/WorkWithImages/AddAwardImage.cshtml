@@ -9,13 +9,12 @@
     Layout = "~/_MainLayout.cshtml";
     Page.Title = "Add award image";
 
-    WebImage photo = null;
     var messageToAdmin = string.Empty;
     var errorMessage = "Cannot to add award image";
 
     if (IsPost)
     {
-        photo = WebImage.GetImageFromRequest();
+        WebImage photo = WebImage.GetImageFromRequest();
         int.TryParse(Request.Params["id"], out var id);
 
         if (photo != null && id > 0)

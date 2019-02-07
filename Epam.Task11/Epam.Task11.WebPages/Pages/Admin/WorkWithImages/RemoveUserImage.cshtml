@@ -10,28 +10,18 @@
     Page.Title = "Remove user image";
 
     var messageToAdmin = string.Empty;
-    var errorMessage = "Cannot to remove user image";
 
     if (IsPost)
     {
         int.TryParse(Request.Params["id"], out var id);
 
-        if (id > 0)
+        if (id > 0 && BLLProvider.UserLogic.RemoveImage(id))
         {
-            if (BLLProvider.UserLogic.RemoveImage(id))
-            {
-                HelperClass.DeleteImage(id, BLLProvider.UserImageFIlePath);
-
-                messageToAdmin = "User image successfully removed";
-            }
-            else
-            {
-                messageToAdmin = errorMessage;
-            }
+            messageToAdmin = "User image successfully removed";
         }
         else
         {
-            messageToAdmin = errorMessage;
+            messageToAdmin = "Cannot to remove user image";
         }
     }
 }

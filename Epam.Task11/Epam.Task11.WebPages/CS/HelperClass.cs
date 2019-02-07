@@ -11,20 +11,19 @@ namespace Epam.Task11.WebPages.CS
 {
     public static class HelperClass
     {
+        private const string DefaultUserImageFilePath = "/Content/images/DefaultUserIcon.png";
+        private const string DefaultAwardImageFilePath = "/Content/images/DefaultAwardIcon.png";
+
         public static string GetUserImagePath(User user)
         {
             if (user.Image != null)
             {
                 WebImage img = new WebImage(user.Image);
-                DeleteImage(user.Id, BLLProvider.UserImageFIlePath);
 
-                string fullPath = $"{GetFullFilePath(BLLProvider.UserImageFIlePath)}{user.Id}.{img.ImageFormat}";
-                img.Save(fullPath);
-
-                return $"/Content/images/userIcons/{user.Id}.{img.ImageFormat}";
+                return $"data:image/{img.ImageFormat};base64,{Convert.ToBase64String(user.Image)}";
             }
 
-            return "/Content/images/DefaultUserIcon.png";
+            return DefaultUserImageFilePath;
         }
 
         public static string GetAwardImagePath(Award award)
@@ -32,15 +31,11 @@ namespace Epam.Task11.WebPages.CS
             if (award.Image != null)
             {
                 WebImage img = new WebImage(award.Image);
-                DeleteImage(award.Id, BLLProvider.AwardImageFIlePath);
 
-                string fullPath = $"{GetFullFilePath(BLLProvider.AwardImageFIlePath)}{award.Id}.{img.ImageFormat}";
-                img.Save(fullPath);
-
-                return $"/Content/images/awardIcons/{award.Id}.{img.ImageFormat}";
+                return $"data:image/{img.ImageFormat};base64,{Convert.ToBase64String(award.Image)}";
             }
 
-            return "/Content/images/DefaultAwardIcon.png";
+            return DefaultAwardImageFilePath;
         }
 
         public static void WorkWithImage(WebImage img, int x, int y)
@@ -61,19 +56,6 @@ namespace Epam.Task11.WebPages.CS
             }
 
             img.Resize(x, y);
-        }
-
-        public static void DeleteImage(int id, string imagePath)
-        {
-            var images = Directory.GetFiles(GetFullFilePath(imagePath), id + ".*");
-
-            if (images.Length > 0)
-            {
-                foreach (var img in images)
-                {
-                    File.Delete(img);
-                }
-            }
         }
 
         public static string HashStringWithSha512(string inputString)
@@ -132,12 +114,17 @@ namespace Epam.Task11.WebPages.CS
 
         public static bool CheckAwardTitle(this string title)
         {
-            return title != null && title.Length < 50 && !title.Contains('|');
+            return title != null
+                && title.Length < 50
+                && !title.Contains('|');
         }
 
         public static bool IsValidRegistrationInfo(string email, string login, string password, string repeatPassword)
         {
-            return CheckEmailFormat(email) && CheckLoginFormat(login) && CheckPasswordFormat(password) && password == repeatPassword;
+            return CheckEmailFormat(email)
+                && CheckLoginFormat(login)
+                && CheckPasswordFormat(password)
+                && password == repeatPassword;
         }
 
         private static bool CheckEmailFormat(this string email)
@@ -165,14 +152,6 @@ namespace Epam.Task11.WebPages.CS
             string passwordTemplate = "^[a-zA-Z0-9]{6,20}$";
 
             return Regex.IsMatch(password, passwordTemplate, RegexOptions.IgnoreCase);
-        }
-
-        private static string GetFullFilePath(string path)
-        {
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            path = new string(path.SkipWhile(c => c != Path.DirectorySeparatorChar).Skip(1).ToArray());
-
-            return baseDir + path;
         }
     }
 }

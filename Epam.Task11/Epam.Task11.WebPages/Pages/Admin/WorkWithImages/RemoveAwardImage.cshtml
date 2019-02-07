@@ -10,28 +10,18 @@
     Page.Title = "Remove award image";
 
     var messageToAdmin = string.Empty;
-    var errorMessage = "Cannot to remove award image";
 
     if (IsPost)
     {
         int.TryParse(Request.Params["id"], out var id);
 
-        if (id > 0)
+        if (id > 0 && BLLProvider.AwardLogic.RemoveImage(id))
         {
-            if (BLLProvider.AwardLogic.RemoveImage(id))
-            {
-                HelperClass.DeleteImage(id, BLLProvider.AwardImageFIlePath);
-
-                messageToAdmin = "Award image successfully removed";
-            }
-            else
-            {
-                messageToAdmin = errorMessage;
-            }
+            messageToAdmin = "Award image successfully removed";
         }
         else
         {
-            messageToAdmin = errorMessage;
+            messageToAdmin = "Cannot to remove award image";
         }
     }
 }
