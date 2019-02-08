@@ -112,7 +112,7 @@
     <Content Include="Pages\Admin\RemoveAward.cshtml" />
     <Content Include="Pages\Admin\GiveAward.cshtml" />
     <Content Include="Pages\Admin\TakeAward.cshtml" />
-    <Content Include="Pages\Admin\WorkWithSiteUsers\UserRoles.cshtml" />
+    <Content Include="Pages\Admin\WorkWithAccounts\AccountRoles.cshtml" />
     <Content Include="Pages\Ajax\AddUserAjax.cshtml" />
     <Content Include="Pages\Ajax\UpdateUserAjax.cshtml" />
     <Content Include="Pages\Ajax\AddAwardAjax.cshtml" />
