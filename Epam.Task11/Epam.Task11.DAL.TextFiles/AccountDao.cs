@@ -54,32 +54,16 @@ namespace Epam.Task7.DAL.TextFiles
 
         public Account GetAccount(string login)
         {
-            var accounts = this.GetAll().ToList();
+            var accounts = this.GetAllAccounts().ToList();
 
             return accounts.FirstOrDefault(u => u.Login == login);
         }
 
         public IEnumerable<Account> GetAll()
         {
-            if (File.Exists(AccountsFilePath))
-            {
-                lock (locker)
-                {
-                    var accounts = File.ReadAllLines(AccountsFilePath)
-                                .Select(account =>
-                                {
-                                    var accountData = account.Split(new[] { Separator }, 5);
+            var accounts = this.GetAllAccounts().ToList();
 
-                                    return new Account(int.Parse(accountData[0]), accountData[1], accountData[2], accountData[3], accountData[4]);
-                                });
-
-                    return accounts.Skip(1);
-                }
-            }
-            else
-            {
-                return Enumerable.Empty<Account>();
-            }
+            return accounts.Count > 1 ? accounts.Skip(1) : Enumerable.Empty<Account>();
         }
 
         public bool Login(string login, string password)
@@ -145,7 +129,7 @@ namespace Epam.Task7.DAL.TextFiles
 
         public string[] GetRoles(string login)
         {
-            var account = this.GetAll().FirstOrDefault(acc => acc.Login == login);
+            var account = this.GetAllAccounts().FirstOrDefault(acc => acc.Login == login);
 
             if (account != null)
             {
@@ -199,7 +183,7 @@ namespace Epam.Task7.DAL.TextFiles
         
         private bool ChangeRole(string login, string role)
         {
-            var accounts = this.GetAll().ToList();
+            var accounts = this.GetAllAccounts().ToList();
             Account accountToUpdate = accounts.FirstOrDefault(u => u.Login == login);
 
             if (accountToUpdate != null)
@@ -224,6 +208,29 @@ namespace Epam.Task7.DAL.TextFiles
             }
 
             return false;
+        }
+
+        private IEnumerable<Account> GetAllAccounts()
+        {
+            if (File.Exists(AccountsFilePath))
+            {
+                lock (locker)
+                {
+                    var accounts = File.ReadAllLines(AccountsFilePath)
+                                .Select(account =>
+                                {
+                                    var accountData = account.Split(new[] { Separator }, 5);
+
+                                    return new Account(int.Parse(accountData[0]), accountData[1], accountData[2], accountData[3], accountData[4]);
+                                });
+
+                    return accounts;
+                }
+            }
+            else
+            {
+                return Enumerable.Empty<Account>();
+            }
         }
 
         private string AccountAsTxt(Account acc)
