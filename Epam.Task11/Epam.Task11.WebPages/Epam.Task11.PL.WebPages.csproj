@@ -91,8 +91,8 @@
     <Content Include="Content\css\navigation.css" />
     <Content Include="Content\css\normalize.css" />
     <Content Include="Content\css\styles.css" />
-    <Content Include="Content\images\favicon-32x32.png" />
     <Content Include="Content\images\DefaultAwardIcon.png" />
+    <Content Include="Content\images\favicon-32x32.png" />
     <Content Include="Content\images\DefaultUserIcon.png" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
@@ -120,7 +120,7 @@
     <Content Include="Pages\Ajax\RemoveAwardAjax.cshtml" />
     <Content Include="Pages\Ajax\RemoveUserAjax.cshtml" />
     <Content Include="Pages\Ajax\TakeAwardAjax.cshtml" />
-    <Content Include="Pages\Ajax\UserRolesAjax.cshtml" />
+    <Content Include="Pages\Ajax\AccountRolesAjax.cshtml" />
     <Content Include="Pages\Admin\WorkWithImages\AddUserImage.cshtml" />
     <Content Include="Pages\Admin\WorkWithImages\AddAwardImage.cshtml" />
     <Content Include="Pages\Admin\WorkWithImages\RemoveUserImage.cshtml" />

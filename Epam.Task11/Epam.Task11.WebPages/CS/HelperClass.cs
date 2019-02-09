@@ -74,18 +74,15 @@ namespace Epam.Task11.WebPages.CS
 
         public static bool CheckName(this string name)
         {
-            if (name.Length < 1 || name.Length > 30)
+            if (name.Length < 1
+                || name.Length > 30
+                || !char.IsLetter(name.First())
+                || !char.IsLetter(name.Last()))
             {
                 return false;
             }
 
             var allowedSeparatorSymbols = new char[] { '-', '\'', ' ' };
-
-            if (!char.IsLetter(name.First())
-                || !char.IsLetter(name.Last()))
-            {
-                return false;
-            }
 
             for (int i = 1; i < name.Length - 1; i++)
             {
@@ -119,39 +116,12 @@ namespace Epam.Task11.WebPages.CS
                 && !title.Contains('|');
         }
 
-        public static bool IsValidRegistrationInfo(string email, string login, string password, string repeatPassword)
-        {
-            return CheckEmailFormat(email)
-                && CheckLoginFormat(login)
-                && CheckPasswordFormat(password)
-                && password == repeatPassword;
-        }
-
-        private static bool CheckEmailFormat(this string email)
-        {
-            string emailTemplate = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
-                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
-
-            return Regex.IsMatch(email, emailTemplate, RegexOptions.IgnoreCase);
-        }
-
-        private static bool CheckLoginFormat(string login)
-        {
-            string loginTemplate = "^[a-zA-Z]{3,20}$";
-
-            if (BLLProvider.AccountLogic.GetAll().All(acc => acc.Login != login))
-            {
-                return Regex.IsMatch(login, loginTemplate, RegexOptions.IgnoreCase);
-            }
-
-            return false;
-        }
-
-        private static bool CheckPasswordFormat(string password)
+        public static bool IsValidPassword(string password, string repeatPassword)
         {
             string passwordTemplate = "^[a-zA-Z0-9]{6,20}$";
 
-            return Regex.IsMatch(password, passwordTemplate, RegexOptions.IgnoreCase);
+            return Regex.IsMatch(password, passwordTemplate, RegexOptions.IgnoreCase)
+                && password == repeatPassword;
         }
     }
 }

@@ -73,7 +73,7 @@ namespace Epam.Task7.DAL.TextFiles
                                     return new Account(int.Parse(accountData[0]), accountData[1], accountData[2], accountData[3], accountData[4]);
                                 });
 
-                    return accounts; 
+                    return accounts.Skip(1);
                 }
             }
             else

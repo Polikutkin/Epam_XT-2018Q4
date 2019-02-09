@@ -9,7 +9,7 @@
     string password = Request["password"];
     string repeatPassword = Request["repeatPassword"];
 
-    if (IsPost && HelperClass.IsValidRegistrationInfo(email, login, password, repeatPassword))
+    if (IsPost && HelperClass.IsValidPassword(password, repeatPassword))
     {
         password = HelperClass.HashStringWithSha512(Request["password"]);
 

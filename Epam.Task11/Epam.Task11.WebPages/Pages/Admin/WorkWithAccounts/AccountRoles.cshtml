@@ -1,9 +1,8 @@
 ﻿@{
     Layout = "/_MainLayout.cshtml";
     Page.Title = "Work with site users roles";
-    var accounts = Epam.Task11.WebPages.CS.BLLProvider.AccountLogic.GetAll().ToList();
-    int accCount = accounts.Count() - 1;
-    int i = 1;
+    var accounts = Epam.Task11.WebPages.CS.BLLProvider.AccountLogic.GetAll().ToArray();
+    int i = accounts.GetLowerBound(0);
 }
 
 @section styles {
@@ -20,7 +19,7 @@
             var $result = $("#result");
             $.ajax({
                 method: "POST",
-                url: "/Pages/Ajax/UserRolesAjax",
+                url: "/Pages/Ajax/AccountRolesAjax",
                 data: {
                     site_user_login: $site_user_login,
                     site_user_role: $site_user_role,
@@ -30,7 +29,7 @@
                         $result.text(error_message);
                     }
                     else {
-                        $("@(i)role").text(response);
+                        $("#@(i)role").text(response);
                     }
                 },
                 error: function () { $result.text(error_message); }
@@ -45,9 +44,9 @@
     <div id="result"></div>
 
     <ul>
-        <li>Site users count: @accCount</li>
+        <li>Site users count: @accounts.Length</li>
 
-        @for (; i < accounts.Count(); i++)
+        @for (; i < accounts.Length; i++)
         {
             <li>
                 <form class="submit_role" id="@i" onsubmit="sendForm(this)" method="post">
