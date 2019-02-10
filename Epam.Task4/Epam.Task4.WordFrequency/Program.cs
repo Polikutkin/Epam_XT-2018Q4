@@ -14,7 +14,12 @@ namespace Epam.Task4.WordFrequency
 
             string input = Console.ReadLine();
 
-            WordFrequency.FindWordFrequency(input);
+            var wordCounter = WordFrequency.FindWordFrequency(input);
+
+            foreach (var item in wordCounter)
+            {
+                Console.WriteLine($"{item.Value} {item.Key}");
+            }
         }
     }
 }
