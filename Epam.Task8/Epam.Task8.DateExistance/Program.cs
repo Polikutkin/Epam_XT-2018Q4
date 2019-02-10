@@ -12,7 +12,9 @@ namespace Epam.Task8.DateExistance
         public static void Main(string[] args)
         {
             string dateFormat = "dd-MM-yyyy";
-            Regex r = new Regex(@"\b[0-9]{2}-[0-9]{2}-[0-9]{4}\b");
+            Regex r = new Regex(@"\b(((31-(0[13578]|1[02]))|((29|30)-(0[1,3-9]|1[0-2]))" +
+                @"|((0[1-9]|1[0-9]|2[0-8])-(0[1-9]|1[0-2])))-([0-9][0-9][0-9][0-9]))|" +
+                @"(29-02-([0-9][0-9]([02468][048])|([13579][26])))\b");
 
             while (true)
             {
@@ -21,18 +23,8 @@ namespace Epam.Task8.DateExistance
                 string input = Console.ReadLine();
 
                 var dateMatches = r.Matches(input);
-                bool dateParse = false;
 
-                foreach (var match in dateMatches)
-                {
-                    if (DateTime.TryParseExact(match.ToString(), dateFormat, null, System.Globalization.DateTimeStyles.None, out var date))
-                    {
-                        dateParse = true;
-                        break;
-                    } 
-                }
-
-                if (dateParse)
+                if (dateMatches.Count > 0)
                 {
                     Console.WriteLine($"Text contains data in \"{dateFormat}\" format.");
                 }
