@@ -6,30 +6,19 @@
         Response.Redirect("~");
     }
 
-    Layout = "~/_MainLayout.cshtml";
-    Page.Title = "All awards";
     var awards = Epam.Task11.WebPages.CS.BLLProvider.AwardLogic.GetAll();
 }
 
-@section styles {
-    <link href="/Content/css/navigation.css" rel="stylesheet" />
-    <link href="/Content/css/content.css" rel="stylesheet" />
-}
+<ul>
+    <li>Awards count: @awards.Count()</li>
 
-@RenderPage("/Pages/Partial/_NavigationPartial.cshtml")
-
-<section class="content">
-    <ul>
-        <li>Awards count: @awards.Count()</li>
-
-        @foreach (var award in awards)
-        {
-            <li>
-                <img src="@HelperClass.GetAwardImagePath(award)" class="photo award_photo" alt="award photo" />
-                <div class="user_info">
-                    @award.ToString()
-                </div>
-            </li>
-        }
-    </ul>
-</section>
+    @foreach (var award in awards)
+    {
+        <li>
+            <img src="@HelperClass.GetAwardImagePath(award)" class="photo award_photo" alt="award photo" />
+            <div class="user_info">
+                @award.ToString()
+            </div>
+        </li>
+    }
+</ul>

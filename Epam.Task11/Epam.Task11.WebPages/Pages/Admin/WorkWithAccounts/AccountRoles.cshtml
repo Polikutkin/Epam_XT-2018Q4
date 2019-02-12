@@ -1,41 +1,50 @@
-﻿@{
-    Layout = "/_MainLayout.cshtml";
-    Page.Title = "Work with site users roles";
-    var accounts = Epam.Task11.WebPages.CS.BLLProvider.AccountLogic.GetAll().ToArray();
-    int i = accounts.GetLowerBound(0);
+﻿@using Epam.Task11.WebPages.CS;
+
+@{
+    if (!User.IsInRole("admin"))
+    {
+        Response.Redirect("~");
+    }
+
+    Layout = "~/_MainLayout.cshtml";
+    Page.Title = "UserAwards";
+
+    var accounts = BLLProvider.AccountLogic.GetAll().ToArray();
 }
 
-@section styles {
-    <link href="/Content/css/navigation.css" rel="stylesheet" />
-    <link href="/Content/css/content.css" rel="stylesheet" />
-}
-
-@section scripts {
+@section scripts{
     <script>
-        function sendForm(form) {
-            var error_message = "Cannot to give/take admin role";
-            var $site_user_login = form.site_user_login.value;
-            var $site_user_role = form.site_user_role.value;
+        function changeAccountRole(form) {
+            var formId = form.id;
+            var loginId = "#" + formId + "login";
+            var roleId = "#" + formId + "role";
+            var $account_login = $(loginId);
+            var $account_role = $(roleId);
             var $result = $("#result");
             $.ajax({
                 method: "POST",
                 url: "/Pages/Ajax/AccountRolesAjax",
                 data: {
-                    site_user_login: $site_user_login,
-                    site_user_role: $site_user_role,
+                    account_login: $account_login.text(),
+                    account_role: $account_role.text().replace(/\n/g, "")
                 },
                 success: function (response) {
                     if (response == 0) {
-                        $result.text(error_message);
+                        $result.text("Cannot to give/take admin role");
                     }
                     else {
-                        $("#@(i)role").text(response);
+                        $(roleId).text(response);
                     }
                 },
                 error: function () { $result.text(error_message); }
-            })
+            });
         }
     </script>
+}
+
+@section styles {
+    <link href="/Content/css/navigation.css" rel="stylesheet" />
+    <link href="/Content/css/content.css" rel="stylesheet" />
 }
 
 @RenderPage("/Pages/Partial/_NavigationPartial.cshtml")
@@ -46,14 +55,14 @@
     <ul>
         <li>Site users count: @accounts.Length</li>
 
-        @for (; i < accounts.Length; i++)
+        @for (int i = 0; i < accounts.Length; i++)
         {
             <li>
-                <form class="submit_role" id="@i" onsubmit="sendForm(this)" method="post">
-                    <span>login: @accounts[i].Login role: <span id="@(i)role">@accounts[i].Role</span></span>
-
-                    <input type="hidden" name="site_user_login" value="@accounts[i].Login" />
-                    <input type="hidden" name="site_user_role" value="@accounts[i].Role" />
+                <form method="post" class="submit_role" id="@i" onsubmit="changeAccountRole(this)">
+                    <span>
+                        login: <span id="@(i)login">@accounts[i].Login</span>
+                        role: <span id="@(i)role">@accounts[i].Role</span>
+                    </span>
 
                     <input type="submit" class="change_role" value="Change Role" />
                 </form>

@@ -66,6 +66,8 @@ namespace Epam.Task7.BLL
         {
             if (this.IsValidRegistrationInfo(email, login, password))
             {
+                this.cacheLogic.Remove(AccountsCacheKey);
+
                 return this.accountDao.Register(email, login, password);
             }
 

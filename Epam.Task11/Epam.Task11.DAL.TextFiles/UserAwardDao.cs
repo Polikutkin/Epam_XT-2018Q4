@@ -20,7 +20,7 @@ namespace Epam.Task7.DAL.TextFiles
 
         static UserAwardDao()
         {
-            Folder = Path.GetTempPath();
+            Folder = AppDomain.CurrentDomain.BaseDirectory;
             UserAwardsFilePath = Path.Combine(Folder, UserAwards);
         }
 

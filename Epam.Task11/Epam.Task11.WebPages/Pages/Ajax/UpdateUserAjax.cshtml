@@ -12,9 +12,11 @@
         if (id > 0 && firstName.CheckName() && lastName.CheckName() && birthDate.CheckDate() && BLLProvider.UserLogic.GetById(id) != null)
         {
             BLLProvider.UserLogic.Update(id, new User(firstName, lastName, birthDate));
-            @(1);
+            @("User was updated");
         }
-
-        return;
+        else
+        {
+            @("Cannot to update user")
+        }
     }
 }

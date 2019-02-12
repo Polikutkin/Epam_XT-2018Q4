@@ -8,7 +8,7 @@
     <title>@Page.Title</title>
     <link rel="stylesheet" type="text/css" href="/Content/css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="/Content/css/styles.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="~/Content/images/favicon-32x32.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/Content/images/favicon-32x32.png">
     @RenderSection("styles", required: false)
 </head>
 <body>
@@ -33,7 +33,8 @@
         @RenderBody()
     </div>
 
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="/Scripts/JS/js.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

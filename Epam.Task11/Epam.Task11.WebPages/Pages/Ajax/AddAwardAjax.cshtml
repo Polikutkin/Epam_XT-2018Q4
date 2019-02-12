@@ -9,9 +9,11 @@
         if (HelperClass.CheckAwardTitle(awardTitle))
         {
             BLLProvider.AwardLogic.Add(new Award(awardTitle));
-            @(1)
+            @("New award added")
         }
-
-        return;
+        else
+        {
+            @("Cannot to add award")
+        }
     }
 }

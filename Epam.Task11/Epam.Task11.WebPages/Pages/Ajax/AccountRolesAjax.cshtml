@@ -7,8 +7,8 @@
         bool IsAdminNow = false;
         bool IsUserNow = false;
 
-        var login = Request.Params["site_user_login"];
-        var role = Request.Params["site_user_role"];
+        var login = Request.Params["account_login"];
+        var role = Request.Params["account_role"];
 
 
         if (role == "user")
@@ -24,7 +24,7 @@
 
         if ((IsAdminNow || IsUserNow) && account != null)
         {
-            @(account.Role)
+            @account.Role
         }
         else
         {

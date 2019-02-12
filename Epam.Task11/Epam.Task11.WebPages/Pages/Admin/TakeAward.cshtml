@@ -1,64 +1,16 @@
-﻿@{
-    if (!User.IsInRole("admin"))
-    {
-        Response.Redirect("~");
-    }
-
-    Layout = "~/_MainLayout.cshtml";
-    Page.Title = "Take award";
+﻿@if (!User.IsInRole("admin"))
+{
+    Response.Redirect("~");
 }
 
-@section styles {
-    <link href="/Content/css/navigation.css" rel="stylesheet" />
-    <link href="/Content/css/content.css" rel="stylesheet" />
-}
+<div class="form">
+    <form method="post" id="form" onsubmit="getUserAwardId(this, '/Pages/Ajax/TakeAwardAjax')">
+        
+        @RenderPage("/Pages/Partial/_IdFieldPartial.cshtml", new { Message = "Enter user ID: ", Id = "user_id" })
+        @RenderPage("/Pages/Partial/_IdFieldPartial.cshtml", new { Message = "Enter award ID: ", Id = "award_id" })
 
-@section scripts {
-    <script>
-        $("#form").submit(function () {
-            var error_message = "Cannot to take award";
-            var success_message = "Award succefully taken";
-            var $userId = $("#user_id");
-            var $awardId = $("#award_id");
-            var $result = $("#result");
-            $.ajax({
-                method: "POST",
-                url: "/Pages/Ajax/TakeAwardAjax",
-                data: {
-                    user_id: $userId.val(),
-                    award_id: $awardId.val(),
-                },
-                success: function (response) {
-                    if (response == 1) {
-                        $('#form')[0].reset();
-                        $result.text(success_message);
-                    }
-                    else {
-                        $result.text(error_message);
-                    }
-                },
-                error: function (response) { $result.text(error_message); }
-            })
-            return false;
-        });
-    </script>
-}
+        <button type="submit" id="submit">Take award</button>
+    </form>
+</div>
 
-@RenderPage("/Pages/Partial/_NavigationPartial.cshtml")
-
-<section class="content">
-    <div class="form">
-        <form method="post" id="form">
-            
-            @RenderPage("/Pages/Partial/_IdFieldPartial.cshtml", new { Message = "Enter user ID: ", Id = "user_id" })
-            @RenderPage("/Pages/Partial/_IdFieldPartial.cshtml", new { Message = "Enter award ID: ", Id = "award_id" })
-
-
-
-
-            <button type="submit" id="submit">Take award</button>
-        </form>
-    </div>
-
-    <div id="result"></div>
-</section>
+<div id="result"></div>

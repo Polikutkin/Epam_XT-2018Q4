@@ -1,66 +1,25 @@
-﻿@{
-    if (!User.IsInRole("admin"))
-    {
-        Response.Redirect("~");
-    }
-
-    Layout = "~/_MainLayout.cshtml";
-    Page.Title = "Add new award";
+﻿@if (!User.IsInRole("admin"))
+{
+    Response.Redirect("~");
 }
 
-@section styles {
-    <link href="/Content/css/navigation.css" rel="stylesheet" />
-    <link href="/Content/css/content.css" rel="stylesheet" />
-}
+<div class="form">
+    <form method="post" id="form" onsubmit="getId(this, '/Pages/Ajax/AddAwardAjax')">
+        <div class="option">
+            <label for="id">Enter award title: </label>
+            <input type="text" id="id" name="id" required />
+        </div>
 
-@section scripts {
-    <script>
-        $("#form").submit(function () {
-            var error_message = "Cannot to add award";
-            var success_message = "Award succefully added";
-            var $awardId = $("#id");
-            var $result = $("#result");
-            $.ajax({
-                method: "POST",
-                url: "/Pages/Ajax/AddAwardAjax",
-                data: { id: $awardId.val() },
-                success: function (response) {
-                    if (response == 1) {
-                        $('#form')[0].reset();
-                        $result.text(success_message);
-                    }
-                    else {
-                        $result.text(error_message);
-                    }
-                },
-                error: function (response) { $result.text(error_message); }
-            })
-            return false;
-        });
-    </script>
-}
+        <button type="submit" id="submit">Add award</button>
+    </form>
+</div>
 
-@RenderPage("/Pages/Partial/_NavigationPartial.cshtml")
+<div id="result"></div>
 
-<section class="content">
-    <div class="form">
-        <form method="post" id="form">
-            <div class="option">
-                <label for="id">Enter award title: </label>
-                <input type="text" id="id" name="id" required />
-            </div>
-
-            <button type="submit" id="submit">Add award</button>
-        </form>
-    </div>
-
-    <div id="result"></div>
-
-    <div id="notes">
-        <h4>Notes:</h4>
-        <ul>
-            <li>Length cannot be more than 30 symbols</li>
-            <li>Cannot contain special symbol '|'</li>
-        </ul>
-    </div>
-</section>
+<div id="notes">
+    <h4>Notes:</h4>
+    <ul>
+        <li>Length cannot be more than 30 symbols</li>
+        <li>Cannot contain special symbol '|'</li>
+    </ul>
+</div>

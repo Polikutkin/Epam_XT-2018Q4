@@ -137,12 +137,15 @@ namespace Epam.Task7.BLL
         public void AddImage(int id, byte[] image)
         {
             this.cacheLogic.Remove(UsersCacheKey);
+            this.cacheLogic.Remove(LastUserCacheKey);
+
             this.userDao.AddImage(id, image);
         }
 
         public bool RemoveImage(int id)
         {
             this.cacheLogic.Remove(UsersCacheKey);
+            this.cacheLogic.Remove(LastUserCacheKey);
 
             return this.userDao.RemoveImage(id);
         }

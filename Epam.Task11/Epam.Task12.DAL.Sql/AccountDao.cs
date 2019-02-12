@@ -25,6 +25,11 @@ namespace Epam.Task12.DAL.Sql
 
         public Account GetAccount(string login)
         {
+            if (login == null || login.Length < 1)
+            {
+                return null;
+            }
+
             using (var connection = new SqlConnection(this.conStr))
             {
                 SqlCommand cmd = connection.CreateCommand();
@@ -64,6 +69,11 @@ namespace Epam.Task12.DAL.Sql
 
         public string[] GetRoles(string login)
         {
+            if (login == null || login.Length < 1)
+            {
+                return new string[0];
+            }
+
             var roles = new List<string>();
 
             using (var connection = new SqlConnection(this.conStr))
@@ -87,11 +97,24 @@ namespace Epam.Task12.DAL.Sql
 
         public bool GiveAdminRights(string login)
         {
+            if (login == null || login.Length < 1)
+            {
+                return false;
+            }
+
             return this.ChangeAccountRole(login, AdminRoleName);
         }
 
         public bool Login(string login, string password)
         {
+            if (login == null
+                || login.Length < 1
+                || password == null
+                || password.Length < 1)
+            {
+                return false;
+            }
+
             var roles = new List<string>();
 
             using (var connection = new SqlConnection(this.conStr))
@@ -123,6 +146,16 @@ namespace Epam.Task12.DAL.Sql
 
         public bool Register(string email, string login, string password)
         {
+            if (login == null
+                || login.Length < 1
+                || password == null
+                || password.Length < 1
+                || email == null
+                || email.Length < 1)
+            {
+                return false;
+            }
+
             using (var connection = new SqlConnection(this.conStr))
             {
                 SqlCommand cmd = connection.CreateCommand();
@@ -153,6 +186,11 @@ namespace Epam.Task12.DAL.Sql
 
         public bool TakeAdminRights(string login)
         {
+            if (login == null || login.Length < 1)
+            {
+                return false;
+            }
+
             return this.ChangeAccountRole(login, UserRoleName);
         }
 

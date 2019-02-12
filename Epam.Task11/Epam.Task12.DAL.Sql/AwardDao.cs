@@ -85,22 +85,20 @@ namespace Epam.Task12.DAL.Sql
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@UserId", userId);
                 cmd.Parameters.AddWithValue("@AwardId", awardId);
-
+                int queryResult;
                 connection.Open();
-                var queryResult = cmd.ExecuteNonQuery();
-
-                if (queryResult == 0)
+                try
+                {
+                    queryResult = cmd.ExecuteNonQuery();
+                }
+                catch (SqlException)
                 {
                     return false;
                 }
-                else if (queryResult == 1)
-                {
-                    return true;
-                }
-                else
-                {
-                    throw new InvalidOperationException(UserDao.SqlErrorMessage);
-                }
+
+                return queryResult == 0 ? false
+                    : queryResult == 1 ? true
+                    : throw new InvalidOperationException(UserDao.SqlErrorMessage);
             }
         }
 

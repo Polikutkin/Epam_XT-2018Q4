@@ -11,9 +11,11 @@
         if (firstName.CheckName() && lastName.CheckName() && birthDate.CheckDate())
         {
             Epam.Task11.WebPages.CS.BLLProvider.UserLogic.Add(new User(firstName, lastName, birthDate));
-            @(1);
+            @("New user added");
         }
-
-        return;
+        else
+        {
+            @("Cannot to add user")
+        }
     }
 }

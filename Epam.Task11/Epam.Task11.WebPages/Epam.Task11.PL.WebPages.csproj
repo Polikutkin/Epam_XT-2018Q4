@@ -32,6 +32,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -94,14 +95,15 @@
     <Content Include="Content\images\DefaultAwardIcon.png" />
     <Content Include="Content\images\favicon-32x32.png" />
     <Content Include="Content\images\DefaultUserIcon.png" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Pages\Autorization\Login.cshtml" />
     <Content Include="Pages\Autorization\Logout.cshtml" />
     <Content Include="Pages\Autorization\Registration.cshtml" />
     <Content Include="Pages\Partial\_NavigationPartial.cshtml" />
-    <Content Include="Pages\Partial\_ContentPartial.cshtml" />
     <Content Include="Pages\User\AllUsers.cshtml" />
     <Content Include="Pages\User\UserById.cshtml" />
     <Content Include="Pages\Admin\AddUser.cshtml" />
@@ -125,11 +127,14 @@
     <Content Include="Pages\Admin\WorkWithImages\AddAwardImage.cshtml" />
     <Content Include="Pages\Admin\WorkWithImages\RemoveUserImage.cshtml" />
     <Content Include="Pages\Admin\WorkWithImages\RemoveAwardImage.cshtml" />
-    <Content Include="Pages\Partial\_AwardViewPartial.cshtml" />
     <Content Include="Pages\Partial\_UserNotesPartial.cshtml" />
     <Content Include="Pages\Partial\_NewUserFieldsPartial.cshtml" />
     <Content Include="Pages\Partial\_UserInfoPartial.cshtml" />
     <Content Include="Pages\Partial\_IdFieldPartial.cshtml" />
+    <Content Include="Pages\Ajax\UserByIdAjax.cshtml" />
+    <Content Include="Pages\Partial\_LoadFileFieldPartial.cshtml" />
+    <Content Include="Pages\Ajax\RemoveUserImageAjax.cshtml" />
+    <Content Include="Pages\Ajax\RemoveAwardImageAjax.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -140,21 +145,20 @@
   <ItemGroup>
     <Content Include="Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Scripts\JS\js.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="_MainLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CS\BLLProvider.cs" />
     <Compile Include="CS\HelperClass.cs" />
     <Compile Include="CS\MyRoleProvider.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

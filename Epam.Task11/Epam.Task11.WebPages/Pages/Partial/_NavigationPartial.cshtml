@@ -1,21 +1,25 @@
 ﻿@using Epam.Task11.WebPages.CS;
 
+@{ 
+    var all = RenderPage("/Pages/User/AllUsers.cshtml");
+}
 <div class="navigation">
-        <a href="/Pages/User/AllUsers">Users list</a>
-        <a href="/Pages/User/UserById">User by ID</a>
+        <a href="javascript: openPage('/Pages/User/AllUsers', '.content')">Users list</a>
+        <a href="javascript: openPage('/Pages/User/UserById', '.content')">User by ID</a>
+
     @if (User.IsInRole("admin"))
     {
-        <a href="/Pages/Admin/AddUser">Add new user</a>
-        <a href="/Pages/Admin/UpdateUser">Update user</a>
-        <a href="/Pages/Admin/RemoveUser">Remove user</a>
+        <a href="javascript: openPage('/Pages/Admin/AddUser', '.content')">Add new user</a>
+        <a href="javascript: openPage('/Pages/Admin/UpdateUser', '.content')">Update user</a>
+        <a href="javascript: openPage('/Pages/Admin/RemoveUser', '.content')">Remove user</a>
 
         <br /><hr /><br />
 
-        <a href="/Pages/Admin/AllAwards">All awards</a>
-        <a href="/Pages/Admin/AddAward">Add new award</a>
-        <a href="/Pages/Admin/RemoveAward">Remove award</a>
-        <a href="/Pages/Admin/GiveAward">Give award</a>
-        <a href="/Pages/Admin/TakeAward">Take award</a>
+        <a href="javascript: openPage('/Pages/Admin/AllAwards', '.content')">All awards</a>
+        <a href="javascript: openPage('/Pages/Admin/AddAward', '.content')">Add new award</a>
+        <a href="javascript: openPage('/Pages/Admin/RemoveAward', '.content')">Remove award</a>
+        <a href="javascript: openPage('/Pages/Admin/GiveAward', '.content')">Give award</a>
+        <a href="javascript: openPage('/Pages/Admin/TakeAward', '.content')">Take award</a>
 
         <br /><hr /><br />
 
@@ -24,11 +28,11 @@
 
         <br />
 
-        <a href="/Pages/Admin/WorkWithImages/RemoveUserImage">Remove user image</a>
-        <a href="/Pages/Admin/WorkWithImages/RemoveAwardImage">Remove award image</a>
+        <a href="javascript: openPage('/Pages/Admin/WorkWithImages/RemoveUserImage', '.content')">Remove user image</a>
+        <a href="javascript: openPage('/Pages/Admin/WorkWithImages/RemoveAwardImage', '.content')">Remove award image</a>
 
         <br /><hr /><br />
 
-        <a href="/Pages/Admin/WorkWithAccounts/AccountRoles">Work with site users</a>
+        <a href="/Pages/Admin/WorkWithAccounts/AccountRoles">Work with accounts</a>
     }
 </div>

@@ -7,7 +7,7 @@
     }
 
     Layout = "~/_MainLayout.cshtml";
-    Page.Title = "Add award image";
+    Page.Title = "UserAwards";
 
     var messageToAdmin = string.Empty;
     var errorMessage = "Cannot to add award image";
@@ -28,7 +28,7 @@
 
                 BLLProvider.AwardLogic.AddImage(award.Id, photo.GetBytes());
 
-                messageToAdmin = "Award image successfully added";
+                messageToAdmin = "Award image was added";
             }
             else
             {

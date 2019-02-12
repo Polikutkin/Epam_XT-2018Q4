@@ -5,13 +5,13 @@
     {
         int.TryParse(Request.Params["id"], out var id);
 
-        if (id > 0 && BLLProvider.UserLogic.Remove(id))
+        if (id > 0 && BLLProvider.UserLogic.RemoveImage(id))
         {
-            @("User was removed")
+            @("User image was removed")
         }
         else
         {
-            @("Cannot to remove user with this ID")
+            @("Cannot to remove user image")
         }
     }
 }

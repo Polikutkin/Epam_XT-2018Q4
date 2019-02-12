@@ -1,0 +1,17 @@
+﻿@using Epam.Task11.WebPages.CS;
+
+@{
+    if (IsPost)
+    {
+        int.TryParse(Request.Params["id"], out var id);
+
+        if (id > 0 && BLLProvider.AwardLogic.RemoveImage(id))
+        {
+            @("Award image was removed")
+        }
+        else
+        {
+            @("Cannot to remove award image")
+        }
+    }
+}

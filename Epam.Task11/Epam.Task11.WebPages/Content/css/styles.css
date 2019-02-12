@@ -70,3 +70,8 @@ hr {
     color: #FFF;
     background-color: #335e8f;
 }
+
+.hidden {
+    display: none;
+    z-index: -1;
+}

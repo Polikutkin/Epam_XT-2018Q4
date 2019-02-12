@@ -1,64 +1,17 @@
-﻿@{
-    if (!User.IsInRole("admin"))
-    {
-        Response.Redirect("~");
-    }
-
-    Layout = "~/_MainLayout.cshtml";
-    Page.Title = "Add new user";
+﻿@if (!User.IsInRole("admin"))
+{
+    Response.Redirect("~");
 }
 
-@section styles {
-    <link href="/Content/css/navigation.css" rel="stylesheet" />
-    <link href="/Content/css/content.css" rel="stylesheet" />
-}
+<div class="form">
+    <form method="post" id="form" onsubmit="sendUserInfo(this, '/Pages/Ajax/AddUserAjax')">
 
-@section scripts {
-    <script>
-        $("#form").submit(function () {
-            var error_message = "Cannot to add user";
-            var success_message = "User succefully added"
-            var $first_name = $("#first_name");
-            var $last_name = $("#last_name");
-            var $birth_date = $("#birth_date");
-            var $result = $("#result");
-            $.ajax({
-                method: "POST",
-                url: "/Pages/Ajax/AddUserAjax",
-                data: {
-                    first_name: $first_name.val(),
-                    last_name: $last_name.val(),
-                    birth_date: $birth_date.val(),
-                },
-                success: function (response) {
-                    if (response == 1) {
-                        $('#form')[0].reset();
-                        $result.text(success_message);
-                    }
-                    else {
-                        $result.text(error_message);
-                    }
-                },
-                error: function (response) { $result.text(error_message); }
-            })
-            return false;
-        });
-    </script>
-}
+        @RenderPage("/Pages/Partial/_NewUserFieldsPartial.cshtml")
 
-@RenderPage("/Pages/Partial/_NavigationPartial.cshtml")
+        <button type="submit" id="submit">Add user</button>
+    </form>
+</div>
 
-<section class="content">
-    <div class="form">
-        <form method="post" id="form">
+<div id="result"></div>
 
-            @RenderPage("/Pages/Partial/_NewUserFieldsPartial.cshtml")
-
-            <button type="submit" id="submit">Add user</button>
-        </form>
-    </div>
-
-    <div id="result"></div>
-
-    @RenderPage("/Pages/Partial/_UserNotesPartial.cshtml")
-</section>
+@RenderPage("/Pages/Partial/_UserNotesPartial.cshtml")

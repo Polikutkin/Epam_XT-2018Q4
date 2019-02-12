@@ -7,7 +7,7 @@
     }
 
     Layout = "~/_MainLayout.cshtml";
-    Page.Title = "Add user image";
+    Page.Title = "UserAwards";
 
     var messageToAdmin = string.Empty;
     var errorMessage = "Cannot to add user image";
@@ -27,7 +27,7 @@
 
                 BLLProvider.UserLogic.AddImage(user.Id, photo.GetBytes());
 
-                messageToAdmin = "User image successfully added";
+                messageToAdmin = "User image was added";
             }
             else
             {
@@ -39,9 +39,9 @@
             messageToAdmin = errorMessage;
         }
     }
-    }
+}
 
-    @section styles {
+@section styles {
     <link href="/Content/css/navigation.css" rel="stylesheet" />
     <link href="/Content/css/content.css" rel="stylesheet" />
 }

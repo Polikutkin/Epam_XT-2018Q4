@@ -1,0 +1,28 @@
+﻿@using Epam.Task7.Entities;
+@using Epam.Task11.WebPages.CS;
+
+@{
+    User user = default(User);
+
+    int.TryParse(Request.Params["id"], out var id);
+
+    if (id > 0)
+    {
+        user = BLLProvider.UserLogic.GetById(id);
+    }
+}
+
+@if (user != null)
+{
+    <div style="color: black; font-weight: 400;">
+        <ul>
+            <li>
+                @RenderPage("/Pages/Partial/_UserInfoPartial.cshtml", new { User = user })
+            </li>
+        </ul>
+    </div>
+}
+else
+{
+    <span>Cannot to find user with this ID</span>
+}

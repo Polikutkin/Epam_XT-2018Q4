@@ -1,17 +1,18 @@
-﻿@{
+﻿@using Epam.Task11.WebPages.CS;
+
+@{
     if (IsAjax)
     {
         int.TryParse(Request.Params["user_id"], out var userId);
         int.TryParse(Request.Params["award_id"], out var awardId);
 
-        if (userId > 0 && awardId > 0)
+        if (userId > 0 && awardId > 0 && BLLProvider.AwardLogic.GiveAward(userId, awardId))
         {
-            if (Epam.Task11.WebPages.CS.BLLProvider.AwardLogic.GiveAward(userId, awardId))
-            {
-                @(1)
-            }
+            @("Award was given")
         }
-
-        return;
+        else
+        {
+            @("Cannot to give award")
+        }
     }
 }

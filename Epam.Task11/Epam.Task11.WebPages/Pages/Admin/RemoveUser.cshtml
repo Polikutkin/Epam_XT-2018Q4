@@ -1,56 +1,15 @@
-﻿@{
-    if (!User.IsInRole("admin"))
-    {
-        Response.Redirect("~");
-    }
-
-    Layout = "~/_MainLayout.cshtml";
-    Page.Title = "Remove user";
+﻿@if (!User.IsInRole("admin"))
+{
+    Response.Redirect("~");
 }
 
-@section styles {
-    <link href="/Content/css/navigation.css" rel="stylesheet" />
-    <link href="/Content/css/content.css" rel="stylesheet" />
-}
+<div class="form">
+    <form method="post" id="form" onsubmit="getId(this, '/Pages/Ajax/RemoveUserAjax')">
+        
+        @RenderPage("/Pages/Partial/_IdFieldPartial.cshtml", new { Message = "Enter user ID: ", Id = "id" })
 
-@section scripts {
-    <script>
-        $("#form").submit(function () {
-            var error_message = "Cannot to remove user";
-            var success_message = "User successfully removed";
-            var $userId = $("#user_id");
-            var $result = $("#result");
-            $.ajax({
-                method: "POST",
-                url: "/Pages/Ajax/RemoveUserAjax",
-                data: { id: $userId.val() },
-                success: function (response) {
-                    if (response == 1) {
-                        $('#form')[0].reset();
-                        $result.text(success_message);
-                    }
-                    else {
-                        $result.text(error_message);
-                    }
-                },
-                error: function (response) { $result.text(error_message); }
-            })
-            return false;
-        });
-    </script>
-}
+        <button type="submit" id="submit">Remove user</button>
+    </form>
+</div>
 
-@RenderPage("/Pages/Partial/_NavigationPartial.cshtml")
-
-<section class="content">
-    <div class="form">
-        <form method="post" id="form">
-            
-            @RenderPage("/Pages/Partial/_IdFieldPartial.cshtml", new { Message = "Enter user ID: ", Id = "user_id" })
-
-            <button type="submit" id="submit">Remove user</button>
-        </form>
-    </div>
-
-    <div id="result"></div>
-</section>
+<div id="result"></div>
