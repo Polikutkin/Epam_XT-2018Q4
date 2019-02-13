@@ -129,18 +129,9 @@ namespace Epam.Task12.DAL.Sql
 
                 var queryResult = (int)cmd.ExecuteScalar();
 
-                if (queryResult == 0)
-                {
-                    return false;
-                }
-                else if (queryResult == 1)
-                {
-                    return true;
-                }
-                else
-                {
-                    throw new InvalidOperationException(UserDao.SqlErrorMessage);
-                }
+                return queryResult == 0 ? false
+                    : queryResult == 1 ? true
+                    : throw new InvalidOperationException(UserDao.SqlErrorMessage);
             }
         }
 
@@ -169,18 +160,9 @@ namespace Epam.Task12.DAL.Sql
                 connection.Open();
                 var queryResult = cmd.ExecuteNonQuery();
 
-                if (queryResult == 0)
-                {
-                    return false;
-                }
-                else if (queryResult == 1)
-                {
-                    return true;
-                }
-                else
-                {
-                    throw new InvalidOperationException(UserDao.SqlErrorMessage);
-                }
+                return queryResult == 0 ? false
+                    : queryResult == 1 ? true
+                    : throw new InvalidOperationException(UserDao.SqlErrorMessage);
             }
         }
 
@@ -207,18 +189,9 @@ namespace Epam.Task12.DAL.Sql
                 connection.Open();
                 var queryResult = cmd.ExecuteNonQuery();
 
-                if (queryResult == 0)
-                {
-                    return false;
-                }
-                else if (queryResult == 1)
-                {
-                    return true;
-                }
-                else
-                {
-                    throw new InvalidOperationException(UserDao.SqlErrorMessage);
-                }
+                return queryResult == 0 ? false
+                    : queryResult == 1 ? true
+                    : throw new InvalidOperationException(UserDao.SqlErrorMessage);
             }
         }
     }
