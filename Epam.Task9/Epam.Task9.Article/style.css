@@ -16,15 +16,14 @@ body {
     background: linear-gradient(#FFF, #DFDFDF);
 }
 
-.ekg::before {
+.ekg span {
+    display: inline;
     position: absolute;
-    display: block;
     top: -2px;
     left: -2px;
     right: -2px;
     padding: 8px;
     color: #FFB163;
-    content: "ЭКГ-5";
     font-weight: bold;
     font-size: 27px;
     background-image: -webkit-linear-gradient(150deg, transparent 280px, black 100px);

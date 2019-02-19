@@ -3,45 +3,43 @@ ul,
 li {
     margin: 0;
     padding: 0;
+    list-style: none;
 }
 
 nav {
     margin: 20px;
 }
 
-ul {
-    list-style: none;
-}
-
-li,
-a {
-  display: block;
-}
-
-ul.menu > li.main {
+.menu > li.main {
     position: relative;
     float: left;
     margin-right: 20px;
 }
 
-ul.menu > li > a.down {
+.menu > li > .down {
     padding: 5px;
     color: #475BE4;
 }
 
-ul.menu > li:hover > a.down,
-ul.menu > li:hover > ul.submenu {
+.down a {
+    color: #475BE4;
+}
+
+.menu > li:hover > .down,
+.menu > li:hover > .submenu {
     background: white;
 }
 
-ul.menu > li:hover > a.down {
-    display: block;
-    text-decoration: none;
-    color: black;
+.menu > li:hover > .down {
     border-radius: 6px 6px 0 0;
 }
 
-a.down:after {
+.menu > li:hover > .down > a {
+    color: black;
+    text-decoration: none;
+}
+
+.down:after {
   content: "";
   display: none;
   position: absolute;
@@ -52,7 +50,7 @@ a.down:after {
   border-radius: 6px 6px 0 0;
 }
 
-ul.submenu {
+.submenu {
     position: absolute;
     display: none;
     top: 26px;
@@ -62,7 +60,7 @@ ul.submenu {
     padding: 2px;
 }
 
-ul.submenu:after {
+.submenu:after {
   content: "";
   display: none;
   position: absolute;
@@ -72,23 +70,29 @@ ul.submenu:after {
   height: 100%;
 }
 
-ul.submenu > li > a {
+.submenu > li div {
     padding: 2px 20px 2px 2px;
+}
+
+.submenu > li div a {
     color: #5B64EF;
     text-decoration: none;
 }
 
-ul.submenu > li > a:hover {
-    color: white;
+.submenu > li div:hover {
     background-color: #37ABFF;
 }
 
-ul.menu > li:hover > ul.submenu {
+.submenu > li div:hover a {
+    color: white;
+}
+
+.menu > li:hover > .submenu {
   display: block;
 }
 
-ul.menu > li:hover > a.down:after,
-ul.menu > li:hover > ul.submenu:after {
+.menu > li:hover > .down:after,
+.menu > li:hover > .submenu:after {
     display: block;
     z-index: -1;
     box-shadow: 0 0 10px 0 gray;

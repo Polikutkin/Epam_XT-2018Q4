@@ -47,29 +47,22 @@ body {
 }
 
 .step label {
-    position: relative;
+    position: absolute;
     display: inline-block;
     width: 100%;
     height: 100%;
-}
-
-.step label input {
-    position: absolute;
-    z-index: -1;
-    visibility: hidden;
-}
-
-.step label .text {
-    position: absolute;
     top: 0;
     left: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
+    background: -webkit-linear-gradient(0deg, #CCC, #999 50%, #CCC);
     background: linear-gradient(0deg, #CCC, #999 50%, #CCC);
 }
 
-.step label input:checked + span {
+.step input {
+    display: none;
+}
+
+.step input:checked ~ label {
     color: #FFF;
+    background: -webkit-linear-gradient(0deg, #B2E28F, #64C51D 50%, #B2E28F);  
     background: linear-gradient(0deg, #B2E28F, #64C51D 50%, #B2E28F);  
 }

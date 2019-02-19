@@ -37,7 +37,7 @@
     box-sizing: content-box;
 }
 
-.regform button{
+.regform #sendInfo{
     margin: 30px 20px 20px 20px;
     padding: 5px 8px;
     border: none;
